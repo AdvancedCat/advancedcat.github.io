@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Flying my idea</title>
+  <title>Javascript计算精度问题 | Flying my idea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Love work, love life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Flying my idea">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：  解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。以下代码可以参考：12345678910111213141516171819202122232425262728">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript计算精度问题">
+<meta property="og:url" content="http://yoursite.com/2017/10/29/Javascript计算精度问题/index.html">
 <meta property="og:site_name" content="Flying my idea">
-<meta property="og:description" content="Love work, love life">
+<meta property="og:description" content="Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：  解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。以下代码可以参考：12345678910111213141516171819202122232425262728">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/280956-0e24421bc8f4c197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-10-29T07:02:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flying my idea">
-<meta name="twitter:description" content="Love work, love life">
+<meta name="twitter:title" content="Javascript计算精度问题">
+<meta name="twitter:description" content="Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：  解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。以下代码可以参考：12345678910111213141516171819202122232425262728">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/280956-0e24421bc8f4c197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternate" href="/atom.xml" title="Flying my idea" type="application/atom+xml">
   
@@ -66,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Javascript计算精度问题" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Javascript计算精度问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/29/Javascript计算精度问题/" class="article-date">
   <time datetime="2017-10-29T07:01:45.000Z" itemprop="datePublished">2017-10-29</time>
@@ -81,8 +82,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/29/Javascript计算精度问题/">Javascript计算精度问题</a>
+    <h1 class="article-title" itemprop="name">
+      Javascript计算精度问题
     </h1>
   
 
@@ -103,92 +104,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/29/hello-world/" class="article-date">
-  <time datetime="2017-10-29T06:29:52.000Z" itemprop="datePublished">2017-10-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/29/hello-world/">How to maintain HexoBlog</a>
-    </h1>
+    <a href="/2017/10/29/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">How to maintain HexoBlog</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/29/hello-world/" data-id="cj9cfpvod0000bli8gxmwkzbc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-第一篇博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/01/第一篇博客/" class="article-date">
-  <time datetime="2017-03-01T15:25:05.000Z" itemprop="datePublished">2017-03-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/01/第一篇博客/">第一篇博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>这是我的第一篇博客啦</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/01/第一篇博客/" data-id="cj9cfvezk0000f0i8c7bwigvt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
