@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        Cookie,localStorage,sessionStorage简单分析 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,11 +50,22 @@
     
 </head>
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Cookie,localStorage,sessionStorage简单分析</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Home</a>
 </header>
@@ -62,21 +73,45 @@
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Cookie,localStorage,sessionStorage简单分析
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/04/10</span>
+            </div>
         
     </div>
 </div>
@@ -144,196 +179,112 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>同构Javascript应用</span>
-                    </h2>
-                <div class="abstract-content">
-                    偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>1.<strong>Cookie</strong><br>网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）</p>
+<p>2.<strong>web storage</strong><br>包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。</p>
+<p>兼容情况：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Chrome</th>
+<th>Firefox</th>
+<th>IE</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>localStorage</td>
+<td>4</td>
+<td>3.5</td>
+<td>8</td>
+<td>10.50</td>
+<td>4</td>
+</tr>
+<tr>
+<td>sessionStorage</td>
+<td>5</td>
+<td>2</td>
+<td>8</td>
+<td>10.50</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h1 id="三者的异同"><a href="#三者的异同" class="headerlink" title="三者的异同"></a>三者的异同</h1><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Cookie</th>
+<th>localStorage</th>
+<th>sessionStorage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据的生命期</td>
+<td>可设置失效时间，默认是关闭浏览器后失效</td>
+<td>除非被清除，否则永久保存</td>
+<td>仅在当前会话下有效，关闭页面或浏览器后被清除</td>
+</tr>
+<tr>
+<td>存放数据大小</td>
+<td>4K左右</td>
+<td>一般为5MB</td>
+<td>一般为5MB</td>
+</tr>
+<tr>
+<td>与服务器端通信</td>
+<td>每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题</td>
+<td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
+<td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
+</tr>
+<tr>
+<td>易用性</td>
+<td>需要程序员自己封装，源生的Cookie接口不友好</td>
+<td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
+<td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
+</tr>
+</tbody>
+</table>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>1.Cookie<br>针对登录过的用户，服务器端会在他登录时往 Cookie 中插入一段加密过的唯一辨识单一用户的辨识码，下次只要读取这个值就可以判断当前用户是否登录啦。</p>
+<p>2.web storage<br>localStorage可以存储用户本地浏览的记录等。如果遇到一些内容特别多的表单，为了优化用户体验，我们可能要把表单页面拆分成多个子页面，然后按步骤引导用户填写。这时候 sessionStorage 的作用就发挥出来了。</p>
+<h1 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h1><p>需要注意的是，不是什么数据都适合放在 Cookie、localStorage 和 sessionStorage 中的。使用它们的时候，需要时刻注意是否有代码存在 XSS 注入的风险。因为只要打开控制台，你就随意修改它们的值，也就是说如果你的网站中有 XSS 的风险，它们就能对你的 localStorage 肆意妄为。所以千万不要用它们存储你系统中的敏感数据。</p>
 
-能够在客户端和服务器端均可运行的应用——同构应用
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/10/29/Javascript计算精度问题/" title= Javascript计算精度问题 >
+                    <span>Next Post</span>
+                    <span>Javascript计算精度问题</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/03/01/第一篇博客/" title= 开篇博客 >
+                    <span>Previous Post</span>
+                    <span>开篇博客</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ru...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/10/29/Javascript计算精度问题/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Javascript计算精度问题</span>
-                    </h2>
-                <div class="abstract-content">
-                    Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：
-
-解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。
-双数四则运算以下代码可以参考：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061//加法函数function accAdd(a...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/29</span>
-                </div>
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Cookie,localStorage,sessionStorage简单分析</span>
-                    </h2>
-                <div class="abstract-content">
-                    基本概念1.Cookie网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）
-2.web storage包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。
-兼容情况：
+    <!--PC版-->
 
-
-
-特性
-Chrome
-Firefox
-IE
-Opera
-Safari
-
-
-
-
-localStorage
-4
-3.5
-8
-10.50
-4
-
-
-sessionStorage
-5
-2
-8
-10.50
-4
+    <!--PC版-->
 
 
-
-三者的异同
-
-
-特性
-Cookie
-localStorage
-sessionStorag...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/03/01/第一篇博客/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>开篇博客</span>
-                    </h2>
-                <div class="abstract-content">
-                    Start now从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。
-工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。
-定一个小目标一周一篇博文，技术或是吐槽，只要愿意记录，都可以
-
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/01</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>How to maintain HexoBlog</span>
-                    </h2>
-                <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
     
 </main>
             <!-- profile -->
@@ -377,6 +328,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三者的异同"><span class="toc-number">2.</span> <span class="toc-text">三者的异同</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用场景"><span class="toc-number">3.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安全性"><span class="toc-number">4.</span> <span class="toc-text">安全性</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">

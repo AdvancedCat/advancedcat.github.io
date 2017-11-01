@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        同构Javascript应用 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,11 +50,22 @@
     
 </head>
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">同构Javascript应用</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Home</a>
 </header>
@@ -62,21 +73,43 @@
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            同构Javascript应用
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/11/01</span>
+            </div>
         
     </div>
 </div>
@@ -144,196 +177,55 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>同构Javascript应用</span>
-                    </h2>
-                <div class="abstract-content">
-                    偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：</p>
+<blockquote>
+<p>能够在客户端和服务器端均可运行的应用——同构应用</p>
+</blockquote>
+<p>既然我是搞前端的，就有必要研究一下同构JavaScript应用。</p>
+<p>前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。</p>
+<p>能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。</p>
+<p>Web 世界有一个至理名言，就是 Java 提出的“Write once, run everywhere”。但这句话只适用于 Java 么？我们能否也用它来形容 JavaScript 呢？答案是 Yes。</p>
+<h2 id="SPA"><a href="#SPA" class="headerlink" title="SPA"></a>SPA</h2><p>多年以前，web 只是一些由 HTML 和 CSS 搭建的静态页面，没有太多的交互。用户的每一个动作都需要服务器来创建并返回一个完整的页面。幸而有了 JavaScript，开发者开始创建很棒的效果，不过 Ajax 的到来才是这场革新的真正开始。Web 开发者开始编写能够与服务端进行交互，且在不重载页面的情况下向服务端发送并接受数据的页面。AJAX促使了前端发展的第二次革命。</p>
+<p>随着时间的推移，客户端代码可以做的事情越来越多，催生了被称作单页面应用（SPA）的一类应用。SPA 在首次加载页面时就获取了所有必需的资源，或者再按需动态加载并且渲染到页面上。我以前做过一个云笔记的应用，使用的就是SPA的架构，客户端（浏览器）在第一次访问站点时，会一次请求到所有资源，因此在第一次访问时会延迟一会来请求加载静态资源。也因为如此，我实现了笔记的离线存储。</p>
+<p>SPA 准许重度的交互设计，因为几乎所有的操作都在客户端执行，保持最低限度地与服务端进行交流。不幸的是，它们也存在一些严重的问题，我们选择几个进行讨论。</p>
+<h3 id="1-性能"><a href="#1-性能" class="headerlink" title="1.性能"></a>1.性能</h3><p>因为相对于静态页面，SPA 需要更多的客户端代码，需要下载数据的体积也更大。这使得手机加载速度很慢，可能会导致一些极端的状况 —— 比如糟糕的用户体验以及收入上的损失等。依据 <a href="http://link.zhihu.com/?target=http%3A//blogs.msdn.com/b/ie/archive/2014/10/08/http-2-the-long-awaited-sequel.aspx" target="_blank" rel="external">Microsoft</a> 的一篇文章 ——</p>
+<blockquote>
+<p>Bing 的一项研究表明：页面的加载时间每增加 10ms，站点年度总收入就会减少 $250K。</p>
+</blockquote>
+<h3 id="2-SEO"><a href="#2-SEO" class="headerlink" title="2.SEO"></a>2.SEO</h3><p>SPA主要依赖于JS执行来实时获取页面信息，从而搜索引擎很难索引这些页面。爬虫请求服务器，结果只获得了原始文本，从而会放弃记录。这对于以信息类为主的网站或应用是很不合理的。直接影响了网站的访问量。如果网站是内部使用，则SEO无关紧要。如果面向大众服务的站点，SEO直接决定它在搜索引擎中的排名。一个好的索引对任何公司来说都至关重要，它通常会带来更多的流量以及更高的回报。</p>
+<p>好在现在有很多服务器可以实现首屏后台渲染，将渲染好的页面传给前端。</p>
+<p>或者服务器端定时生成页面的静态文件放入特定站点，当有爬虫访问时，返回生成的静态页面。如<a href="https://github.com/ariya/phantomjs" target="_blank" rel="external">PhantomJS</a>可自动生成页面。</p>
+<h3 id="3-导航不可用"><a href="#3-导航不可用" class="headerlink" title="3.导航不可用"></a>3.导航不可用</h3><p>需要应用自行实现前进，后退</p>
+<h2 id="同构-JavaScript-应用"><a href="#同构-JavaScript-应用" class="headerlink" title="同构 JavaScript 应用"></a>同构 JavaScript 应用</h2><p>同构 JavaScript 应用基于 JavaScript 编写，可以在客户端和服务端运行。正因为此，你只需要写一次代码，就可以在服务端渲染静态页面，还可以在客户端完成复杂的交互。所以，这种方式互通了两个世界，并且避免了前面提到了两个问题。</p>
+<p>现在，有很多框架可以帮助你开发这类应用。其中最著名的一个可能是 <a href="http://link.zhihu.com/?target=https%3A//www.meteor.com/" target="_blank" rel="external">Meteor</a>。Meteor 是一个开源 JavaScript 框架，基于 Node.js 编写，专注于实时 web 应用。我想提到的另一个项目是 <a href="http://link.zhihu.com/?target=http%3A//rendrjs.github.io/rendr/" target="_blank" rel="external">Rendr</a>，它是 <a href="http://link.zhihu.com/?target=http%3A//nerds.airbnb.com/weve-launched-our-first-nodejs-app-to-product" target="_blank" rel="external">Airbnb 开发</a>的一款轻量级类库，准许同时在客户端和服务端运行 Backbone.js。</p>
+<p>越来越多的公司将 Node.js 应用到他们的产品中。客户端和服务端的代码共享成为一个更加普通而自然的选择。在我看来，这种做法将是 web 开发的未来。有些类库通过共享模板又增强了这一趋势，比如 <a href="http://link.zhihu.com/?target=http%3A//facebook.github.io/react/" target="_blank" rel="external">React</a>。</p>
 
-能够在客户端和服务器端均可运行的应用——同构应用
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/10/29/Javascript计算精度问题/" title= Javascript计算精度问题 >
+                    <span>Previous Post</span>
+                    <span>Javascript计算精度问题</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ru...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
-                </div>
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/10/29/Javascript计算精度问题/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Javascript计算精度问题</span>
-                    </h2>
-                <div class="abstract-content">
-                    Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：
+    <!--PC版-->
 
-解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。
-双数四则运算以下代码可以参考：
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061//加法函数function accAdd(a...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/29</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Cookie,localStorage,sessionStorage简单分析</span>
-                    </h2>
-                <div class="abstract-content">
-                    基本概念1.Cookie网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）
-2.web storage包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。
-兼容情况：
+    <!--PC版-->
 
 
-
-特性
-Chrome
-Firefox
-IE
-Opera
-Safari
-
-
-
-
-localStorage
-4
-3.5
-8
-10.50
-4
-
-
-sessionStorage
-5
-2
-8
-10.50
-4
-
-
-
-三者的异同
-
-
-特性
-Cookie
-localStorage
-sessionStorag...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/03/01/第一篇博客/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>开篇博客</span>
-                    </h2>
-                <div class="abstract-content">
-                    Start now从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。
-工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。
-定一个小目标一周一篇博文，技术或是吐槽，只要愿意记录，都可以
-
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/01</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>How to maintain HexoBlog</span>
-                    </h2>
-                <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
     
 </main>
             <!-- profile -->
@@ -377,6 +269,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SPA"><span class="toc-number">1.</span> <span class="toc-text">SPA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-性能"><span class="toc-number">1.1.</span> <span class="toc-text">1.性能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-SEO"><span class="toc-number">1.2.</span> <span class="toc-text">2.SEO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-导航不可用"><span class="toc-number">1.3.</span> <span class="toc-text">3.导航不可用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#同构-JavaScript-应用"><span class="toc-number">2.</span> <span class="toc-text">同构 JavaScript 应用</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
