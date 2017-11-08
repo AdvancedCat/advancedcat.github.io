@@ -244,7 +244,7 @@
 <p>更多关于babel的用法，可以访问它的<a href="https://babeljs.io/">官网</a></p>
 <h2 id="plugin属性"><a href="#plugin属性" class="headerlink" title="plugin属性"></a>plugin属性</h2><p>plugin的角色更多是后处理，帮助用户进一步操作预处理后的文件。<br>plugin是构造函数，因此使用的时候需要我们去实例化它：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>); <span class="comment">//installed via npm</span></div><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>); <span class="comment">//to access built-in plugins</span></div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> config = &#123;</div><div class="line">  entry: <span class="string">'./path/to/my/entry/file.js'</span>,</div><div class="line">  output: &#123;</div><div class="line">    filename: <span class="string">'my-first-webpack.bundle.js'</span>,</div><div class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>)</div><div class="line">  &#125;,</div><div class="line">  <span class="built_in">module</span>: &#123;</div><div class="line">    rules: [</div><div class="line">      &#123;</div><div class="line">        test: <span class="regexp">/\.(js|jsx)$/</span>,</div><div class="line">        use: <span class="string">'babel-loader'</span></div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  plugins: [</div><div class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(),</div><div class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;<span class="attr">template</span>: <span class="string">'./src/index.html'</span>&#125;)</div><div class="line">  ]</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = config;</div></pre></td></tr></table></figure></p>
 <p>由于webpack.config.js本身是一个可引入的脚本，因此它本身用什么语言编写无关紧要，即可以用TypeScript或CoffeeScript编写，只要能正确被webpack识别即可。</p>
-<h2 id="常用的Plugin"><a href="#常用的Plugin" class="headerlink" title="常用的Plugin"></a>常用的Plugin</h2><p>html-webpack-plugin<br>clean-webpack-plugin</p>
+<h2 id="常用的Plugin"><a href="#常用的Plugin" class="headerlink" title="常用的Plugin"></a>常用的Plugin</h2><p>html-webpack-plugin<br>clean-webpack-plugin<br>webpack-dev-server<br>webpack-dev-middleware<br>webpack-hot-middleware<br>uglifyjs-webpack-plugin</p>
 </style></p>
     </article>
     <!-- 前后页  -->
@@ -332,10 +332,6 @@
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-archive">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
     
     
     
