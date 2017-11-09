@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-08T13:20:24.000Z</updated>
+  <updated>2017-11-09T03:39:48.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用Babel</title>
+    <link href="http://yoursite.com/2017/11/09/%E4%BD%BF%E7%94%A8Babel/"/>
+    <id>http://yoursite.com/2017/11/09/使用Babel/</id>
+    <published>2017-11-09T02:31:15.000Z</published>
+    <updated>2017-11-09T03:39:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Babel"><a href="#Babel" class="headerlink" title="Babel?"></a>Babel?</h1><blockquote><p>Babel is a JavaScript compiler.</p></blockquote><p>使用Babel可以让你用下一代的语法特性写今天的代码。</p><h1 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h1><h2 id="Babel-CLI"><a href="#Babel-CLI" class="headerlink" title="Babel-CLI"></a>Babel-CLI</h2><p>1.安装babel以及preset<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev babel-cli babel-preset-env</div></pre></td></tr></table></figure></p><p>2.新建<code>.babelrc</code>文件或者在<code>package.json</code>中配置<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">echo <span class="string">'&#123;presets:["env"]&#125;'</span> &gt; .babelrc</div><div class="line"><span class="comment">// or option in package.json</span></div><div class="line">&#123;</div><div class="line">    ...,</div><div class="line">    <span class="string">"babel"</span>:&#123;</div><div class="line">        <span class="string">"presets"</span>: [<span class="string">"env"</span>]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>babel命令行提供了一些命令，可以敲击<code>babel --help</code>查看</p><h2 id="与项目配合使用"><a href="#与项目配合使用" class="headerlink" title="与项目配合使用"></a>与项目配合使用</h2><p>一般而言babel适合与其他构建工具一起使用，如<code>webpack</code>,<code>gulp</code>等。当然如果应用并不大，也可以单独使用，此时你需要去了解一下<a href="http://babeljs.io/docs/usage/api/" target="_blank" rel="external">babel API</a>了。<br>以下我们以和<code>webpack</code>使用为例，如果你需要和<code>gulp</code>使用，你可以参考<a href="https://www.npmjs.com/package/gulp-babel/" target="_blank" rel="external">gulp-babel</a></p><ul><li><p>安装插件<br>首先需要知道项目代码需要翻译到哪个目标代码，假设你的项目是用CoffeeScript书写的，需要将代码转换为ES5.你需要安装好以下插件：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev babel-core babel-loader babel-preset-es2015 coffee-loader coffeescript</div></pre></td></tr></table></figure></li><li><p>配置webpack<br>在<code>webpack.config.js</code>(webpack 3.X)中如下配置：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    ...,</div><div class="line">    <span class="built_in">module</span>: &#123;</div><div class="line">        rules: [</div><div class="line">            &#123;</div><div class="line">                test: <span class="regexp">/\.coffee$/</span>,</div><div class="line">                use: [&#123;</div><div class="line">                    loader: <span class="string">'coffee-loader'</span>,</div><div class="line">                    options: &#123;</div><div class="line">                        sourceMap: <span class="literal">true</span>    <span class="comment">// 开启sourceMap</span></div><div class="line">                    &#125;</div><div class="line">                &#125;]</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></li><li><p>新建<code>.babelrc</code><br>在项目根目录下新建文件<code>.babelrc</code>:</p><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    presets:[</div><div class="line">        <span class="string">'es2015'</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></li></ul><h3 id="presets"><a href="#presets" class="headerlink" title="presets"></a>presets</h3><p>babel官方提供了几个常用的<a href="https://babeljs.io/docs/plugins/#presets" target="_blank" rel="external">presets</a>：</p><ul><li>env</li><li>es2015</li><li>es2016</li><li>es2017</li><li>latest</li><li>react</li><li>flow</li></ul><p>如果你要使用上面的任一preset，均要安装对应的插件<code>babel-preset-*</code></p><p>如果你使用了多个presets，则babel会逆序执行相应插件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [</div><div class="line">    <span class="string">"es2015"</span>,</div><div class="line">    <span class="string">"react"</span>,</div><div class="line">    <span class="string">"stage-2"</span></div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p><code>stage-2</code>-&gt;<code>react</code>-&gt;<code>es2015</code></p><p>更多关于babel的使用，你可以访问<a href="http://babeljs.io/" target="_blank" rel="external">官网</a>或者阅读这篇<a href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/user-handbook.md" target="_blank" rel="external">babel用户手册</a></p><h1 id="Babel插件"><a href="#Babel插件" class="headerlink" title="Babel插件"></a>Babel插件</h1><p>如果你想写一个自己的babel插件，你可以阅读一下<a href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md" target="_blank" rel="external">这个文章</a>，对babel的编译原理做了介绍，还是中文的哦。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Babel&quot;&gt;&lt;a href=&quot;#Babel&quot; class=&quot;headerlink&quot; title=&quot;Babel?&quot;&gt;&lt;/a&gt;Babel?&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;Babel is a JavaScript compiler.&lt;/p&gt;
+&lt;/block
+      
+    
+    </summary>
+    
+    
+      <category term="Babel" scheme="http://yoursite.com/tags/Babel/"/>
+    
+  </entry>
   
   <entry>
     <title>学习使用Webpack</title>
