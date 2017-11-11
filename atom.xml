@@ -40,6 +40,30 @@
   </entry>
   
   <entry>
+    <title>webpack原理剖析</title>
+    <link href="http://yoursite.com/2017/11/10/webpack%E5%8E%9F%E7%90%86%E5%89%96%E6%9E%90/"/>
+    <id>http://yoursite.com/2017/11/10/webpack原理剖析/</id>
+    <published>2017-11-10T03:00:06.000Z</published>
+    <updated>2017-11-10T03:02:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/img/webpack工作流程图.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/img/webpack工作流程图.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="webpack" scheme="http://yoursite.com/tags/webpack/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用Babel</title>
     <link href="http://yoursite.com/2017/11/09/%E4%BD%BF%E7%94%A8Babel/"/>
     <id>http://yoursite.com/2017/11/09/使用Babel/</id>
