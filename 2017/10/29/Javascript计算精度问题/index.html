@@ -211,6 +211,7 @@
 <h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addNum</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>),</div><div class="line">		len = args.length,</div><div class="line">		result = <span class="number">0</span>,</div><div class="line">		m = <span class="number">0</span>, i, factor</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!len) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	m = getMaxDecimalBits(args)</div><div class="line">	factor = <span class="built_in">Math</span>.pow(<span class="number">10</span>, m)</div><div class="line"></div><div class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; len; i++)&#123;</div><div class="line">		result+=(args[i] * factor)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result / factor</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">subNum</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>),</div><div class="line">		len = args.length,</div><div class="line">		result, m, i, factor</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!len) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	m = getMaxDecimalBits(args)</div><div class="line">	factor = <span class="built_in">Math</span>.pow(<span class="number">10</span>, m)</div><div class="line"></div><div class="line">	result = args[<span class="number">0</span>] * factor</div><div class="line">	<span class="keyword">for</span>( i=<span class="number">1</span>; i&lt;len; i++)&#123;</div><div class="line">		result -= (args[i] * factor)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result / factor</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiNum</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>),</div><div class="line">		len = args.length,</div><div class="line">		m, factor, i, result = <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!len) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	m = getMaxDecimalBits(args)</div><div class="line">	factor = <span class="built_in">Math</span>.pow(<span class="number">10</span>, m)</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)&#123;</div><div class="line">		result *= (args[i] * factor)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result / <span class="built_in">Math</span>.pow(factor, len)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>针对解决JS计算精度的问题，我特地写了一个专门解决这些问题的函数库。可以访问我的<a href="https://github.com/AdvancedCat/Fixed-Number" target="_blank" rel="external">Github</a>项目仓库进一步查看。</p>
 
     </article>
     <!-- 前后页  -->
@@ -408,7 +409,26 @@
     
     
     
-    <div class="total-archive"> Total : 9 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 10 </div>
     
     <div class="post-archive">
     
@@ -417,6 +437,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/Karma单元测试/" >Karma单元测试</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -470,11 +495,13 @@
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        Karma单元测试 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,58 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Karma单元测试</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Karma单元测试
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/11/16</span>
+            </div>
         
     </div>
 </div>
@@ -164,206 +197,39 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Karma单元测试</span>
-                    </h2>
-                <div class="abstract-content">
-                    Karma?Javascript 单元测试工具
-使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
-安装1.全局安装karma-cli1npm i -g karma-cli
-2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine karma-coverage
-自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的ka...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>常用Webpack插件</span>
-                    </h2>
-                <div class="abstract-content">
-                    webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
-webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
-由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
-12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/10/webpack原理剖析/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>webpack原理剖析</span>
-                    </h2>
-                <div class="abstract-content">
-                    webpack工作流程图，待完善
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Karma"><a href="#Karma" class="headerlink" title="Karma?"></a>Karma?</h1><p>Javascript 单元测试工具</p>
+<h1 id="使用背景"><a href="#使用背景" class="headerlink" title="使用背景"></a>使用背景</h1><p>公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。<br>UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>1.全局安装<code>karma-cli</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g karma-cli</div></pre></td></tr></table></figure></p>
+<p>2.项目安装相关依赖<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -D karma jasmine-core karma-jasmine karma-coverage</div></pre></td></tr></table></figure></p>
+<h1 id="自动化单元测试"><a href="#自动化单元测试" class="headerlink" title="自动化单元测试"></a>自动化单元测试</h1><p>Karma最常用的功能就是它的自动化单元测试<br>首先在终端运行：<code>karma init</code><br>依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的<code>karma.conf.js</code>）:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Karma configuration</span></div><div class="line"><span class="comment">// Generated on Thu Nov 16 2017 11:53:28 GMT+0800 (CST)</span></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</div><div class="line">  config.set(&#123;</div><div class="line"></div><div class="line">    <span class="comment">// base path that will be used to resolve all patterns (eg. files, exclude)</span></div><div class="line">    basePath: <span class="string">''</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// frameworks to use</span></div><div class="line">    <span class="comment">// available frameworks: https://npmjs.org/browse/keyword/karma-adapter</span></div><div class="line">    frameworks: [<span class="string">'jasmine'</span>],</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// list of files / patterns to load in the browser</span></div><div class="line">    files: [</div><div class="line">        <span class="string">'dist/*.min.css'</span>,</div><div class="line">        <span class="string">'dist/*.min.js'</span>,</div><div class="line">        <span class="string">'test/*.spec.js'</span></div><div class="line">    ],</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// list of files to exclude</span></div><div class="line">    exclude: [</div><div class="line">    ],</div><div class="line"></div><div class="line">    <span class="comment">// test results reporter to use</span></div><div class="line">    <span class="comment">// possible values: 'dots', 'progress'</span></div><div class="line">    <span class="comment">// available reporters: https://npmjs.org/browse/keyword/karma-reporter</span></div><div class="line">    reporters: [<span class="string">'progress'</span>],</div><div class="line"></div><div class="line">    <span class="comment">// web server port</span></div><div class="line">    port: <span class="number">9876</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// enable / disable colors in the output (reporters and logs)</span></div><div class="line">    colors: <span class="literal">true</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// level of logging</span></div><div class="line">    <span class="comment">// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG</span></div><div class="line">    logLevel: config.LOG_INFO,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// enable / disable watching file and executing tests whenever any file changes</span></div><div class="line">    autoWatch: <span class="literal">true</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// start these browsers</span></div><div class="line">    <span class="comment">// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher</span></div><div class="line">    browsers: [<span class="string">'Chrome'</span>],</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// Continuous Integration mode</span></div><div class="line">    <span class="comment">// if true, Karma captures browsers, runs the tests and exits</span></div><div class="line">    singleRun: <span class="literal">false</span>,</div><div class="line"></div><div class="line">    <span class="comment">// Concurrency level</span></div><div class="line">    <span class="comment">// how many browser should be started simultaneous</span></div><div class="line">    concurrency: <span class="literal">Infinity</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>之后再在根目录下运行<code>karma start</code>,karma会自动运行起Chrome浏览器，并在终端中输出测试结果。</p>
 
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/09/使用Babel/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>使用Babel</span>
-                    </h2>
-                <div class="abstract-content">
-                    Babel?
-Babel is a JavaScript compiler.
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/11/10/常用Webpack插件/" title= 常用Webpack插件 >
+                    <span>Previous Post</span>
+                    <span>常用Webpack插件</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-使用Babel可以让你用下一代的语法特性写今天的代码。
-如何使用Babel-CLI1.安装babel以及preset1npm install --save-dev babel-cli babel-preset-env
-2.新建.babelrc文件或者在package.json中配置12345678echo '&#123;presets:["env"]&#125;' &gt; .babelrc// or option in package.json&#123;    ...,    "babel":&#123;...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Babel>Babel</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/09</span>
-                </div>
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>学习使用Webpack</span>
-                    </h2>
-                <div class="abstract-content">
-                    今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
-Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
-webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
-webpack中主要有四个概念，只要掌握这四个概念，基本可以学会使用webpack
+    <!--PC版-->
 
-EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
-OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
-Loaderwe...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>同构Javascript应用</span>
-                    </h2>
-                <div class="abstract-content">
-                    偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
+    <!--PC版-->
 
-能够在客户端和服务器端均可运行的应用——同构应用
 
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-历史前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
     
 </main>
             <!-- profile -->
@@ -407,6 +273,13 @@ Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Karma"><span class="toc-number">1.</span> <span class="toc-text">Karma?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用背景"><span class="toc-number">2.</span> <span class="toc-text">使用背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化单元测试"><span class="toc-number">4.</span> <span class="toc-text">自动化单元测试</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
