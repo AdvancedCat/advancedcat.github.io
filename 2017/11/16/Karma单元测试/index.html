@@ -202,13 +202,21 @@
         <h1 id="Karma"><a href="#Karma" class="headerlink" title="Karma?"></a>Karma?</h1><p>Javascript 单元测试工具</p>
 <h1 id="使用背景"><a href="#使用背景" class="headerlink" title="使用背景"></a>使用背景</h1><p>公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。<br>UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。</p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>1.全局安装<code>karma-cli</code><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g karma-cli</div></pre></td></tr></table></figure></p>
-<p>2.项目安装相关依赖<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -D karma jasmine-core karma-jasmine karma-coverage</div></pre></td></tr></table></figure></p>
+<p>2.项目安装相关依赖<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -D karma jasmine-core karma-jasmine</div></pre></td></tr></table></figure></p>
 <h1 id="自动化单元测试"><a href="#自动化单元测试" class="headerlink" title="自动化单元测试"></a>自动化单元测试</h1><p>Karma最常用的功能就是它的自动化单元测试<br>首先在终端运行：<code>karma init</code><br>依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的<code>karma.conf.js</code>）:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Karma configuration</span></div><div class="line"><span class="comment">// Generated on Thu Nov 16 2017 11:53:28 GMT+0800 (CST)</span></div><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">config</span>) </span>&#123;</div><div class="line">  config.set(&#123;</div><div class="line"></div><div class="line">    <span class="comment">// base path that will be used to resolve all patterns (eg. files, exclude)</span></div><div class="line">    basePath: <span class="string">''</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// frameworks to use</span></div><div class="line">    <span class="comment">// available frameworks: https://npmjs.org/browse/keyword/karma-adapter</span></div><div class="line">    frameworks: [<span class="string">'jasmine'</span>],</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// list of files / patterns to load in the browser</span></div><div class="line">    files: [</div><div class="line">        <span class="string">'dist/*.min.css'</span>,</div><div class="line">        <span class="string">'dist/*.min.js'</span>,</div><div class="line">        <span class="string">'test/*.spec.js'</span></div><div class="line">    ],</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// list of files to exclude</span></div><div class="line">    exclude: [</div><div class="line">    ],</div><div class="line"></div><div class="line">    <span class="comment">// test results reporter to use</span></div><div class="line">    <span class="comment">// possible values: 'dots', 'progress'</span></div><div class="line">    <span class="comment">// available reporters: https://npmjs.org/browse/keyword/karma-reporter</span></div><div class="line">    reporters: [<span class="string">'progress'</span>],</div><div class="line"></div><div class="line">    <span class="comment">// web server port</span></div><div class="line">    port: <span class="number">9876</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// enable / disable colors in the output (reporters and logs)</span></div><div class="line">    colors: <span class="literal">true</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// level of logging</span></div><div class="line">    <span class="comment">// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG</span></div><div class="line">    logLevel: config.LOG_INFO,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// enable / disable watching file and executing tests whenever any file changes</span></div><div class="line">    autoWatch: <span class="literal">true</span>,</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// start these browsers</span></div><div class="line">    <span class="comment">// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher</span></div><div class="line">    browsers: [<span class="string">'Chrome'</span>],</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">// Continuous Integration mode</span></div><div class="line">    <span class="comment">// if true, Karma captures browsers, runs the tests and exits</span></div><div class="line">    singleRun: <span class="literal">false</span>,</div><div class="line"></div><div class="line">    <span class="comment">// Concurrency level</span></div><div class="line">    <span class="comment">// how many browser should be started simultaneous</span></div><div class="line">    concurrency: <span class="literal">Infinity</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>之后再在根目录下运行<code>karma start</code>,karma会自动运行起Chrome浏览器，并在终端中输出测试结果。</p>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><p>1.由于对mocha和chai比较熟，所以用了这两个测试框架。测试异步代码时，<code>done</code>和<code>promise</code>最好不要混用</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/11/22/结合百度地图的业务场景/" title= 结合百度地图的业务场景 >
+                    <span>Next Post</span>
+                    <span>结合百度地图的业务场景</span>
+                </a>
+            </li>
         
         
             <li class="previous">
@@ -278,7 +286,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Karma"><span class="toc-number">1.</span> <span class="toc-text">Karma?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用背景"><span class="toc-number">2.</span> <span class="toc-text">使用背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化单元测试"><span class="toc-number">4.</span> <span class="toc-text">自动化单元测试</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Karma"><span class="toc-number">1.</span> <span class="toc-text">Karma?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用背景"><span class="toc-number">2.</span> <span class="toc-text">使用背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装"><span class="toc-number">3.</span> <span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#自动化单元测试"><span class="toc-number">4.</span> <span class="toc-text">自动化单元测试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#常见问题"><span class="toc-number">5.</span> <span class="toc-text">常见问题</span></a></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>
@@ -413,8 +421,7 @@
     
     
     
-    
-    <div class="total-archive"> Total : 10 </div>
+    <div class="total-archive"> Total : 11 </div>
     
     <div class="post-archive">
     
@@ -423,6 +430,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2017/11/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -481,13 +493,13 @@
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

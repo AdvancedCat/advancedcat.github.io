@@ -169,6 +169,37 @@
     
     
         <article class="index-post">
+            <a class="content-show-full" href = "/2017/11/22/结合百度地图的业务场景/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>结合百度地图的业务场景</span>
+                    </h2>
+                <div class="abstract-content">
+                    背景这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结
+需求用户在一个输入框中输入地址的关键字，调用百度的Autocomplete接口获取联想地址列表，并展示在前端，供用户选择。当用户选择一个地址后，再调用LocalSearch反编译地址，获得地址标点，然后在地图上标记；用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果
+如何做？封装百度地图接口，形成组件，暴露必要的api，供业务调用
+问题1.由于Autocomplete内部业务已经封装了一个，而不直接使用百度地图的Autocomplete，我们只关心其返回的结果，这里模拟了一个假的inputcallbac...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/22</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
                     <h2 class="abstract-title">
                         
@@ -178,8 +209,8 @@
                     Karma?Javascript 单元测试工具
 使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
 安装1.全局安装karma-cli1npm i -g karma-cli
-2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine karma-coverage
-自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的ka...
+2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
+自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -489,33 +520,11 @@ sessionStorag...
             </div>
         </article>
     
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>How to maintain HexoBlog</span>
-                    </h2>
-                <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                </div>
-            </div>
-        </article>
-    
     <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">#NEXT</a>
+    </nav>
     
 </main>
             <!-- profile -->
@@ -692,8 +701,7 @@ More...
     
     
     
-    
-    <div class="total-archive"> Total : 10 </div>
+    <div class="total-archive"> Total : 11 </div>
     
     <div class="post-archive">
     
@@ -702,6 +710,11 @@ More...
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2017/11/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -760,13 +773,13 @@ More...
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

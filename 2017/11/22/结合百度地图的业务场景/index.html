@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        结合百度地图的业务场景 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,58 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">结合百度地图的业务场景</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            结合百度地图的业务场景
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/11/22</span>
+            </div>
         
     </div>
 </div>
@@ -164,237 +197,38 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/22/结合百度地图的业务场景/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>结合百度地图的业务场景</span>
-                    </h2>
-                <div class="abstract-content">
-                    背景这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结
-需求用户在一个输入框中输入地址的关键字，调用百度的Autocomplete接口获取联想地址列表，并展示在前端，供用户选择。当用户选择一个地址后，再调用LocalSearch反编译地址，获得地址标点，然后在地图上标记；用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果
-如何做？封装百度地图接口，形成组件，暴露必要的api，供业务调用
-问题1.由于Autocomplete内部业务已经封装了一个，而不直接使用百度地图的Autocomplete，我们只关心其返回的结果，这里模拟了一个假的inputcallbac...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/22</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Karma单元测试</span>
-                    </h2>
-                <div class="abstract-content">
-                    Karma?Javascript 单元测试工具
-使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
-安装1.全局安装karma-cli1npm i -g karma-cli
-2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
-自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>常用Webpack插件</span>
-                    </h2>
-                <div class="abstract-content">
-                    webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
-webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
-由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
-12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/10/webpack原理剖析/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>webpack原理剖析</span>
-                    </h2>
-                <div class="abstract-content">
-                    webpack工作流程图，待完善
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>用户在一个输入框中输入地址的关键字，调用百度的<code>Autocomplete</code>接口获取联想地址列表，并展示在前端，供用户选择。<br>当用户选择一个地址后，再调用<code>LocalSearch</code>反编译地址，获得地址标点，然后在地图上标记；<br>用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果<br><img src="/img/地图联动效果.png" alt="地图联动效果"></p>
+<h2 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h2><p>封装百度地图接口，形成组件，暴露必要的api，供业务调用</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>1.由于Autocomplete内部业务已经封装了一个，而不直接使用百度地图的Autocomplete，我们只关心其返回的结果，这里模拟了一个假的input<br>callback(cb)回调函数通过闭包形式由search完成后的onSearchComplete钩子函数调用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;!-- hack: 用于伪造百度Autocomplete --&gt;</div><div class="line">&lt;input type=<span class="string">"hidden"</span> name=<span class="string">"faded_auto"</span> id=<span class="string">"faded_auto_input"</span>&gt;</div><div class="line"></div><div class="line">Flame.prototype.searchAutocomplete = <span class="function"><span class="keyword">function</span>(<span class="params">kw, cb</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span>( !self._auto )&#123;</div><div class="line">            <span class="keyword">var</span> options = &#123;</div><div class="line">                input: <span class="string">'faded_auto_input'</span>,   <span class="comment">// PS: 如果不指定input, search后不会有结果返回</span></div><div class="line">                location: self.op.cityName,</div><div class="line">                onSearchComplete: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">                    <span class="keyword">var</span> s = [], rLen = result.getNumPois(), r</div><div class="line"></div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;rLen; i++)&#123;</div><div class="line">                        r = result.getPoi(i)</div><div class="line">                        s.push(&#123;</div><div class="line">                            business: r.business,</div><div class="line">                            address: r.city + r.district,</div><div class="line">                            province: r.province,</div><div class="line">                            city: r.city,</div><div class="line">                            district: r.district,</div><div class="line">                            street: r.street</div><div class="line">                        &#125;)</div><div class="line">                    &#125;</div><div class="line">                    cb(s)</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            self._auto = <span class="keyword">new</span> BMap.Autocomplete(options)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        self._auto.search(kw)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>2.自定义覆盖物时，地图缩放会丢失覆盖物的宽高，可以实现保存下来<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 缓存w,h的作用是什么？</span></div><div class="line"><span class="comment"> * 地图在缩放时，会丢失div的宽高（可能是百度地图在重绘marker时异步导致的）</span></div><div class="line"><span class="comment"> * 这里缓存一下宽高，用于正确更改样式</span></div><div class="line"><span class="comment"> */</span></div><div class="line">CustomOverlay.prototype._setOverlayPos = <span class="function"><span class="keyword">function</span>(<span class="params">p, w, h</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(w || h)&#123;</div><div class="line">        self._w = w</div><div class="line">        self._h = h</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    self._arrow.style.left = (self._w) / <span class="number">2</span> - <span class="number">8</span> + <span class="string">'px'</span></div><div class="line">    self._div.style.left = p.x - (self._w/<span class="number">2</span>) - <span class="number">2</span> + <span class="string">"px"</span></div><div class="line">    self._div.style.top  = p.y - self._h - <span class="number">25</span> + <span class="string">"px"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/09/使用Babel/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>使用Babel</span>
-                    </h2>
-                <div class="abstract-content">
-                    Babel?
-Babel is a JavaScript compiler.
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/11/16/Karma单元测试/" title= Karma单元测试 >
+                    <span>Previous Post</span>
+                    <span>Karma单元测试</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-使用Babel可以让你用下一代的语法特性写今天的代码。
-如何使用Babel-CLI1.安装babel以及preset1npm install --save-dev babel-cli babel-preset-env
-2.新建.babelrc文件或者在package.json中配置12345678echo '&#123;presets:["env"]&#125;' &gt; .babelrc// or option in package.json&#123;    ...,    "babel":&#123;...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Babel>Babel</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/09</span>
-                </div>
-            </div>
-        </article>
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>学习使用Webpack</span>
-                    </h2>
-                <div class="abstract-content">
-                    今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
-Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
-webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
-webpack中主要有四个概念，只要掌握这四个概念，基本可以学会使用webpack
+    <!--PC版-->
 
-EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
-OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
-Loaderwe...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>同构Javascript应用</span>
-                    </h2>
-                <div class="abstract-content">
-                    偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
+    <!--PC版-->
 
-能够在客户端和服务器端均可运行的应用——同构应用
 
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-历史前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
     
 </main>
             <!-- profile -->
@@ -438,6 +272,13 @@ Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何做？"><span class="toc-number">3.</span> <span class="toc-text">如何做？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-number">4.</span> <span class="toc-text">问题</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">

@@ -209,7 +209,7 @@
 <li>Entry<br>Entry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图</li>
 <li>Output<br>Output会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们</li>
 <li>Loader<br>webpack本身只会处理javascript文件，指定相关loader会帮助webpack去处理其他的资源，如图片、样式等<br>loader的工作像是预处理(pre-handle)，将源文件转换为js文件，或将图片转换base64编码格式等</li>
-<li>Plugin<br>Plugin与Loader主要区别在于，loader仅用于如何处理资源，比如讲less编写的样式转换为css格式的样式。<br>plugin则帮助用户进一步处理资源，比如将经loader处理后的资源压缩处理或混淆处理等<br>plugin的工作像后处理(post-handle)，将js文件进一步处理（压缩等）</li>
+<li>Plugin<br>Plugin与Loader主要区别在于，loader仅用于如何处理资源，比如讲less编写的样式转换为css格式的样式。<br>plugin则帮助用户进一步处理资源，比如将经loader处理后的资源压缩处理或混淆处理等<br>plugin的工作像后处理(post-handle)，将js文件进一步处理（压缩等）<br>sss</li>
 </ul>
 <p>我们来看看完整的webpack.config.js文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>); <span class="comment">//installed via npm</span></div><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>); <span class="comment">//to access built-in plugins</span></div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> config = &#123;</div><div class="line">  entry: <span class="string">'./path/to/my/entry/file.js'</span>,</div><div class="line">  output: &#123;</div><div class="line">    path: path.resolve(__dirname, <span class="string">'dist'</span>),</div><div class="line">    filename: <span class="string">'my-first-webpack.bundle.js'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="built_in">module</span>: &#123;</div><div class="line">    rules: [</div><div class="line">      &#123; <span class="attr">test</span>: <span class="regexp">/\.txt$/</span>, <span class="attr">use</span>: <span class="string">'raw-loader'</span> &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  plugins: [</div><div class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(),</div><div class="line">    <span class="keyword">new</span> HtmlWebpackPlugin(&#123;<span class="attr">template</span>: <span class="string">'./src/index.html'</span>&#125;)</div><div class="line">  ]</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = config;</div></pre></td></tr></table></figure></p>
 <p>可以看出，loader是不需要引进的，而plugin则需要通过require引入</p>
@@ -460,8 +460,7 @@
     
     
     
-    
-    <div class="total-archive"> Total : 10 </div>
+    <div class="total-archive"> Total : 11 </div>
     
     <div class="post-archive">
     
@@ -470,6 +469,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2017/11/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -528,13 +532,13 @@
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
