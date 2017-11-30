@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        工作过程中相关问题的总结 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,7 +50,7 @@
     
 </head>
     
-        <body class="home-body">
+        <body class="post-body">
     
     <script>
     var jsInfo = {
@@ -58,10 +58,19 @@
     }
 </script>
     
-<header class="header index-header">
+<header class="header">
 
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">工作过程中相关问题的总结</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Home</a>
 </header>
@@ -71,17 +80,17 @@
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/intro-desktop.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            XinHong's Blog.
-            <!-- 文章页  -->
+            工作过程中相关问题的总结
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -89,12 +98,23 @@
             <!-- 主页副标题  -->
             
             
-                Time for a true display of skill!
-            
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 工作>工作</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/11/30</span>
+            </div>
         
     </div>
 </div>
@@ -177,112 +197,39 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/03/01/第一篇博客/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>开篇博客</span>
-                    </h2>
-                <div class="abstract-content">
-                    Start now从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。
-工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。
-定一个小目标一周一篇博文，技术或是吐槽，只要愿意记录，都可以
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="20171130"><a href="#20171130" class="headerlink" title="20171130"></a>20171130</h1><h2 id="百度地图key校验未通过"><a href="#百度地图key校验未通过" class="headerlink" title="百度地图key校验未通过"></a>百度地图key校验未通过</h2><h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>今天中午，产品报出一个问题，部分经纪人用户在加载页面时，有如下的弹框报错：<br><a href="./img/百度地图key校验报错.jpeg"></a></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>项目在前几天针对百度地图key进行了调整，将分散在不同页面的百度key统一通过PHP的配置完成输出，方便管理。同时key也使用了新的key，扩大流量。</p>
+<h3 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h3><p>1.首先确定百度地图的key是否正确输出，访问线上地址，打开终端查看dom后发现，百度key已经正确输出了。并且key也是正确的新key；<br>2.既然key是正确的，会不会是缓存的问题，导致用户访问的是老的key，而老key被停止了，导致用户端出现百度key不可用提示。于是让用户清空了浏览器端缓存，但仍然有这个问题；<br>3.会不会是新key的配置出问题了呢？询问用户的访问地址是什么，确认用户访问的地址是<code>vip.abc.com</code>,而我们网站的访问的地址是<code>vip.xyz.com</code>.询问后端后得知，网站可以通过两个域名访问，即<code>vip.abc.com</code>和<code>vip.xyz.com</code>。但我们之前配置百度地图key的白名单，仅配置了<code>*.xyz.com</code>，从而导致域名<code>vip.abc.com</code>未通过白名单校验。Bingo，找到了原因，随后在百度地图新key的白名单中将域名<code>*.xyz.com</code>加入后，用户端访问就正常了</p>
 
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/01</span>
-                </div>
-            </div>
-        </article>
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/11/22/结合百度地图的业务场景/" title= 结合百度地图的业务场景 >
+                    <span>Previous Post</span>
+                    <span>结合百度地图的业务场景</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>How to maintain HexoBlog</span>
-                    </h2>
-                <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">#PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
             <!-- profile -->
-            
-            <div class="profile">
-    <img class="profile-avatar" src= /avatar/Picachu.min.jpg >
-    <div class="profile-name">XinHong</div>
-    
-    <div class="profile-signature">
-        Love life
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
-            
-                <a href="mailto:wshx1938@gmail.com" class="iconfont-archer email" title=email ></a>
-            
-        
-    
-        
-            
-                <a href="//github.com/AdvancedCat" class="iconfont-archer github" target="_blank" title="github"></a>
-            
-        
-    
-        
-    
-        
-            
-                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
-            
-        
-    
-
-    </div>
-    
-    
-    
-        <div class="about-me">
-            <div>
-                <a href = "/about" >ABOUT ME</a>
-            </div>
-        </div>
-    
-</div>
             
         </div>
         <footer class="footer footer-unloaded">
@@ -323,6 +270,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#20171130"><span class="toc-number">1.</span> <span class="toc-text">20171130</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#百度地图key校验未通过"><span class="toc-number">1.1.</span> <span class="toc-text">百度地图key校验未通过</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.1.1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#背景"><span class="toc-number">1.1.2.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分析过程"><span class="toc-number">1.1.3.</span> <span class="toc-text">分析过程</span></a></li></ol></li></ol></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
