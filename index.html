@@ -179,206 +179,228 @@
         <div class="container container-unloaded">
             <main class="main index-page">
     
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/12/12/读懂package-json/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>读懂package.json</span>
+                        </h2>
+                    <div class="abstract-content">
+                        作为一个前端工程师，不断地去学习前端新技术是必须的。在这过程中，不断接触开源项目是必不可少的。github上的开源项目，我们发现大多数项目下都有一个package.json文件，package.json存储的是一个严格的json对象。那么今天分析一下package.json中的字段意义。
+
+本文主要是对npm document中package.json的简单翻译
+
+name在package.json中最重要的两个字段是name和version，如果没有这两个字段，npm无法安装你的包。name和version就像是你的项目身份证，且必须是唯一的。如果你的包做了改动，那么version也应...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
+        <a class="post-tag" href="javascript:void(0);" data-href = Node>Node</a>
     
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/30/工作过程中相关问题的总结/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>工作过程中相关问题的总结</span>
-                    </h2>
-                <div class="abstract-content">
-                    20171130百度地图key校验未通过描述今天中午，产品报出一个问题，部分经纪人用户在加载页面时，有如下的弹框报错：
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/12</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+    
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/30/工作过程中相关问题的总结/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>工作过程中相关问题的总结</span>
+                        </h2>
+                    <div class="abstract-content">
+                        20171130百度地图key校验未通过描述今天中午，产品报出一个问题，部分经纪人用户在加载页面时，有如下的弹框报错：
 
 背景项目在前几天针对百度地图key进行了调整，将分散在不同页面的百度key统一通过PHP的配置完成输出，方便管理。同时key也使用了新的key，扩大流量。
 分析过程
 首先确定百度地图的key是否正确输出，访问线上地址，打开终端查看dom后发现，百度key已经正确输出了。并且key也是正确的新key；
 既然key是正确的，会不会是缓存的问题，导致用户访问的是老的key，而老key被停止了，导致用户端出现百度key不可用提示。于是让用户清空了浏览器端缓存，但仍然有这个问题...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = 工作>工作</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/30</span>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/30</span>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        
     
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/22/结合百度地图的业务场景/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>结合百度地图的业务场景</span>
-                    </h2>
-                <div class="abstract-content">
-                    背景这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/22/结合百度地图的业务场景/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>结合百度地图的业务场景</span>
+                        </h2>
+                    <div class="abstract-content">
+                        背景这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结
 需求用户在一个输入框中输入地址的关键字，调用百度的Autocomplete接口获取联想地址列表，并展示在前端，供用户选择。当用户选择一个地址后，再调用LocalSearch反编译地址，获得地址标点，然后在地图上标记；用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果
 如何做？封装百度地图接口，形成组件，暴露必要的api，供业务调用
 为了做到js部分代码的可移植性，尽量减少依赖。目前js部分仅依赖于jQuery。页面展示和样式目前无法通用，需要依据业务自定义。可以做成模板。
 组件设计：内部维护地图实例对象...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = Design>Design</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/22</span>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/22</span>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        
     
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Karma单元测试</span>
-                    </h2>
-                <div class="abstract-content">
-                    Karma?Javascript 单元测试工具
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Karma单元测试</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Karma?Javascript 单元测试工具
 使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
 安装1.全局安装karma-cli1npm i -g karma-cli
 2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
 自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        
     
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>常用Webpack插件</span>
-                    </h2>
-                <div class="abstract-content">
-                    webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>常用Webpack插件</span>
+                        </h2>
+                    <div class="abstract-content">
+                        webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
 webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
 由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
 12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        
     
+        
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/10/webpack原理剖析/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>webpack原理剖析</span>
-                    </h2>
-                <div class="abstract-content">
-                    webpack工作流程图，待完善
-
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/09/使用Babel/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>使用Babel</span>
-                    </h2>
-                <div class="abstract-content">
-                    Babel?
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/09/使用Babel/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>使用Babel</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Babel?
 Babel is a JavaScript compiler.
 
 使用Babel可以让你用下一代的语法特性写今天的代码。
 如何使用Babel-CLI1.安装babel以及preset1npm install --save-dev babel-cli babel-preset-env
 2.新建.babelrc文件或者在package.json中配置12345678echo '&#123;presets:["env"]&#125;' &gt; .babelrc// or option in package.json&#123;    ...,    "babel":&#123;...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = Babel>Babel</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/09</span>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/09</span>
+                    </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        
     
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>学习使用Webpack</span>
-                    </h2>
-                <div class="abstract-content">
-                    今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>学习使用Webpack</span>
+                        </h2>
+                    <div class="abstract-content">
+                        今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
 Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
 webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
 webpack中主要有四个核心概念，只要掌握这四个概念，基本可以学会使用webpack
@@ -386,161 +408,26 @@ webpack中主要有四个核心概念，只要掌握这四个概念，基本可�
 EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
 OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
 Loader...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
     
         <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
     
         <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
     
 </div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
+                    </div>
                 </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>同构Javascript应用</span>
-                    </h2>
-                <div class="abstract-content">
-                    偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
-
-能够在客户端和服务器端均可运行的应用——同构应用
-
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-历史前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/10/29/Javascript计算精度问题/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Javascript计算精度问题</span>
-                    </h2>
-                <div class="abstract-content">
-                    Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：
-
-解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。
-双数四则运算以下代码可以参考：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162//加法函数function accAdd...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/29</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>Cookie,localStorage,sessionStorage简单分析</span>
-                    </h2>
-                <div class="abstract-content">
-                    基本概念1.Cookie网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）
-2.web storage包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。
-兼容情况：
-
-
-
-特性
-Chrome
-Firefox
-IE
-Opera
-Safari
-
-
-
-
-localStorage
-4
-3.5
-8
-10.50
-4
-
-
-sessionStorage
-5
-2
-8
-10.50
-4
-
-
-
-三者的异同
-
-
-特性
-Cookie
-localStorage
-sessionStorag...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
-    
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
-                </div>
-            </div>
-        </article>
+            </article>
+        
     
     <!-- paginator  -->
     
@@ -549,6 +436,7 @@ sessionStorag...
     </nav>
     
 </main>
+
             <!-- profile -->
             
             <div class="profile">
@@ -769,7 +657,54 @@ sessionStorag...
     
     
     
-    <div class="total-archive"> Total : 12 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 15 </div>
     
     <div class="post-archive">
     
@@ -778,6 +713,21 @@ sessionStorag...
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2017/12/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2017/12/06/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2017/12/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -850,13 +800,17 @@ sessionStorag...
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+        <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

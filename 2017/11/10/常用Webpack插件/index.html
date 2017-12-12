@@ -206,7 +206,7 @@
 <h1 id="常用的插件"><a href="#常用的插件" class="headerlink" title="常用的插件"></a>常用的插件</h1><h2 id="CommonsChunkPlugin"><a href="#CommonsChunkPlugin" class="headerlink" title="CommonsChunkPlugin"></a><a href="https://doc.webpack-china.org/plugins/commons-chunk-plugin" target="_blank" rel="external">CommonsChunkPlugin</a></h2><p>将应用中引入的公共部分建立一个独立的文件，便于浏览器缓存公共代码。通过将公共模块拆出来，最终合成的文件能够在最开始的时候加载一次，便存起来到缓存中供后续使用。</p>
 <p>用法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</div><div class="line"></div><div class="line"><span class="keyword">const</span> config = &#123;</div><div class="line">    entry:&#123;</div><div class="line">        vendor: [<span class="string">'underscore'</span>, <span class="string">'jquery'</span>],</div><div class="line">        app: <span class="string">'./app'</span></div><div class="line">    &#125;,</div><div class="line">    ...,</div><div class="line">    plugins:[</div><div class="line">        <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">            name: <span class="string">'verdor'</span>,    <span class="comment">// common chunk的名称, 如上面entry中的vendor</span></div><div class="line">            filename: <span class="string">'commons.js'</span>  <span class="comment">// 为common chunk起一个新的文件名称</span></div><div class="line">            <span class="comment">// 其他options</span></div><div class="line">        &#125;)</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="ExtractTextWebpackPlugin"><a href="#ExtractTextWebpackPlugin" class="headerlink" title="ExtractTextWebpackPlugin"></a><a href="https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/" target="_blank" rel="external">ExtractTextWebpackPlugin</a></h2><p>将bundle中的文本单独抽离为独立的文件.</p>
-<p>安装<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev extract-text-webpack-plugin</div></pre></td></tr></table></figure></p>
+<p>安装<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install extract-text-webpack-plugin --save-dev</div></pre></td></tr></table></figure></p>
 <p>用法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">"extract-text-webpack-plugin"</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="built_in">module</span>: &#123;</div><div class="line">    rules: [</div><div class="line">      &#123;</div><div class="line">        test: <span class="regexp">/\.css$/</span>,</div><div class="line">        use: ExtractTextPlugin.extract(&#123;</div><div class="line">          fallback: <span class="string">"style-loader"</span>,</div><div class="line">          use: <span class="string">"css-loader"</span></div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  plugins: [</div><div class="line">    <span class="keyword">new</span> ExtractTextPlugin(<span class="string">"styles.css"</span>),</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="HotModuleReplacementPlugin"><a href="#HotModuleReplacementPlugin" class="headerlink" title="HotModuleReplacementPlugin"></a><a href="https://doc.webpack-china.org/plugins/hot-module-replacement-plugin/" target="_blank" rel="external">HotModuleReplacementPlugin</a></h2><p>HMR,模块热替换插件<br><a href="https://doc.webpack-china.org/concepts/hot-module-replacement" target="_blank" rel="external">这篇教程</a>提到它的作用.</p>
 <p>用法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通常不需要设置任何属性</span></div><div class="line"><span class="keyword">new</span> webpack.HotModuleReplacementPlugin()</div></pre></td></tr></table></figure></p>
@@ -435,7 +435,54 @@
     
     
     
-    <div class="total-archive"> Total : 12 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 15 </div>
     
     <div class="post-archive">
     
@@ -444,6 +491,21 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2017/12/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2017/12/06/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2017/12/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -516,13 +578,17 @@
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+        <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

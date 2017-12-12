@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        jQuery中的focus与focusin · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,58 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">jQuery中的focus与focusin</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            jQuery中的focus与focusin
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = jQuery>jQuery</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/12/04</span>
+            </div>
         
     </div>
 </div>
@@ -164,86 +197,43 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>常用Webpack插件</span>
-                        </h2>
-                    <div class="abstract-content">
-                        webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
-webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
-由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
-12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>学习使用Webpack</span>
-                        </h2>
-                    <div class="abstract-content">
-                        今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
-Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
-webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
-webpack中主要有四个核心概念，只要掌握这四个概念，基本可以学会使用webpack
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>关于focus与focusin的区别<br>敬请期待</p>
 
-EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
-OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
-Loader...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
-                    </div>
-                </div>
-            </article>
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
         
+            <li class="next">
+                <a href= "/2017/12/06/target与currentTarget，傻傻分不清/" title= target与currentTarget，傻傻分不清 >
+                    <span>Next Post</span>
+                    <span>target与currentTarget，傻傻分不清</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/11/30/工作过程中相关问题的总结/" title= 工作过程中相关问题的总结 >
+                    <span>Previous Post</span>
+                    <span>工作过程中相关问题的总结</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <!-- paginator  -->
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
-
             <!-- profile -->
             
         </div>
@@ -285,6 +275,13 @@ Loader...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
