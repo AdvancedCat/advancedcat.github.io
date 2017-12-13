@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        套娃组件——记一次项目设计 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,58 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">套娃组件——记一次项目设计</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            套娃组件——记一次项目设计
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 项目设计>项目设计</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/12/13</span>
+            </div>
         
     </div>
 </div>
@@ -164,40 +197,49 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>近期，接到一个项目，商业产品引入新的券种————时长券。大致的交互和以往的现金券差不不多，仅仅是优惠券的数据结构不同，展示的弹框样式也有所不同。<br>下图是时长券弹框的样式：<br><img src="/img/时长券弹框样式.png" alt=""></p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ul>
+<li>偷懒方案<br>大可将现金券的交互逻辑拷贝一份，装饰一个新的模板，留意券的数据结构，调整个别个性化交互即可。<br>预估两三天即可，很轻松。</li>
+</ul>
+<p>缺点：代码通过剪刀胶水一番操作后，重复大片，如果下次需要调整优惠券的一些逻辑时，相当于我要改两次。另外，弹框的交互和优惠券的业务掺杂在一起了。耦合度较高。</p>
+<ul>
+<li>自找麻烦方案<br>静下心，认真分析现金券和时长券之间共同点，思考是否可以将它们共同部分单独抽离出来。<br>比如弹框的左右翻页，就可以抽离出来作为弹框本身的事件处理，与何种券没有关系。</li>
+</ul>
+<h1 id="套娃组件"><a href="#套娃组件" class="headerlink" title="套娃组件"></a>套娃组件</h1><p>本着不给自己挖坑的原则，有必要好好设计一下。想到俄罗斯的玩具————套娃，既然两种券弹框样式和交互大多一致，就可以将共同部分抽离出为一个弹框组件。弹框组件维护自己的样式和交互，它并不关心优惠券的类别。<br>现金券弹框和时长券弹框都可继承自这个基础弹框，它们仅负责自己业务行为，将需要展示的优惠券列表通过参数形式传入到基础弹框组件中。<br>这就像一个套娃套住了另一个套娃。<br>在实际开发中，也尽量将基础弹框组件做成热拔插的组件，这样也可以应对以后业务扩展的需要，比如以后再引入其他券种，就可以继承自基础组件，而仅关心业务需求即可。</p>
+<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>依据上面的思路，画出以下设计框架，以继承封装的形式层层套组件<br><img src="/img/优惠券套娃组件设计.png" alt=""></p>
+<p>由于基础弹框组件已经封装了弹框的交互行为，当弹框点击行为触发时，比如翻页，它需要读取到下一页的数据并展示，那么通知券组件获取展示数据。此时需要为组件之间的通信架起桥梁。<br>我的解决方案是观察者模式，又称订阅发布模式。当基础弹框组件触发相关事件时，可以立即抛出消息，券组件就可以监听到这个消息，从而准备好相关数据，再次调用基础弹框组件暴露的方法更新视图。大致流程图如下：<br><img src="/img/时长券组件消息通知.png" alt=""></p>
+<p>1.基础弹框组件继承观察者类(Observer)，在基础弹框组件的关键行为中，如翻页事件，会触发消息：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.trigger(<span class="string">'go_page'</span>, [page])</div></pre></td></tr></table></figure></p>
+<p>2.券组件初始化时，会监听来自基础弹框组件的消息，并依据消息完成业务逻辑，如翻页消息:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line">self.on(<span class="string">'go_page'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">page</span>)</span>&#123;</div><div class="line">    <span class="comment">// get coupon list according to page paramater</span></div><div class="line">    self._common.goPage(page)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>3.券组件在实例化基础弹框组件时，可以传入一些钩子函数，这些钩子函数的作用是在弹框组件一些事件中执行券组件个性化需求。<br>比如基础弹框组件不关心券列表，其中显示的表格样式也可以由券组件配置，那么基础弹框组件在渲染券列表时，并不知道它的数据结构，因此可以调起传入的优惠券渲染钩子函数，这样渲染个性化的模板任务交给了券组件。<br>如果钩子函数参数是空的，那么基础弹框组件就会执行默认行为。<br>以下代码片段是计算使用优惠券后计算优惠信息，其中<code>calDiscountHook</code>就是一个钩子。当计算完毕后，还会抛出<code>calculate</code>消息告知券组件已计算完毕，可以执行一些额外的工作。（添加<code>eventPrefix</code>为的防止消息重名）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * [calculate 计算优惠信息]</span></div><div class="line"><span class="comment"> * @return &#123;number&#125;    [折后价]</span></div><div class="line"><span class="comment"> */</span></div><div class="line">Common.prototype.calculate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>,</div><div class="line">        discount = <span class="number">0</span></div><div class="line">    _.each(self._choosen, <span class="function"><span class="keyword">function</span> (<span class="params">coupon</span>) </span>&#123;</div><div class="line">        <span class="comment">// 可以指定计算优惠信息的钩子函数，方便自定义。默认读取discountValue字段</span></div><div class="line">        discount += ( self._op.calDiscountHook ? +self._op.calDiscountHook(coupon) : (+coupon.discountValue || <span class="number">0</span>) )</div><div class="line">    &#125;)</div><div class="line">    discount = toFixed(discount, <span class="number">2</span>)</div><div class="line">    self._updateDiscount(discount)</div><div class="line">    <span class="comment">// 如果你需要自定义更新显示优惠信息，你可以去监听这个事件</span></div><div class="line">    self.trigger(self._op.eventPrefix + <span class="string">'calculate'</span>, [self._choosen, discount])</div><div class="line">    <span class="keyword">return</span> discount</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
         
         
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>How to maintain HexoBlog</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                    </div>
+            <li class="previous">
+                <a href= "/2017/12/12/读懂package-json/" title= 读懂package.json >
+                    <span>Previous Post</span>
+                    <span>读懂package.json</span>
                 </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                    </div>
-                </div>
-            </article>
+            </li>
         
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <!-- paginator  -->
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
-
             <!-- profile -->
             
         </div>
@@ -239,6 +281,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分析"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#套娃组件"><span class="toc-number">3.</span> <span class="toc-text">套娃组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计"><span class="toc-number">4.</span> <span class="toc-text">设计</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">

@@ -221,6 +221,9 @@
 <h3 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h3><p>指明你的项目仓库地点。这有助于其他人能够帮助你一起维护项目，最常见的就是GitHub仓库啦：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"repository"</span> :</div><div class="line"> &#123;</div><div class="line">    <span class="string">"type"</span> : <span class="string">"git"</span>,</div><div class="line">    <span class="string">"url"</span> : <span class="string">"https://github.com/npm/npm.git"</span></div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 <h3 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h3><p>scripts包含了在项目开发过程会使用的脚本命令，我们可以运行<code>npm run command-name</code>来执行它们：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">   <span class="string">"start"</span>: <span class="string">"node server.js"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h3><p><strong>For production</strong>: 指明你项目生产环境时的依赖，即别人使用你的项目代码时必须依赖某些插件方可使用。在这里需要特别说明一下关于依赖项目version的范围规则：</p>
+<blockquote>
+<p>版本号满足范式： major.minor.patch 即 主版本.次版本.补丁</p>
+</blockquote>
 <ul>
 <li>version :必须满足规定的版本</li>
 <li>>version  :大于某个版本</li>
@@ -243,6 +246,13 @@
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/12/13/套娃组件——记一次项目设计/" title= 套娃组件——记一次项目设计 >
+                    <span>Next Post</span>
+                    <span>套娃组件——记一次项目设计</span>
+                </a>
+            </li>
         
         
             <li class="previous">
@@ -495,7 +505,24 @@
     
     
     
-    <div class="total-archive"> Total : 15 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 16 </div>
     
     <div class="post-archive">
     
@@ -504,6 +531,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2017/12/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -593,15 +625,17 @@
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

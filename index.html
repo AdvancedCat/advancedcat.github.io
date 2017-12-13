@@ -183,6 +183,42 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/12/13/套娃组件——记一次项目设计/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>套娃组件——记一次项目设计</span>
+                        </h2>
+                    <div class="abstract-content">
+                        背景近期，接到一个项目，商业产品引入新的券种————时长券。大致的交互和以往的现金券差不不多，仅仅是优惠券的数据结构不同，展示的弹框样式也有所不同。下图是时长券弹框的样式：
+分析
+偷懒方案大可将现金券的交互逻辑拷贝一份，装饰一个新的模板，留意券的数据结构，调整个别个性化交互即可。预估两三天即可，很轻松。
+
+缺点：代码通过剪刀胶水一番操作后，重复大片，如果下次需要调整优惠券的一些逻辑时，相当于我要改两次。另外，弹框的交互和优惠券的业务掺杂在一起了。耦合度较高。
+
+自找麻烦方案静下心，认真分析现金券和时长券之间共同点，思考是否可以将它们共同部分单独抽离出来。比如弹框的左右翻页，就可以抽离出来...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 项目设计>项目设计</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/13</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/12/12/读懂package-json/" >
                         <h2 class="abstract-title">
                             
@@ -385,45 +421,6 @@ Babel is a JavaScript compiler.
                     <!-- date  -->
                     <div class="abstract-date">
                         <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/09</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>学习使用Webpack</span>
-                        </h2>
-                    <div class="abstract-content">
-                        今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
-Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
-webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
-webpack中主要有四个核心概念，只要掌握这四个概念，基本可以学会使用webpack
-
-EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
-OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
-Loader...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
                     </div>
                 </div>
             </article>
@@ -704,7 +701,24 @@ Loader...
     
     
     
-    <div class="total-archive"> Total : 15 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 16 </div>
     
     <div class="post-archive">
     
@@ -713,6 +727,11 @@ Loader...
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2017/12/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -802,15 +821,17 @@ Loader...
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

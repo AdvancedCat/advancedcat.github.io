@@ -170,25 +170,33 @@
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2017/02/01/hello-world/" >
+                <a class="content-show-full" href = "/2017/12/13/套娃组件——记一次项目设计/" >
                         <h2 class="abstract-title">
                             
-                            <span>How to maintain HexoBlog</span>
+                            <span>套娃组件——记一次项目设计</span>
                         </h2>
                     <div class="abstract-content">
-                        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
+                        背景近期，接到一个项目，商业产品引入新的券种————时长券。大致的交互和以往的现金券差不不多，仅仅是优惠券的数据结构不同，展示的弹框样式也有所不同。下图是时长券弹框的样式：
+分析
+偷懒方案大可将现金券的交互逻辑拷贝一份，装饰一个新的模板，留意券的数据结构，调整个别个性化交互即可。预估两三天即可，很轻松。
+
+缺点：代码通过剪刀胶水一番操作后，重复大片，如果下次需要调整优惠券的一些逻辑时，相当于我要改两次。另外，弹框的交互和优惠券的业务掺杂在一起了。耦合度较高。
+
+自找麻烦方案静下心，认真分析现金券和时长券之间共同点，思考是否可以将它们共同部分单独抽离出来。比如弹框的左右翻页，就可以抽离出来...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
                     <!-- tags  -->
                     
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 项目设计>项目设计</a>
+    
+</div>
+                    
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/13</span>
                     </div>
                 </div>
             </article>
