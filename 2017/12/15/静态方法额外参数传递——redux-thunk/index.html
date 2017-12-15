@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        静态方法额外参数传递——redux-thunk · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,52 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">静态方法额外参数传递——redux-thunk</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            静态方法额外参数传递——redux-thunk
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/12/15</span>
+            </div>
         
     </div>
 </div>
@@ -164,289 +191,46 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/09/使用Babel/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>使用Babel</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Babel?
-Babel is a JavaScript compiler.
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>今天来看一段仅有14行的代码，它在github上获得了7200+ star。它就是<a href="https://github.com/gaearon/redux-thunk" target="_blank" rel="external">redux-thunk</a><br>redux-thunk的作用是为redux提供thunk中间件，使得延迟调用dispatch，完成异步请求等功能。</p>
+<blockquote>
+<p>何为thunk?<br>thunk是一种包裹一些稍后执行的表达式的函数</p>
+</blockquote>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>先感受一下这14行的代码(v2.0)：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createThunkMiddleware</span>(<span class="params">extraArgument</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">&#123; dispatch, getState &#125;</span>) =&gt;</span> next =&gt; <span class="function"><span class="params">action</span> =&gt;</span> &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> action === <span class="string">'function'</span>) &#123;</div><div class="line">      <span class="keyword">return</span> action(dispatch, getState, extraArgument);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> next(action);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> thunk = createThunkMiddleware();</div><div class="line">thunk.withExtraArgument = createThunkMiddleware;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> thunk;</div></pre></td></tr></table></figure></p>
+<p>源码很简单，但是有一处让我觉得很不错。<br>首先createThunkMiddleware工厂函数作用是封装middleware，并返回它。但是我们希望在执行这个中间件的时候，能将额外的参数传递给action，同时这个额外参数希望用户自定义。<br>这时候可以给返回的这个中间添加静态方法<code>withExtraArgument</code>，指向工厂函数，这样就可以传入自定义参数的同时，返回中间件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> store = createStore(</div><div class="line">  reducer,</div><div class="line">  applyMiddleware(thunk.withExtraArgument(api))</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment">// later</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchUser</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">dispatch, getState, api</span>) =&gt;</span> &#123;</div><div class="line">    <span class="comment">// you can use api here</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h1><p>react-redux需要配合redux的applyMiddleware一起使用，因此需要先看一下applyMiddleware的源码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">applyMiddleware</span>(<span class="params">...middlewares</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">createStore</span>) =&gt;</span> (...args) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> store = createStore(...args)</div><div class="line">    <span class="keyword">let</span> dispatch = store.dispatch</div><div class="line">    <span class="keyword">let</span> chain = []</div><div class="line"></div><div class="line">    <span class="keyword">const</span> middlewareAPI = &#123;</div><div class="line">      getState: store.getState,</div><div class="line">      dispatch: <span class="function">(<span class="params">...args</span>) =&gt;</span> dispatch(...args)</div><div class="line">    &#125;</div><div class="line">    chain = middlewares.map(<span class="function"><span class="params">middleware</span> =&gt;</span> middleware(middlewareAPI))</div><div class="line">    dispatch = compose(...chain)(store.dispatch)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      ...store,</div><div class="line">      dispatch</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其中compose的作用是这样的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compose(a,b,c)(args) ==&gt; a(b(c(args)))</div></pre></td></tr></table></figure></p>
+<p>applyMiddleware使用方法如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> createStoreWithMiddleware = applyMiddleware(thunk)(createStore)</div><div class="line"><span class="keyword">const</span> store = createStoreWithMiddleware(reducer)</div></pre></td></tr></table></figure></p>
+<p>配合双方的源码来看，thunk作为中间件，接受由上一个中间返回的dispatch,若只有thunk一个中间件的话，<code>next</code>即为<code>store.dispatch</code><br>一旦应用中分发了action，必定会一次执行每一个中间件。这样thunk就可以依据传进来的action的类别进行区分了，从而支持异步操作</p>
 
-使用Babel可以让你用下一代的语法特性写今天的代码。
-如何使用Babel-CLI1.安装babel以及preset1npm install --save-dev babel-cli babel-preset-env
-2.新建.babelrc文件或者在package.json中配置12345678echo '&#123;presets:["env"]&#125;' &gt; .babelrc// or option in package.json&#123;    ...,    "babel":&#123;...
-                    </div>
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/12/14/源码阅读——Redux/" title= 源码阅读——Redux >
+                    <span>Previous Post</span>
+                    <span>源码阅读——Redux</span>
                 </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Babel>Babel</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/09</span>
-                    </div>
-                </div>
-            </article>
+            </li>
         
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/08/学习使用Webpack/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>学习使用Webpack</span>
-                        </h2>
-                    <div class="abstract-content">
-                        今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
-Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
-webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
-webpack中主要有四个核心概念，只要掌握这四个概念，基本可以学会使用webpack
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
-OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
-Loader...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
+<!-- City版安装代码已完成 -->
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
     
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/08</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>同构Javascript应用</span>
-                        </h2>
-                    <div class="abstract-content">
-                        偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
+    <!--PC版-->
 
-能够在客户端和服务器端均可运行的应用——同构应用
-
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-历史前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/10/29/Javascript计算精度问题/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Javascript计算精度问题</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：
-
-解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。
-双数四则运算以下代码可以参考：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162//加法函数function accAdd...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/29</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Cookie,localStorage,sessionStorage简单分析</span>
-                        </h2>
-                    <div class="abstract-content">
-                        基本概念1.Cookie网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）
-2.web storage包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。
-兼容情况：
+    <!--PC版-->
 
 
-
-特性
-Chrome
-Firefox
-IE
-Opera
-Safari
-
-
-
-
-localStorage
-4
-3.5
-8
-10.50
-4
-
-
-sessionStorage
-5
-2
-8
-10.50
-4
-
-
-
-三者的异同
-
-
-特性
-Cookie
-localStorage
-sessionStorag...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/03/01/第一篇博客/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>开篇博客</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Start now从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。
-工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。
-定一个小目标一周一篇博文，技术或是吐槽，只要愿意记录，都可以
-
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/01</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>How to maintain HexoBlog</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-    <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">#PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
     
 </main>
-
             <!-- profile -->
             
         </div>
@@ -488,6 +272,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#源码"><span class="toc-number">1.</span> <span class="toc-text">源码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#用法"><span class="toc-number">2.</span> <span class="toc-text">用法</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
