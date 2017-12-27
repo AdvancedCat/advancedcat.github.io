@@ -185,6 +185,144 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/30/工作过程中相关问题的总结/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>工作过程中相关问题的总结</span>
+                        </h2>
+                    <div class="abstract-content">
+                        20171130百度地图key校验未通过描述今天中午，产品报出一个问题，部分经纪人用户在加载页面时，有如下的弹框报错：
+
+背景项目在前几天针对百度地图key进行了调整，将分散在不同页面的百度key统一通过PHP的配置完成输出，方便管理。同时key也使用了新的key，扩大流量。
+分析过程
+首先确定百度地图的key是否正确输出，访问线上地址，打开终端查看dom后发现，百度key已经正确输出了。并且key也是正确的新key；
+既然key是正确的，会不会是缓存的问题，导致用户访问的是老的key，而老key被停止了，导致用户端出现百度key不可用提示。于是让用户清空了浏览器端缓存，但仍然有这个问题...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 工作>工作</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/30</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/22/结合百度地图的业务场景/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>结合百度地图的业务场景</span>
+                        </h2>
+                    <div class="abstract-content">
+                        背景这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结
+需求用户在一个输入框中输入地址的关键字，调用百度的Autocomplete接口获取联想地址列表，并展示在前端，供用户选择。当用户选择一个地址后，再调用LocalSearch反编译地址，获得地址标点，然后在地图上标记；用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果
+如何做？封装百度地图接口，形成组件，暴露必要的api，供业务调用
+为了做到js部分代码的可移植性，尽量减少依赖。目前js部分仅依赖于jQuery。页面展示和样式目前无法通用，需要依据业务自定义。可以做成模板。
+组件设计：内部维护地图实例对象...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Design>Design</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/22</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Karma单元测试</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Karma?Javascript 单元测试工具
+使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
+安装1.全局安装karma-cli1npm i -g karma-cli
+2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
+自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>常用Webpack插件</span>
+                        </h2>
+                    <div class="abstract-content">
+                        webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
+webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
+由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
+12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/11/09/使用Babel/" >
                         <h2 class="abstract-title">
                             
@@ -326,136 +464,10 @@ Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
             </article>
         
     
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Cookie,localStorage,sessionStorage简单分析</span>
-                        </h2>
-                    <div class="abstract-content">
-                        基本概念1.Cookie网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）
-2.web storage包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。
-兼容情况：
-
-
-
-特性
-Chrome
-Firefox
-IE
-Opera
-Safari
-
-
-
-
-localStorage
-4
-3.5
-8
-10.50
-4
-
-
-sessionStorage
-5
-2
-8
-10.50
-4
-
-
-
-三者的异同
-
-
-特性
-Cookie
-localStorage
-sessionStorag...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/03/01/第一篇博客/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>开篇博客</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Start now从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。
-工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。
-定一个小目标一周一篇博文，技术或是吐槽，只要愿意记录，都可以
-
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/01</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>How to maintain HexoBlog</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                    </div>
-                </div>
-            </article>
-        
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/">#PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+        <a class="extend prev" rel="prev" href="/">#PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">#NEXT</a>
     </nav>
     
 </main>
@@ -776,7 +788,80 @@ More...
     
     
     
-    <div class="total-archive"> Total : 18 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 23 </div>
     
     <div class="post-archive">
     
@@ -785,6 +870,31 @@ More...
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/26</span><a class="archive-post-title" href= "/2017/12/26/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2017/12/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2017/12/18/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2017/12/18/JS的单线程与异步/" >JS的单线程与异步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2017/12/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -881,15 +991,21 @@ More...
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
