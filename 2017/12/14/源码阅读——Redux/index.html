@@ -212,7 +212,7 @@
 <h2 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h2><p>如果应用比较简单，我们可以只写一个reducer，将所有的action都集中到一处去，之后参数传给createStore.<br>但是随着应用越来越大，你可能有很多action，如果都放入一个reducer中，显然变得不可维护。于是期望可以拆分reducer，每个reducer仅关心store tree中某个分支（即state中部分key），且仅返回这部分分支内容。其他分支内容你并不关心。<br>为了解决这个问题，Reudex提供了combineReducers函数。<br>combineReducers接受一个reducers对象，每一个key对应了一个reducer，这个key之后也将反应到state中。<br>比如你有一个postListReducer，这个reducer专门用来处理博客列表相关的操作（增删改查），将<code>{postList: postListReducer}</code>传给combineReducers，你会得到<code>{postList: []}</code>的store。而postListReducer也仅能处理postList部分的数据，不用关心其他字段。</p>
 <p>源码如下（有删减）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将包含多个reducer函数的对象转换为一个reducer函数</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; reducers [description]</span></div><div class="line"><span class="comment"> * @return &#123;[type]&#125;          [description]</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">combineReducers</span>(<span class="params">reducers</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers)</div><div class="line">  <span class="keyword">const</span> finalReducers = &#123;&#125;</div><div class="line">  <span class="comment">// 将有效的reducer汇集到一个最终对象中</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; reducerKeys.length; i++) &#123;</div><div class="line">    <span class="keyword">const</span> key = reducerKeys[i]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> reducers[key] === <span class="string">'function'</span>) &#123;</div><div class="line">      finalReducers[key] = reducers[key]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">const</span> finalReducerKeys = <span class="built_in">Object</span>.keys(finalReducers)</div><div class="line"></div><div class="line">  <span class="comment">// 最终返回一个reducer函数，接受state和action参数</span></div><div class="line">  <span class="comment">// 它会遍历每一个之前传入的reducer，每个reducer仅会改变对应key的state</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">combination</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> hasChanged = <span class="literal">false</span></div><div class="line">    <span class="keyword">const</span> nextState = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; finalReducerKeys.length; i++) &#123;</div><div class="line">      <span class="keyword">const</span> key = finalReducerKeys[i]</div><div class="line">      <span class="keyword">const</span> reducer = finalReducers[key]</div><div class="line">      <span class="keyword">const</span> previousStateForKey = state[key]</div><div class="line">      <span class="keyword">const</span> nextStateForKey = reducer(previousStateForKey, action)</div><div class="line">      <span class="comment">// 每个reducer只管自己的一亩三分地</span></div><div class="line">      nextState[key] = nextStateForKey  <span class="comment">// 计算出的state会放入对应key中去</span></div><div class="line">      hasChanged = hasChanged || nextStateForKey !== previousStateForKey  <span class="comment">// 这里应对可能reducer返回原来的state</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> hasChanged ? nextState : state</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="bindActionCreators"><a href="#bindActionCreators" class="headerlink" title="bindActionCreators"></a>bindActionCreators</h2><p>在你使用Redux后，我们可以通过<code>store.dispatch(ActionCreator(...))</code>的形式去分发由ActionCreator生成的action。<br>我们知道，React很适合组件式开发，那么如果我们需要在子组件中去分发action的时候该如何做呢？可以这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Child &#123;...data&#125; dispatch=&#123;store.dispatch&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Child</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">//在组件内部我们可以这样调用了</span></div><div class="line"><span class="keyword">this</span>.props.dispatch(action)</div></pre></td></tr></table></figure></p>
-<p>这样做有一个问题，如果子组件嵌套较深，那么每个组件我都要传一个dispatch下去，我们希望使用redux时透明的，能否将dispatch保存在actioncreator中，当分发action时自动带出dispatch。答案是可以的，这里我们需要借助bindActionCreators函数来绑定dispatch<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">render()&#123;</div><div class="line">    <span class="keyword">let</span> &#123;todos, dispatch&#125; = <span class="keyword">this</span>.props</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * &#123;</span></div><div class="line"><span class="comment">     *    addTodo: Function,</span></div><div class="line"><span class="comment">     *    removeTodo: Function</span></div><div class="line"><span class="comment">     * &#125;</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">let</span> boundActionCreators = bindActionCreators(TodoActionCreators, dispatch)</div><div class="line"></div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;TodoList todos=&#123;todos&#125; &#123;...boundActionCreators&#125; /&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样做有一个问题，如果子组件嵌套较深，那么每个组件我都要传一个dispatch下去，我们希望使用redux时透明的，能否将dispatch保存在actioncreator中，当分发action时自动带出dispatch。答案是可以的，这里我们需要借助bindActionCreators函数来绑定dispatch<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">render()&#123;</div><div class="line">    <span class="keyword">let</span> &#123;todos, dispatch&#125; = <span class="keyword">this</span>.props</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * &#123;</span></div><div class="line"><span class="comment">     *    add<span class="doctag">Todo:</span> Function,</span></div><div class="line"><span class="comment">     *    remove<span class="doctag">Todo:</span> Function</span></div><div class="line"><span class="comment">     * &#125;</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">let</span> boundActionCreators = bindActionCreators(TodoActionCreators, dispatch)</div><div class="line"></div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;TodoList todos=&#123;todos&#125; &#123;...boundActionCreators&#125; /&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>上例摘自<a href="http://cn.redux.js.org/docs/api/bindActionCreators.html" target="_blank" rel="external">Redux文档</a>中<br>在实际应用，我么也可以用的更灵活一些，比如借助<code>react-redux</code>中connect方法</p>
 <p>源码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindActionCreator</span>(<span class="params">actionCreator, dispatch</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> dispatch(actionCreator.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)) &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将dispatch绑定到actionCreator函数中</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; actionCreators actionCreator函数或者actionCreator函数对象</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; dispatch       [description]</span></div><div class="line"><span class="comment"> * @return &#123;[type]&#125;                [description]</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">bindActionCreators</span>(<span class="params">actionCreators, dispatch</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> actionCreators === <span class="string">'function'</span>) &#123;</div><div class="line">    <span class="keyword">return</span> bindActionCreator(actionCreators, dispatch)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(actionCreators)</div><div class="line">  <span class="keyword">const</span> boundActionCreators = &#123;&#125;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.length; i++) &#123;</div><div class="line">    <span class="keyword">const</span> key = keys[i]</div><div class="line">    <span class="keyword">const</span> actionCreator = actionCreators[key]</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> actionCreator === <span class="string">'function'</span>) &#123;</div><div class="line">      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> boundActionCreators</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这段源码是比较简单的，大致意图是进一步封装actionCreator函数，通过闭包的形式将dispatch绑定到actionCreator中。从而使子组件不需要关心dispatch参数，直接分发action</p>
@@ -602,7 +602,18 @@
     
     
     
-    <div class="total-archive"> Total : 23 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 24 </div>
     
     <div class="post-archive">
     
@@ -611,6 +622,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2017/12/27/CSS-Modules/" >CSS Modules</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -732,11 +748,13 @@
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
@@ -746,17 +764,15 @@
     
         <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Design</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Design</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

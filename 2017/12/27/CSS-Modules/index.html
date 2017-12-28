@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        CSS Modules · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,58 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">CSS Modules</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            CSS Modules
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = CSS>CSS</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/12/27</span>
+            </div>
         
     </div>
 </div>
@@ -164,46 +197,72 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><p>我们在开发页面的时候，经常是需要写一些样式文件的。自从React，Vue兴起后，组件化开发日益火热。<br>组件化开发过程中，我们编程思维颗粒度更细，在写样式时，仅仅会针对这个单独组件，难免会与其他的组件样式冲突，导致重名样式覆盖。<br>比如，A组件有个<code>title</code>样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而在B组件中也有同名<code>title</code>样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: blue;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当在同一页面中使用A B组件时，样式就会冲突。</p>
+<p>那么有没有什么好的办法解决这个问题呢？</p>
+<p>有一种css组织方式——<a href="https://en.bem.info/methodology/css/" target="_blank" rel="external">BEM</a>,为每个class起一个有意义的名称，尽可能避免重名问题。但是，它的命名过于繁琐和冗长，虽然便于管理，但是对开发者而言不够友好。</p>
+<p>试试CSS Modules吧</p>
+<h1 id="CSS-Modules"><a href="#CSS-Modules" class="headerlink" title="CSS Modules"></a><a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">CSS Modules</a></h1><p>CSS Modules是一个样式文件，这个样式文件中所有样式类（class）和动画名称默认都是本地作用域的。通过模块引入的方式访问。</p>
+<blockquote>
+<p>注意，CSS Modules只对样式类做转换，即如果你配合webpack使用后，它会把样式类以base64形式转换。如果在CSS Modules中使用id选择器、伪类、标签选择器，它不会做任何转换</p>
+</blockquote>
+<p>CSS Modules引入了模块依赖和局部作用域的概念，让css文件以模块的方式引入.这与webpack的思想不谋而合，在webpack中，所以资源都是模块，并且webpack中也可以针对模块使用不同的loader处理资源。</p>
+<p>我们先看看，CSS Module的基本内容，再看看搭配webpack如何做到css模块的引入。</p>
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>CSS Modules提倡使用驼峰式书写类名，但并不是强制的<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.bannerBg</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样做的原因是，如果你使用了react或者vue，那么你通过引入样式文件就一切很自然了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// For React</span></div><div class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">'./style.css'</span></div><div class="line"></div><div class="line">&lt;App className=&#123;style.bannerBg&#125; /&gt;</div></pre></td></tr></table></figure></p>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>在CSS Modules中，有本地作用域和全局作用域之分，使用<code>:local()</code>和<code>:global()</code>标识，默认情况下都是本地作用域的<br>如果在全局作用域下，其他组件也可以访问到样式类名<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.normal</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 以上与下面等价 */</span></div><div class="line"><span class="selector-pseudo">:local(.normal)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 定义全局样式 */</span></div><div class="line"><span class="selector-pseudo">:global(.btn)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 定义多个全局样式 */</span></div><div class="line"><span class="selector-pseudo">:global</span> &#123;</div><div class="line">  .link &#123;</div><div class="line">    <span class="selector-tag">color</span>: <span class="selector-tag">green</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.box</span> &#123;</div><div class="line">    <span class="attribute">color</span>: yellow;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>允许开发者自由组合多个样式类<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.className</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">  <span class="attribute">background</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.otherClassName</span> &#123;</div><div class="line">  <span class="attribute">composes</span>: className;</div><div class="line">  <span class="attribute">color</span>: yellow;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面<code>otherClassName</code>组合了<code>className</code>的属性，但自身<code>color</code>会覆盖其他类<code>className</code>的同名属性。<br><code>otherClassName</code>必须在之前声明好。</p>
+<p>可以组合多个类<code>composes: classNameA classNameB;</code></p>
+<p>也可以组合全局类,以及组合来自其他文件的类<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.otherClassName</span> &#123;</div><div class="line">  <span class="attribute">composes</span>: globalClassName from global;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.otherClassName</span> &#123;</div><div class="line">  <span class="attribute">composes</span>: className from <span class="string">'./another.css'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>知道了CSS Modules的内容，当然需要用它，不然学它做什么(黑人问号脸…)</p>
+<p>我们以React为例，使用webpack进行打包。首先如果需要开启CSS Modules，我们需要在webpack中声明：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line">...</div><div class="line"><span class="built_in">module</span>:&#123;</div><div class="line">    loaders: [&#123;</div><div class="line">        test: <span class="regexp">/\.css$/</span>,</div><div class="line">        loader: <span class="string">"style-loader!css-loader?modules"</span></div><div class="line">    &#125;]</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>一个App组件：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// style.css</div><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> style <span class="keyword">from</span> <span class="string">'./style.css'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ()=&gt;&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;h1 className=&#123;style.title&#125;&gt;&lt;/h1&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我们访问页面时，这个组件内部<code>h1</code>标签的变成了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"_3zyde4l1yATCOkgn-DBWEL"</span>&gt;</span></div><div class="line">  Hello World</div><div class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p><code>h1</code>的class属性值变成了base64编码，这样就避免了样式的重名。</p>
+<p>更多的用例，你可以看一下阮大神的博文——<a href="http://www.ruanyifeng.com/blog/2016/06/css_modules.html" target="_blank" rel="external">CSS Modules</a></p>
+<h1 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h1><p>既然有个规范，那就有一些使用的约定，非强制性的约定，但使用后还是很有好处的。</p>
+<ul>
+<li>不使用选择器，只使用 class 名来定义样式</li>
+<li>不层叠多个 class，只使用一个 class 把所有样式定义好</li>
+<li>所有样式通过 composes 组合来实现复用</li>
+<li>不嵌套</li>
+</ul>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">CSS Modules</a></li>
+<li><a href="https://zhuanlan.zhihu.com/purerender/20495964" target="_blank" rel="external">CSS Modules 详解及 React 中实践</a></li>
+</ul>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
         
         
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/22/结合百度地图的业务场景/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>结合百度地图的业务场景</span>
-                        </h2>
-                    <div class="abstract-content">
-                        背景这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结
-需求用户在一个输入框中输入地址的关键字，调用百度的Autocomplete接口获取联想地址列表，并展示在前端，供用户选择。当用户选择一个地址后，再调用LocalSearch反编译地址，获得地址标点，然后在地图上标记；用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果
-如何做？封装百度地图接口，形成组件，暴露必要的api，供业务调用
-为了做到js部分代码的可移植性，尽量减少依赖。目前js部分仅依赖于jQuery。页面展示和样式目前无法通用，需要依据业务自定义。可以做成模板。
-组件设计：内部维护地图实例对象...
-                    </div>
+            <li class="previous">
+                <a href= "/2017/12/26/伸缩盒——Flex/" title= 伸缩盒——Flex >
+                    <span>Previous Post</span>
+                    <span>伸缩盒——Flex</span>
                 </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Design>Design</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/22</span>
-                    </div>
-                </div>
-            </article>
+            </li>
         
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-    <!-- paginator  -->
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
-
             <!-- profile -->
             
         </div>
@@ -245,6 +304,13 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#痛点"><span class="toc-number">1.</span> <span class="toc-text">痛点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-Modules"><span class="toc-number">2.</span> <span class="toc-text">CSS Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#命名"><span class="toc-number">2.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">2.2.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合"><span class="toc-number">2.3.</span> <span class="toc-text">组合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用"><span class="toc-number">3.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#约定"><span class="toc-number">4.</span> <span class="toc-text">约定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
