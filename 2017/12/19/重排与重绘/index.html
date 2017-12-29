@@ -218,6 +218,17 @@
 <li>在内存中多次操作节点，完成后再添加到文档中去（可使用fragment元素）。例如要异步获取表格数据，渲染到页面。可以先取得数据后在内存中构建整个表格的html片段，再一次性添加到文档中去，而不是循环添加每一行。</li>
 </ol>
 <p>那么问题来了，如果面试官问你“如何给一个大量数据的表格排序”，你要怎么回答？</p>
+<p>另一个有趣的问题：如何快速让一个元素的子元素逆序展示？<br>给出两个用CSS解决的方法</p>
+<ul>
+<li>使用css3 的 <code>scaleY()</code>方法<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;div id="top-to-bottom"&gt;</div><div class="line">	&lt;div id="a"&gt;A&lt;/div&gt;</div><div class="line">	&lt;div id="b"&gt;B&lt;/div&gt;</div><div class="line">	&lt;div id="c"&gt;C&lt;/div&gt;</div><div class="line">	&lt;div id="d"&gt;D&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line"><span class="selector-tag">div</span><span class="selector-id">#top-to-bottom</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">width</span>:<span class="number">50px</span>;</div><div class="line">	<span class="attribute">text-align</span>: left;</div><div class="line">	<span class="attribute">float</span>: left;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">div</span><span class="selector-id">#top-to-bottom</span> &gt; <span class="selector-tag">div</span> &#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">50px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">50px</span>;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">float</span>: right;</div><div class="line">	<span class="attribute">display</span>: block;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>原理是父元素倒置，子元素也倒置一次，负负得正。</p>
+<ul>
+<li>使用flexbox布局<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#parent</span> &#123;</div><div class="line">  <span class="attribute">display</span>: flex;</div><div class="line">  <span class="attribute">flex-direction</span>: column-reverse;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>缺点目前flexbox在不同浏览器中实现程度不同</p>
 
     </article>
     <!-- 前后页  -->
@@ -614,7 +625,54 @@
     
     
     
-    <div class="total-archive"> Total : 24 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 25 </div>
     
     <div class="post-archive">
     
@@ -623,6 +681,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2017/12/29/DOM元素排序/" >DOM元素排序</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -749,17 +812,19 @@
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     

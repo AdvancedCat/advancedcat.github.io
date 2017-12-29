@@ -170,17 +170,24 @@
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
+                <a class="content-show-full" href = "/2017/12/29/DOM元素排序/" >
                         <h2 class="abstract-title">
                             
-                            <span>Karma单元测试</span>
+                            <span>DOM元素排序</span>
                         </h2>
                     <div class="abstract-content">
-                        Karma?Javascript 单元测试工具
-使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
-安装1.全局安装karma-cli1npm i -g karma-cli
-2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
-自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
+                        问题如何给页面中已存在的DOM元素排序？
+
+表格中有一些数据，希望按照某些规则进行排序
+父元素下的子元素排序等等…
+
+分析这个问题的关键是如何以最小的代价去操作这些dom，我们都知道直接操作页面DOM是很耗时的行为，因为操作一次页面DOM就会引发重排或重绘.那么如何设计解决这个问题。
+
+必须要缓存读取的DOM集合，在JS中完成排序，之后再写会页面中
+最好能直接用已存在的DOM填充到父元素中，不要使用新建DOM的方式
+以最少的标记来标识已存在DOM如何做移动
+
+关键函数sortElements根据以上设想，写出以下代码：12345678910111213141516171819202122...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -188,13 +195,15 @@
                     
                     <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = DOM>DOM</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
     
 </div>
                     
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/29</span>
                     </div>
                 </div>
             </article>

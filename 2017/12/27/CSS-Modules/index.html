@@ -221,7 +221,7 @@
 <h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>知道了CSS Modules的内容，当然需要用它，不然学它做什么(黑人问号脸…)</p>
 <p>我们以React为例，使用webpack进行打包。首先如果需要开启CSS Modules，我们需要在webpack中声明：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line">...</div><div class="line"><span class="built_in">module</span>:&#123;</div><div class="line">    loaders: [&#123;</div><div class="line">        test: <span class="regexp">/\.css$/</span>,</div><div class="line">        loader: <span class="string">"style-loader!css-loader?modules"</span></div><div class="line">    &#125;]</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure></p>
 <p>一个App组件：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// style.css</div><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> style <span class="keyword">from</span> <span class="string">'./style.css'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ()=&gt;&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;h1 className=&#123;style.title&#125;&gt;&lt;/h1&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> style <span class="keyword">from</span> <span class="string">'./style.css'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ()=&gt;&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;h1 className=&#123;style.title&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当我们访问页面时，这个组件内部<code>h1</code>标签的变成了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"_3zyde4l1yATCOkgn-DBWEL"</span>&gt;</span></div><div class="line">  Hello World</div><div class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p><code>h1</code>的class属性值变成了base64编码，这样就避免了样式的重名。</p>
 <p>更多的用例，你可以看一下阮大神的博文——<a href="http://www.ruanyifeng.com/blog/2016/06/css_modules.html" target="_blank" rel="external">CSS Modules</a></p>
@@ -240,6 +240,13 @@
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/12/29/DOM元素排序/" title= DOM元素排序 >
+                    <span>Next Post</span>
+                    <span>DOM元素排序</span>
+                </a>
+            </li>
         
         
             <li class="previous">
@@ -625,7 +632,54 @@
     
     
     
-    <div class="total-archive"> Total : 24 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 25 </div>
     
     <div class="post-archive">
     
@@ -634,6 +688,11 @@
     
     <div class="archive-year"> 2017 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2017/12/29/DOM元素排序/" >DOM元素排序</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -760,17 +819,19 @@
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
