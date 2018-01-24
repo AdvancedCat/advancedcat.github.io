@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        开篇博客 · XinHong&#39;s Blog
+        Markdown语法(Hexo) · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,7 +68,7 @@
                 <a href="/" >XinHong&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">开篇博客</a>
+                <a href="#" class="post-name">Markdown语法(Hexo)</a>
             </div>
     </div>
     
@@ -89,7 +89,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            开篇博客
+            Markdown语法(Hexo)
             <!-- 404 -->
             
         </h1>
@@ -107,7 +107,7 @@
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/03/01</span>
+                <span class="post-intro-time">2017/01/28</span>
             </div>
         
     </div>
@@ -193,28 +193,95 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="Start-now"><a href="#Start-now" class="headerlink" title="Start now"></a>Start now</h1><p>从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。</p>
-<p>工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。</p>
-<h1 id="定一个小目标"><a href="#定一个小目标" class="headerlink" title="定一个小目标"></a>定一个小目标</h1><p>一周一篇博文，技术或是吐槽，只要愿意记录，都可以</p>
+        <h2 id="内容目录"><a href="#内容目录" class="headerlink" title="内容目录"></a>内容目录</h2><h2 id="斜体和粗体"><a href="#斜体和粗体" class="headerlink" title="斜体和粗体"></a>斜体和粗体</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="emphasis">*斜体*</span>  <span class="strong">**粗体**</span></div></pre></td></tr></table></figure>
+<p><em>这是斜体</em><br><strong>这是粗体</strong></p>
+<h2 id="分级标题"><a href="#分级标题" class="headerlink" title="分级标题"></a>分级标题</h2><p>在行首加#号表示不同级别的标题 (H1-H6)，格式如下：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="section"># H1</span></div><div class="line"><span class="section">## H2</span></div><div class="line"><span class="section">### H3</span></div><div class="line"><span class="section">#### H4</span></div><div class="line"><span class="section">##### H5</span></div><div class="line"><span class="section">###### H6</span></div></pre></td></tr></table></figure></p>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>在单行中使用<code>***</code>或者<code>---</code>表示分割线</p>
+<hr>
+<p>上面是分割线</p>
+<hr>
+<p>我也是分割线</p>
+<h2 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h2><p>使用<code>~~</code>表示删除线<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~~我是一行错误的文本段。~~</div></pre></td></tr></table></figure></p>
+<p><del>我是一行错误的文本段。</del></p>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>文字超链接：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[<span class="string">链接文字</span>](<span class="link">链接地址 "链接名称"</span>)</div><div class="line">鼠标hover到链接上会显示链接名称</div></pre></td></tr></table></figure></p>
+<p><a href="http://www.baidu.com" title="这是百度网地址" target="_blank" rel="external">百度</a></p>
+<p>图片超链接：<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![<span class="string">图片说明</span>](<span class="link">图片链接 "图片标题"</span>)</div></pre></td></tr></table></figure></p>
+<p><img src="https://www.google.com/logos/doodles/2018/sergei-eisensteins-120th-birthday-5380775741489152-law.gif" alt="Google" title="纪念电影人"></p>
+<p>引入视频则直接插入<code>iframe</code>代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"/js/youtube-autoresizer.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div><div class="line">&lt;iframe width=<span class="string">"640"</span> height=<span class="string">"360"</span> src=<span class="string">"https://www.youtube.com/embed/HfElOZSEqn4"</span> frameborder=<span class="string">"0"</span> allowfullscreen&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<p><script src="/js/youtube-autoresizer.js"></script></p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/HfElOZSEqn4" frameborder="0" allowfullscreen></iframe>
 
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>用<code>\</code>表示注释，<code>\</code>后面的文字解析为纯文本格式<br>即<code>\</code>的作用相当于转义<br>如：<br>#这不是一级标题</p>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>使用<code>&gt;</code>表示文字引用</p>
+<blockquote>
+<p>这是被引用的一段文字</p>
+</blockquote>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><ul>
+<li><strong>使用<code>+ - *</code>表示无序列表</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">+ </span>大列表1</div><div class="line">  - 中列表1</div><div class="line"><span class="code">    * 小列表1</span></div><div class="line"><span class="bullet">+ </span>大列表2</div></pre></td></tr></table></figure>
+<ul>
+<li>大列表1<ul>
+<li>中列表1<ul>
+<li>小列表1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大列表2</li>
+</ul>
+<ul>
+<li><strong>使用<code>数字.</code>表示有序列表</strong><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">1. </span>大列表</div><div class="line"> 1. 中列表</div><div class="line"><span class="bullet">2. </span>大列表</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>大列表<ol>
+<li>中列表</li>
+</ol>
+</li>
+<li>大列表</li>
+</ol>
+<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>绘制表格格式如下，<code>|</code> 控制分列，<code>-</code> 控制分行，<code>:</code> 控制对齐方式。<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">| Item     | Value     | Qty   |</div><div class="line">| :------- | --------: | :---: |</div><div class="line">| Computer | 1600 USD  | 5     |</div><div class="line">| Phone    | 12 USD    | 12    |</div><div class="line">| Pipe     | 1 USD     | 234   |</div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Item</th>
+<th style="text-align:right">Value</th>
+<th style="text-align:center">Qty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Computer</td>
+<td style="text-align:right">1600 USD</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:left">Phone</td>
+<td style="text-align:right">12 USD</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td style="text-align:left">Pipe</td>
+<td style="text-align:right">1 USD</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p>使用连续三个```包裹代码块</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// javascript</span></div><div class="line"><span class="keyword">var</span> name = <span class="string">'xinhong'</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// python</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getName</span><span class="params">()</span>:</span></div><div class="line">	<span class="keyword">return</span> <span class="string">'xinhong'</span></div></pre></td></tr></table></figure>
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2017/04/10/Cookie-localStorage-sessionStorage/" title= Cookie,localStorage,sessionStorage简单分析 >
-                    <span>Next Post</span>
-                    <span>Cookie,localStorage,sessionStorage简单分析</span>
-                </a>
-            </li>
-        
-        
-            <li class="previous">
                 <a href= "/2017/02/01/hello-world/" title= How to maintain HexoBlog >
-                    <span>Previous Post</span>
+                    <span>Next Post</span>
                     <span>How to maintain HexoBlog</span>
                 </a>
             </li>
+        
         
     </ul>
     <!-- 评论插件 -->
@@ -276,7 +343,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Start-now"><span class="toc-number">1.</span> <span class="toc-text">Start now</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定一个小目标"><span class="toc-number">2.</span> <span class="toc-text">定一个小目标</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内容目录"><span class="toc-number">1.</span> <span class="toc-text">内容目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#斜体和粗体"><span class="toc-number">2.</span> <span class="toc-text">斜体和粗体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分级标题"><span class="toc-number">3.</span> <span class="toc-text">分级标题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分割线"><span class="toc-number">4.</span> <span class="toc-text">分割线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除线"><span class="toc-number">5.</span> <span class="toc-text">删除线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#超链接"><span class="toc-number">6.</span> <span class="toc-text">超链接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">7.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引用"><span class="toc-number">8.</span> <span class="toc-text">引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#列表"><span class="toc-number">9.</span> <span class="toc-text">列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表格"><span class="toc-number">10.</span> <span class="toc-text">表格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码块"><span class="toc-number">11.</span> <span class="toc-text">代码块</span></a></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>
