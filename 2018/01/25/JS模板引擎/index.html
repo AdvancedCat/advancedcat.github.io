@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        CSS Modules · XinHong&#39;s Blog
+        JS模板引擎 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,7 +68,7 @@
                 <a href="/" >XinHong&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">CSS Modules</a>
+                <a href="#" class="post-name">JS模板引擎</a>
             </div>
     </div>
     
@@ -89,7 +89,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            CSS Modules
+            JS模板引擎
             <!-- 404 -->
             
         </h1>
@@ -107,13 +107,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = CSS>CSS</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/12/27</span>
+                <span class="post-intro-time">2018/01/25</span>
             </div>
         
     </div>
@@ -199,60 +199,27 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><p>我们在开发页面的时候，经常是需要写一些样式文件的。自从React，Vue兴起后，组件化开发日益火热。<br>组件化开发过程中，我们编程思维颗粒度更细，在写样式时，仅仅会针对这个单独组件，难免会与其他的组件样式冲突，导致重名样式覆盖。<br>比如，A组件有个<code>title</code>样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>而在B组件中也有同名<code>title</code>样式：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: blue;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当在同一页面中使用A B组件时，样式就会冲突。</p>
-<p>那么有没有什么好的办法解决这个问题呢？</p>
-<p>有一种css组织方式——<a href="https://en.bem.info/methodology/css/" target="_blank" rel="external">BEM</a>,为每个class起一个有意义的名称，尽可能避免重名问题。但是，它的命名过于繁琐和冗长，虽然便于管理，但是对开发者而言不够友好。</p>
-<p>试试CSS Modules吧</p>
-<h1 id="CSS-Modules"><a href="#CSS-Modules" class="headerlink" title="CSS Modules"></a><a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">CSS Modules</a></h1><p>CSS Modules是一个样式文件，这个样式文件中所有样式类（class）和动画名称默认都是本地作用域的。通过模块引入的方式访问。</p>
-<blockquote>
-<p>注意，CSS Modules只对样式类做转换，即如果你配合webpack使用后，它会把样式类以base64形式转换。如果在CSS Modules中使用id选择器、伪类、标签选择器，它不会做任何转换</p>
-</blockquote>
-<p>CSS Modules引入了模块依赖和局部作用域的概念，让css文件以模块的方式引入.这与webpack的思想不谋而合，在webpack中，所以资源都是模块，并且webpack中也可以针对模块使用不同的loader处理资源。</p>
-<p>我们先看看，CSS Module的基本内容，再看看搭配webpack如何做到css模块的引入。</p>
-<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>CSS Modules提倡使用驼峰式书写类名，但并不是强制的<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.bannerBg</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样做的原因是，如果你使用了react或者vue，那么你通过引入样式文件就一切很自然了：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// For React</span></div><div class="line"><span class="keyword">import</span> style <span class="keyword">from</span> <span class="string">'./style.css'</span></div><div class="line"></div><div class="line">&lt;App className=&#123;style.bannerBg&#125; /&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p>在CSS Modules中，有本地作用域和全局作用域之分，使用<code>:local()</code>和<code>:global()</code>标识，默认情况下都是本地作用域的<br>如果在全局作用域下，其他组件也可以访问到样式类名<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.normal</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 以上与下面等价 */</span></div><div class="line"><span class="selector-pseudo">:local(.normal)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 定义全局样式 */</span></div><div class="line"><span class="selector-pseudo">:global(.btn)</span> &#123;</div><div class="line">  <span class="attribute">color</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/* 定义多个全局样式 */</span></div><div class="line"><span class="selector-pseudo">:global</span> &#123;</div><div class="line">  .link &#123;</div><div class="line">    <span class="selector-tag">color</span>: <span class="selector-tag">green</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="selector-class">.box</span> &#123;</div><div class="line">    <span class="attribute">color</span>: yellow;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><p>允许开发者自由组合多个样式类<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.className</span> &#123;</div><div class="line">  <span class="attribute">color</span>: green;</div><div class="line">  <span class="attribute">background</span>: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.otherClassName</span> &#123;</div><div class="line">  <span class="attribute">composes</span>: className;</div><div class="line">  <span class="attribute">color</span>: yellow;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>上面<code>otherClassName</code>组合了<code>className</code>的属性，但自身<code>color</code>会覆盖其他类<code>className</code>的同名属性。<br><code>otherClassName</code>必须在之前声明好。</p>
-<p>可以组合多个类<code>composes: classNameA classNameB;</code></p>
-<p>也可以组合全局类,以及组合来自其他文件的类<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.otherClassName</span> &#123;</div><div class="line">  <span class="attribute">composes</span>: globalClassName from global;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.otherClassName</span> &#123;</div><div class="line">  <span class="attribute">composes</span>: className from <span class="string">'./another.css'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h1 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h1><p>知道了CSS Modules的内容，当然需要用它，不然学它做什么(黑人问号脸…)</p>
-<p>我们以React为例，使用webpack进行打包。首先如果需要开启CSS Modules，我们需要在webpack中声明：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// webpack.config.js</span></div><div class="line">...</div><div class="line"><span class="built_in">module</span>:&#123;</div><div class="line">    loaders: [&#123;</div><div class="line">        test: <span class="regexp">/\.css$/</span>,</div><div class="line">        loader: <span class="string">"style-loader!css-loader?modules"</span></div><div class="line">    &#125;]</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>一个App组件：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// style.css</div><div class="line"><span class="selector-class">.title</span>&#123;</div><div class="line">    <span class="attribute">color</span>: red;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> style <span class="keyword">from</span> <span class="string">'./style.css'</span></div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ()=&gt;&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;h1 className=&#123;style.title&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当我们访问页面时，这个组件内部<code>h1</code>标签的变成了<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"_3zyde4l1yATCOkgn-DBWEL"</span>&gt;</span></div><div class="line">  Hello World</div><div class="line"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p><code>h1</code>的class属性值变成了base64编码，这样就避免了样式的重名。</p>
-<p>更多的用例，你可以看一下阮大神的博文——<a href="http://www.ruanyifeng.com/blog/2016/06/css_modules.html" target="_blank" rel="external">CSS Modules</a></p>
-<h1 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h1><p>既然有个规范，那就有一些使用的约定，非强制性的约定，但使用后还是很有好处的。</p>
-<ul>
-<li>不使用选择器，只使用 class 名来定义样式</li>
-<li>不层叠多个 class，只使用一个 class 把所有样式定义好</li>
-<li>所有样式通过 composes 组合来实现复用</li>
-<li>不嵌套</li>
-</ul>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">CSS Modules</a></li>
-<li><a href="https://zhuanlan.zhihu.com/purerender/20495964" target="_blank" rel="external">CSS Modules 详解及 React 中实践</a></li>
-</ul>
+        <h1 id="常见的几种JS模板引擎"><a href="#常见的几种JS模板引擎" class="headerlink" title="常见的几种JS模板引擎"></a>常见的几种JS模板引擎</h1><h2 id="ArtTemplate"><a href="#ArtTemplate" class="headerlink" title="ArtTemplate"></a>ArtTemplate</h2><p>High performance JavaScript templating engine <a href="https://aui.github.io/art-template/" target="_blank" rel="external">https://aui.github.io/art-template/</a></p>
+<p>性能<br><img src="/img/arttemplate性能图.png" alt=""></p>
+<p>标准语法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;&#123;if user&#125;&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;user.name&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">&#123;&#123;/if&#125;&#125;</div></pre></td></tr></table></figure></p>
+<p>原始语法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%</span> <span class="attr">if</span> (<span class="attr">user</span>) &#123; %&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">user.name</span> %&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></div></pre></td></tr></table></figure></p>
+<p>渲染模板<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> template = <span class="built_in">require</span>(<span class="string">'art-template'</span>);</div><div class="line"><span class="keyword">var</span> html = template(__dirname + <span class="string">'/tpl-user.art'</span>, &#123;</div><div class="line">    user: &#123;</div><div class="line">        name: <span class="string">'aui'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p><a href="http://aui.github.io/art-template/zh-cn/" target="_blank" rel="external">中文文档</a></p>
+<h2 id="Swig"><a href="#Swig" class="headerlink" title="Swig"></a>Swig</h2><p>Swig is an awesome, Django/Jinja-like template engine for node.js.<br><a href="https://github.com/paularmstrong/swig/" target="_blank" rel="external">项目地址</a></p>
+<p>创建模板<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; pagename|title &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">&#123;% for author in authors %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">li&#123;%</span> <span class="attr">if</span> <span class="attr">loop.first</span> %&#125; <span class="attr">class</span>=<span class="string">"first"</span>&#123;% <span class="attr">endif</span> %&#125;&gt;</span></div><div class="line">    &#123;&#123; author &#125;&#125;</div><div class="line">  <span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">&#123;% endfor %&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>渲染模板<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> swig  = <span class="built_in">require</span>(<span class="string">'swig'</span>);</div><div class="line">swig.renderFile(<span class="string">'/path/to/template.html'</span>, &#123;</div><div class="line">    pagename: <span class="string">'awesome people'</span>,</div><div class="line">    authors: [<span class="string">'Paul'</span>, <span class="string">'Jim'</span>, <span class="string">'Jane'</span>]</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>渲染结果<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Awesome People<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"first"</span>&gt;</span>Paul<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Jim<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Jane<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>语法偏向于python，和JavaScript有点不符</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2017/12/29/DOM元素排序/" title= DOM元素排序 >
-                    <span>Next Post</span>
-                    <span>DOM元素排序</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2017/12/26/伸缩盒——Flex/" title= 伸缩盒——Flex >
+                <a href= "/2018/01/23/Javascript真值表/" title= Javascript真值表 >
                     <span>Previous Post</span>
-                    <span>伸缩盒——Flex</span>
+                    <span>Javascript真值表</span>
                 </a>
             </li>
         
@@ -316,7 +283,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#痛点"><span class="toc-number">1.</span> <span class="toc-text">痛点</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS-Modules"><span class="toc-number">2.</span> <span class="toc-text">CSS Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#命名"><span class="toc-number">2.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-number">2.2.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组合"><span class="toc-number">2.3.</span> <span class="toc-text">组合</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应用"><span class="toc-number">3.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#约定"><span class="toc-number">4.</span> <span class="toc-text">约定</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考资料"><span class="toc-number">5.</span> <span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#常见的几种JS模板引擎"><span class="toc-number">1.</span> <span class="toc-text">常见的几种JS模板引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ArtTemplate"><span class="toc-number">1.1.</span> <span class="toc-text">ArtTemplate</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Swig"><span class="toc-number">1.2.</span> <span class="toc-text">Swig</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>
