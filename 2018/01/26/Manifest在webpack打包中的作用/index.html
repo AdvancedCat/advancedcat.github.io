@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        结合百度地图的业务场景 · XinHong&#39;s Blog
+        Manifest在webpack打包中的作用 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,7 +68,7 @@
                 <a href="/" >XinHong&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">结合百度地图的业务场景</a>
+                <a href="#" class="post-name">Manifest在webpack打包中的作用</a>
             </div>
     </div>
     
@@ -89,7 +89,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            结合百度地图的业务场景
+            Manifest在webpack打包中的作用
             <!-- 404 -->
             
         </h1>
@@ -107,13 +107,13 @@
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Design>Design</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/11/22</span>
+                <span class="post-intro-time">2018/01/26</span>
             </div>
         
     </div>
@@ -199,32 +199,47 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这两天在做一个运用百度地图标记商铺地址的项目，现做一下总结</p>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>用户在一个输入框中输入地址的关键字，调用百度的<code>Autocomplete</code>接口获取联想地址列表，并展示在前端，供用户选择。<br>当用户选择一个地址后，再调用<code>LocalSearch</code>反编译地址，获得地址标点，然后在地图上标记；<br>用户也可以在地图上点击或拖拽锚点，并将结果反向至输入框中，达到联动的效果<br><img src="/img/地图联动效果.png" alt="地图联动效果"></p>
-<h2 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h2><p>封装百度地图接口，形成组件，暴露必要的api，供业务调用</p>
-<p>为了做到js部分代码的可移植性，尽量减少依赖。目前js部分仅依赖于jQuery。<br>页面展示和样式目前无法通用，需要依据业务自定义。可以做成模板。</p>
-<p>组件设计：<br>内部维护地图实例对象，锚点以及自定义覆盖物。抽离业务方法完成地图交互。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>1.由于Autocomplete内部业务已经封装了一个，而不直接使用百度地图的Autocomplete，我们只关心其返回的结果，这里模拟了一个假的input<br>callback(cb)回调函数通过闭包形式由search完成后的onSearchComplete钩子函数调用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;!-- hack: 用于伪造百度Autocomplete --&gt;</div><div class="line">&lt;input type=<span class="string">"hidden"</span> name=<span class="string">"faded_auto"</span> id=<span class="string">"faded_auto_input"</span>&gt;</div><div class="line"></div><div class="line">Flame.prototype.searchAutocomplete = <span class="function"><span class="keyword">function</span>(<span class="params">kw, cb</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span>( !self._auto )&#123;</div><div class="line">            <span class="keyword">var</span> options = &#123;</div><div class="line">                input: <span class="string">'faded_auto_input'</span>,   <span class="comment">// PS: 如果不指定input, search后不会有结果返回</span></div><div class="line">                location: self.op.cityName,</div><div class="line">                onSearchComplete: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">                    <span class="keyword">var</span> s = [], rLen = result.getNumPois(), r</div><div class="line"></div><div class="line">                    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>; i&lt;rLen; i++)&#123;</div><div class="line">                        r = result.getPoi(i)</div><div class="line">                        s.push(&#123;</div><div class="line">                            business: r.business,</div><div class="line">                            address: r.city + r.district,</div><div class="line">                            province: r.province,</div><div class="line">                            city: r.city,</div><div class="line">                            district: r.district,</div><div class="line">                            street: r.street</div><div class="line">                        &#125;)</div><div class="line">                    &#125;</div><div class="line">                    cb(s)</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            self._auto = <span class="keyword">new</span> BMap.Autocomplete(options)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        self._auto.search(kw)</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>模拟input的原因是，项目中的Autocomplete已经个性化设置了，暂不能使用百度地图提供的Autocomplete</p>
-<p>2.自定义覆盖物时，地图缩放会丢失覆盖物的宽高<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment"> * 缓存w,h的作用是什么？</span></div><div class="line"><span class="comment"> * 地图在缩放时，会丢失div的宽高（可能是百度地图在重绘marker时异步导致的）</span></div><div class="line"><span class="comment"> * 这里缓存一下宽高，用于正确更改样式</span></div><div class="line"><span class="comment"> */</span></div><div class="line">CustomOverlay.prototype._setOverlayPos = <span class="function"><span class="keyword">function</span>(<span class="params">p, w, h</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(w || h)&#123;</div><div class="line">        self._w = w</div><div class="line">        self._h = h</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    self._arrow.style.left = (self._w) / <span class="number">2</span> - <span class="number">8</span> + <span class="string">'px'</span></div><div class="line">    self._div.style.left = p.x - (self._w/<span class="number">2</span>) - <span class="number">2</span> + <span class="string">"px"</span></div><div class="line">    self._div.style.top  = p.y - self._h - <span class="number">25</span> + <span class="string">"px"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>丢失的主要原因在于地图在缩放的时候，地图中锚点需要重新绘制，异步的过程导致获取元素的宽高出错。<br>由于地图中锚点的文本信息不会发生变化，因此可以将上一次的宽高保存下来，然后直接使用。</p>
+        <h1 id="何为Manifest"><a href="#何为Manifest" class="headerlink" title="何为Manifest"></a>何为Manifest</h1><p>Manifest，英文释义“货物单；旅客名单”。映射到网络中，可以认为是静态资源清单。<br>在我们使用webpack打包资源的时候，manifest在其中起到了什么作用呢</p>
+<p>在使用 webpack 构建的典型应用程序或站点中，有三种主要的代码类型：</p>
+<ul>
+<li>你或你的团队编写的源码。</li>
+<li>你的源码会依赖的任何第三方的 library 或 “vendor” 代码。</li>
+<li>webpack 的 runtime 和 manifest，管理所有模块的交互。</li>
+</ul>
+<p>本文将重点介绍这三个部分中的最后部分，runtime 和 manifest。</p>
+<h2 id="Runtime"><a href="#Runtime" class="headerlink" title="Runtime"></a>Runtime</h2><p>runtime，以及伴随的 manifest 数据，主要是指：在浏览器运行时，webpack 用来连接模块化的应用程序的所有代码。runtime 包含：在模块交互时，连接模块所需的加载和解析逻辑。包括浏览器中的已加载模块的连接，以及懒加载模块的执行逻辑。<br>比如你在打包后的js文件中一定能看到<code>webpackJsonp</code>函数，它就是webpack用来引入模块时定义的函数。</p>
+<h2 id="Manifest"><a href="#Manifest" class="headerlink" title="Manifest"></a>Manifest</h2><p>当编译器(compiler)开始执行、解析和映射应用程序时，它会保留所有模块的详细要点。这个数据集合称为 “Manifest”，当完成打包并发送到浏览器时，会在运行时通过 Manifest 来解析和加载模块。无论你选择哪种模块语法，那些 import 或 require 语句现在都已经转换为 <strong>webpack_require</strong> 方法，此方法指向模块标识符(module identifier)。通过使用 manifest 中的数据，runtime 将能够查询模块标识符，检索出背后对应的模块。</p>
+<h1 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h1><p>在webpack打包时，我们都通常会将会划分chunks，提取公共模块。但仅改动一个模块的代码还是会造成 Initial chunk (libs) 的变化。原因是这个初始块包含着 webpack runtime，而 runtime 还包含 chunks ID 及其对应 chunkhash 的对象。因此当任何 chunks 内容发生变化，webpack runtime 均会随之改变。</p>
+<p>假设，webpack的entry如下结构：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	entry: &#123;</div><div class="line">	    libs: [</div><div class="line">	      <span class="string">'vue'</span>,</div><div class="line">	      <span class="string">'vue-router'</span></div><div class="line">	    ],</div><div class="line">	    vendor: [</div><div class="line">	      <span class="comment">/*</span></div><div class="line"><span class="comment">	       * vendor 中均是非 npm 模块，</span></div><div class="line"><span class="comment">	       * 用 resolve.alias 修改路径，</span></div><div class="line"><span class="comment">	       * 避免冗长的相对路径。</span></div><div class="line"><span class="comment">	       */</span></div><div class="line">	      <span class="string">'assets/libs/fastclick'</span>,</div><div class="line">	      <span class="string">'components/request'</span>,</div><div class="line">	      <span class="string">'components/ui'</span>,</div><div class="line">	      <span class="string">'components/bootstrap'</span> <span class="comment">// 初始化脚本</span></div><div class="line">	    ],</div><div class="line">	    page1: <span class="string">'src/pages/page1'</span>,</div><div class="line">	    page2: <span class="string">'src/pages/page2'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们期望能够将<code>libs</code>，<code>vendor</code>单独打包为一个静态文件，并且配合cache缓存达到持久化，因为这类js文件的改动频率较低，每次版本更新浏览器可以读取到之前的缓存。配置如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">  names: [<span class="string">'vendor'</span>, <span class="string">'libs'</span>]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>按照webpack构建的顺序，webpack会将runtime和manifest信息打包到<code>libs</code>中，我们知道webpack是根据<code>chunk id</code>引入资源的，那么当我们修改代码时会导致资源id的变化。因此我们可以进一步提取公共代码，如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(&#123;</div><div class="line">  names: [<span class="string">'vendor'</span>, <span class="string">'libs'</span>, <span class="string">'manifest'</span>]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>manifest的名称不是一定的，因为它的作用仅是存放runtime和manifest信息，你可以任意命名。另外，关于chunkid，其实有更好的组织方式，比如<a href="https://github.com/webpack/webpack/blob/master/lib/HashedModuleIdsPlugin.js" target="_blank" rel="external">HashedModuleIdsPlugin</a>.用 HashedModuleIdsPlugin 可以轻松地实现 chunkhash 的稳定化！</p>
+</blockquote>
+<p>经过这样配置后，经常发生变化的manifest信息被抽离出来单独放在了<code>manifest.js</code>中，<code>libs</code>和<code>vendor</code>则不会发生变化，方便缓存。因为<code>manifest.js</code>经常变化，并且非常小，则可以考虑将它直出到html中。这个插件可以帮助实现，<a href="https://github.com/szrenwei/inline-manifest-webpack-plugin" target="_blank" rel="external">inline-manifest-webpack-plugin</a></p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><ul>
+<li><a href="https://doc.webpack-china.org/guides/caching" target="_blank" rel="external">缓存</a>：确保 webpack 编译生成的文件能够被客户端缓存</li>
+<li><a href="https://doc.webpack-china.org/concepts/manifest/" target="_blank" rel="external">webpack中的Manifest</a></li>
+</ul>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2017/11/30/工作过程中相关问题的总结/" title= 工作过程中相关问题的总结 >
+                <a href= "/2018/01/26/常用的Linux-Mac命令/" title= 常用的Linux/Mac命令 >
                     <span>Next Post</span>
-                    <span>工作过程中相关问题的总结</span>
+                    <span>常用的Linux/Mac命令</span>
                 </a>
             </li>
         
         
             <li class="previous">
-                <a href= "/2017/11/16/Karma单元测试/" title= Karma单元测试 >
+                <a href= "/2018/01/25/JS模板引擎/" title= JS模板引擎 >
                     <span>Previous Post</span>
-                    <span>Karma单元测试</span>
+                    <span>JS模板引擎</span>
                 </a>
             </li>
         
@@ -288,7 +303,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何做？"><span class="toc-number">3.</span> <span class="toc-text">如何做？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题"><span class="toc-number">4.</span> <span class="toc-text">问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#何为Manifest"><span class="toc-number">1.</span> <span class="toc-text">何为Manifest</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Runtime"><span class="toc-number">1.1.</span> <span class="toc-text">Runtime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Manifest"><span class="toc-number">1.2.</span> <span class="toc-text">Manifest</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作用"><span class="toc-number">2.</span> <span class="toc-text">作用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展阅读"><span class="toc-number">2.1.</span> <span class="toc-text">扩展阅读</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>

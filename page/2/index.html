@@ -183,6 +183,67 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/12/16/ES6——Generator函数学习笔记/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>ES6——Generator函数学习笔记</span>
+                        </h2>
+                    <div class="abstract-content">
+                        本文是学习阮一峰的《ECMAScript6 入门》的学习笔记
+基本概念Generator函数是ES6提供的一种异步编程解决方案
+Generator 函数是一个状态机，封装了多个内部状态。
+执行 Generator 函数会返回一个遍历器对象(Iterator)，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。12345678910111213141516function* gen()&#123;    yield 1    yield 2    return 3&#125;let g = g...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = ES6>ES6</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/16</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/12/15/静态方法额外参数传递——redux-thunk/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>静态方法额外参数传递——redux-thunk</span>
+                        </h2>
+                    <div class="abstract-content">
+                        今天来看一段仅有14行的代码，它在github上获得了7200+ star。它就是redux-thunkredux-thunk的作用是为redux提供thunk中间件，使得延迟调用dispatch，完成异步请求等功能。
+
+何为thunk?thunk是一种包裹一些稍后执行的表达式的函数
+
+源码先感受一下这14行的代码(v2.0)：1234567891011121314function createThunkMiddleware(extraArgument) &#123;  return (&#123; dispatch, getState &#125;) =&gt; next =&gt; ...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/15</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/12/14/源码阅读——Redux/" >
                         <h2 class="abstract-title">
                             
@@ -388,41 +449,6 @@ name在package.json中最重要的两个字段是name和version，如果没有�
                     </div>
                 </div>
             </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>常用Webpack插件</span>
-                        </h2>
-                    <div class="abstract-content">
-                        webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
-webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
-由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
-12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/10</span>
-                    </div>
-                </div>
-            </article>
-        
-    
         
     
     <!-- paginator  -->
@@ -923,15 +949,7 @@ webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性�
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="total-archive"> Total : 28 </div>
+    <div class="total-archive"> Total : 30 </div>
     
     <div class="post-archive">
     
@@ -940,6 +958,16 @@ webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性�
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/26</span><a class="archive-post-title" href= "/2018/01/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/26</span><a class="archive-post-title" href= "/2018/01/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1095,23 +1123,23 @@ webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性�
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
