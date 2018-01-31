@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        重排与重绘 · XinHong&#39;s Blog
+        eslint——规范你的代码 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,7 +68,7 @@
                 <a href="/" >XinHong&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">重排与重绘</a>
+                <a href="#" class="post-name">eslint——规范你的代码</a>
             </div>
     </div>
     
@@ -89,7 +89,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            重排与重绘
+            eslint——规范你的代码
             <!-- 404 -->
             
         </h1>
@@ -105,9 +105,15 @@
         
             <!-- 文章页标签  -->
             
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+            
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/12/19</span>
+                <span class="post-intro-time">2018/01/31</span>
             </div>
         
     </div>
@@ -193,59 +199,60 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="重排重绘？"><a href="#重排重绘？" class="headerlink" title="重排重绘？"></a>重排重绘？</h1><p>当浏览器将静态资源（一般指css、js和字体）加载完成后，会维护两个内部数据结构————<strong>DOM树</strong> 和 <strong>渲染树</strong>。</p>
-<p>DOM树和渲染树合并为一个DOM渲染树，DOM渲染树上标记每个DOM的外观和位置属性，浏览器依据这棵树计算出每个DOM的位置大小外观等信息，之后依照这些信息将节点绘制在页面中。</p>
-<p>隐藏的DOM不会出现在DOM渲染树中，浏览器不会去渲染它。</p>
-<p>由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。但table及其内部元素除外，它可能需要多次计算才能确定好其在渲染树中节点的属性，通常要花3倍于同等元素的时间。这也是为什么我们要避免使用table做布局的一个原因。</p>
-<p>在CSS中，我们知道每个节点都是一个盒模型，无论通过css或者js改变了这个盒子的属性，都会导致盒子的状态发生变化。浏览器检测到盒子变化后，就会将这种变化即使反应到页面中，一般现代浏览器都比较聪明，会将若干次的变化合并为一次来改变页面。<br>触发这种页面变化的就是重排和重绘。</p>
-<p><strong>重绘</strong> ： 是一个元素外观的改变所触发的浏览器行为，例如改变visibility、outline、背景色等属性。浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。重绘不会带来重新布局，并不一定伴随重排。</p>
-<p><strong>重排</strong> ： 当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为重排。重排一定伴随着重绘。</p>
-<p>从上面得知，重排必定会触发重绘，因此减少重排的次数可以有效提高浏览器效率。</p>
-<h1 id="影响重排的操作"><a href="#影响重排的操作" class="headerlink" title="影响重排的操作"></a>影响重排的操作</h1><p>当DOM的几何因素发生变化时，就会触发重排，DOM几何变化有以下几种：</p>
-<ol>
-<li>DOM的<code>width,height,padding,border,margin,line-height</code>属性发生变化时，都会发生重排。如果DOM的其他属性的变化使得它的位置和大小也发生了变化，如调整字体大小因此高度变化，必定也会发生重排。DOM的动画也会影响重排。</li>
-<li>DOM树的结构发生变化，这个肯定是触发重排的，没得商量。</li>
-<li>浏览器大小发生变化。浏览器的resize会影响到页面内容的布局。</li>
-</ol>
-<h1 id="提高浏览器效率"><a href="#提高浏览器效率" class="headerlink" title="提高浏览器效率"></a>提高浏览器效率</h1><p>为了能让浏览器更快的显示页面，一般做到尽量减少重绘次数、减少重排次数、缩小重排的影响范围</p>
-<ol>
-<li><p>合并多次操作</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ele.style.cssText = <span class="string">'margin-top:20px;padding: 0 10px;'</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>如果某个dom频繁触发重排，将它设置为<code>absolute或fixed或float</code>,这样它脱离了文档流，尽可能减少它对其他dom的影响。例如动画类的dom使用绝对定位是最好的。</p>
-</li>
-<li>由于隐藏的元素不在DOM渲染树中，因此针对频繁更新位置和外观的DOM，可以先将它隐藏，之后完成更新后，再显示出来。这样仅触发两次重排。但这个方式有个缺点，会导致页面的忽闪。</li>
-<li>在内存中多次操作节点，完成后再添加到文档中去（可使用fragment元素）。例如要异步获取表格数据，渲染到页面。可以先取得数据后在内存中构建整个表格的html片段，再一次性添加到文档中去，而不是循环添加每一行。</li>
-</ol>
-<p>那么问题来了，如果面试官问你“如何给一个大量数据的表格排序”，你要怎么回答？</p>
-<p>另一个有趣的问题：如何快速让一个元素的子元素逆序展示？<br>给出两个用CSS解决的方法</p>
+        <h1 id="ESLint"><a href="#ESLint" class="headerlink" title="ESLint"></a>ESLint</h1><p>ESLint是目前比较流行的js检查工具，它利用AST处理规则，虽然速度上不及JSLint，但做到了规则完全可配置，收到广泛欢迎。下图看出它们的下载趋势：</p>
+<p><img src="/img/eslint下载趋势.jpg" alt=""></p>
+<p>ESLint的目标是提供一个插件化的javascript代码检测工具</p>
+<h1 id="安装与使用"><a href="#安装与使用" class="headerlink" title="安装与使用"></a>安装与使用</h1><h2 id="Local"><a href="#Local" class="headerlink" title="Local"></a>Local</h2><p>一般使用eslint都是搭配项目的，因此本地安装是首选</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1.安装</span></div><div class="line">yarn add -D eslint</div><div class="line"></div><div class="line"><span class="comment">// 2.生成配置文件</span></div><div class="line">./node_modules/.bin/eslint --init </div><div class="line">执行该命令后会进入一个eslint配置的选择题过程，按你的需求简单配置即可，配置内容后面还是可以修改的</div><div class="line"></div><div class="line"><span class="comment">// 3.检测你的js文件</span></div><div class="line">./node_modules/.bin/eslint yourfile.js</div></pre></td></tr></table></figure>
+<p>与eslint搭配使用的插件也需要本地安装，谁用谁负责安装，哈哈</p>
+<h2 id="Global"><a href="#Global" class="headerlink" title="Global"></a>Global</h2><p>与local类似，仅仅是命令可以全局调用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g eslint</div></pre></td></tr></table></figure></p>
+<h2 id="与webpack集成"><a href="#与webpack集成" class="headerlink" title="与webpack集成"></a>与webpack集成</h2><p>单独使用eslint的话，你需要每次都要手动去调起<code>eslint xxx.js</code>，非常麻烦，可以配合构建工具一起使用会更加的方便。<br>以下与webpack搭配使用（谁叫webpack太火了呢）</p>
+<p>首先安装<code>[eslint-loader](https://www.npmjs.com/package/eslint-loader)</code>以及<code>babel-eslint</code>,后者是更改eslint的解析器，配合babel使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yarn add -D eslint-loader babel-eslint</div></pre></td></tr></table></figure>
+<p>在<code>.eslintrc</code>中配置如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="string">"extends"</span>: <span class="string">"eslint:recommended"</span>,</div><div class="line">    <span class="string">"env"</span>:&#123;</div><div class="line">    	<span class="string">"browser"</span>: <span class="literal">true</span>,</div><div class="line">    	<span class="string">"commonjs"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"parser"</span>: <span class="string">"babel-eslint"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>上面提到eslint强大的能力提现在它的可配置性上，简单分析一下它可配置的特性</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>一个配置文件大致这个样子的：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="string">"extends"</span>: <span class="string">"eslint:recommended"</span>,</div><div class="line">    <span class="string">"env"</span>:&#123;</div><div class="line">    	<span class="string">"browser"</span>: <span class="literal">true</span>,</div><div class="line">    	<span class="string">"commonjs"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"parser"</span>: <span class="string">"babel-eslint"</span>,</div><div class="line">    <span class="string">"globals"</span>: &#123;</div><div class="line">    	<span class="string">"globalVar"</span>: <span class="literal">true</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"rules"</span>:&#123;</div><div class="line">    	<span class="string">"no-console"</span>: process.env.NODE_ENV === <span class="string">'production'</span> ? <span class="string">'error'</span> : <span class="string">'off'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
-<li>使用css3 的 <code>scaleY()</code>方法<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;div id="top-to-bottom"&gt;</div><div class="line">	&lt;div id="a"&gt;A&lt;/div&gt;</div><div class="line">	&lt;div id="b"&gt;B&lt;/div&gt;</div><div class="line">	&lt;div id="c"&gt;C&lt;/div&gt;</div><div class="line">	&lt;div id="d"&gt;D&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line"><span class="selector-tag">div</span><span class="selector-id">#top-to-bottom</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">width</span>:<span class="number">50px</span>;</div><div class="line">	<span class="attribute">text-align</span>: left;</div><div class="line">	<span class="attribute">float</span>: left;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">div</span><span class="selector-id">#top-to-bottom</span> &gt; <span class="selector-tag">div</span> &#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">50px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">50px</span>;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">float</span>: right;</div><div class="line">	<span class="attribute">display</span>: block;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li><p>extends<br>告知eslint默认使用何种规则集合，一般我们使用<code>eslint:recommended</code>即可，或者其他业内规范，比如<code>airbnb</code>,<code>google</code>,<code>standard</code>。区别主要在（缩进、引号、换行等方面）<br>使用其他规范，则安装对应插件即可，如<code>eslint-config-airbnb</code>,<code>eslint-config-google</code></p>
+</li>
+<li><p>env<br>用于指定代码的运行环境，根据环境不同，规则也会不同.可以在<code>.eslintrc</code>中配置环境，也可以在单个文件中通过注释添加环境：<code>/* eslint-env node,mocha */</code></p>
 </li>
 </ul>
-<p>原理是父元素倒置，子元素也倒置一次，负负得正。</p>
+<p>常见环境配置项有<code>browser</code>,<code>node</code>,<code>es6</code>等.<br>具体环境可选项，可点击查看<a href="http://eslint.cn/docs/user-guide/configuring#specifying-environments" target="_blank" rel="external">Specifying Environments</a></p>
 <ul>
-<li>使用flexbox布局<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#parent</span> &#123;</div><div class="line">  <span class="attribute">display</span>: flex;</div><div class="line">  <span class="attribute">flex-direction</span>: column-reverse;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>parser<br>ESLint 默认使用<code>Espree</code>作为其解析器，你可以在配置文件中指定一个不同的解析器。</li>
+</ul>
+<blockquote>
+<p>这个值得研究一下，甚至可以自己写一个解析器。这是了解解析器的切入口</p>
+</blockquote>
+<ul>
+<li><p>parserOptions<br>ESLint 允许你指定你想要支持的 JavaScript 语言选项。默认情况下，ESLint 支持 ECMAScript 5 语法。你可以覆盖该设置启用对 ECMAScript 其它版本和 JSX 的支持。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"parserOptions"</span>: &#123;</div><div class="line">    <span class="string">"ecmaVersion"</span>: <span class="number">6</span>,   <span class="comment">// 支持ES6</span></div><div class="line">    <span class="string">"sourceType"</span>: <span class="string">"module"</span>,</div><div class="line">    <span class="string">"ecmaFeatures"</span>: &#123;</div><div class="line">        <span class="string">"jsx"</span>: <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>rules<br>当我们配置<code>eslint:recommended</code>时，eslint会帮助默认开启一些规则，比如<code>no-console</code>指定在代码中不可以使用<code>console</code>。<br>此时，我们期望在开发模式下跳过校验，而在生产环境下开启校验，如上配置即可。多种配置方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"rules"</span>: &#123;</div><div class="line">	<span class="string">"eqeqeq"</span>: <span class="string">"off"</span>,   <span class="comment">// 0</span></div><div class="line">	<span class="string">"curly"</span>: <span class="string">"warn"</span>,   <span class="comment">// 1</span></div><div class="line">	<span class="string">"quotes"</span>: [<span class="string">"error"</span>,<span class="string">"double"</span>] <span class="comment">// 2 (当被触发的时候，程序会退出)</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>缺点目前flexbox在不同浏览器中实现程度不同</p>
+<p>更多规则可以查看<a href="http://eslint.cn/docs/rules/" target="_blank" rel="external">eslint默认规则</a></p>
+<ul>
+<li>globals<br>默认情况下，eslint针对文件未定义的变量会提示错误或警告，例如应用中某个变量<code>globalVar</code>可以全局调用。则需要在<code>globals</code><br>true - 允许变量被重写<br>false - 不允许变量被重写</li>
+</ul>
+<hr>
+<p>更多配置项可以前往<a href="http://eslint.cn/docs/user-guide/configuring" target="_blank" rel="external">eslint配置页</a>查看</p>
+<h1 id="扒代码"><a href="#扒代码" class="headerlink" title="扒代码"></a>扒代码</h1><p><a href="https://github.com/eslint/eslint" target="_blank" rel="external">eslint主页</a><br>未完待续</p>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
+<li><a href="http://eslint.cn/" target="_blank" rel="external">ESLint中文文档</a></li>
+</ul>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
-            <li class="next">
-                <a href= "/2017/12/26/伸缩盒——Flex/" title= 伸缩盒——Flex >
-                    <span>Next Post</span>
-                    <span>伸缩盒——Flex</span>
-                </a>
-            </li>
-        
         
             <li class="previous">
-                <a href= "/2017/12/18/TODO-List/" title= TODO List >
+                <a href= "/2018/01/26/常用的Linux-Mac命令/" title= 常用的Linux/Mac命令 >
                     <span>Previous Post</span>
-                    <span>TODO List</span>
+                    <span>常用的Linux/Mac命令</span>
                 </a>
             </li>
         
@@ -309,7 +316,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#重排重绘？"><span class="toc-number">1.</span> <span class="toc-text">重排重绘？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#影响重排的操作"><span class="toc-number">2.</span> <span class="toc-text">影响重排的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#提高浏览器效率"><span class="toc-number">3.</span> <span class="toc-text">提高浏览器效率</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ESLint"><span class="toc-number">1.</span> <span class="toc-text">ESLint</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#安装与使用"><span class="toc-number">2.</span> <span class="toc-text">安装与使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Local"><span class="toc-number">2.1.</span> <span class="toc-text">Local</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Global"><span class="toc-number">2.2.</span> <span class="toc-text">Global</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#与webpack集成"><span class="toc-number">2.3.</span> <span class="toc-text">与webpack集成</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置"><span class="toc-number">3.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件"><span class="toc-number">3.1.</span> <span class="toc-text">配置文件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扒代码"><span class="toc-number">4.</span> <span class="toc-text">扒代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展阅读"><span class="toc-number">5.</span> <span class="toc-text">扩展阅读</span></a></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>

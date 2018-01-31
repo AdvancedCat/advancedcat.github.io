@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        重排与重绘 · XinHong&#39;s Blog
+        XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,8 +50,6 @@
     
 </head>
     
-        <body class="post-body">
-    
     <script>
     var jsInfo = {
         root: '/'
@@ -63,52 +61,27 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >XinHong&#39;s Blog.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">重排与重绘</a>
-            </div>
-    </div>
-    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            重排与重绘
-            <!-- 404 -->
-            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <!-- 文章页标签  -->
-            
-            <div class="post-intro-meta">
-                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/12/19</span>
-            </div>
         
     </div>
 </div>
@@ -191,78 +164,54 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="重排重绘？"><a href="#重排重绘？" class="headerlink" title="重排重绘？"></a>重排重绘？</h1><p>当浏览器将静态资源（一般指css、js和字体）加载完成后，会维护两个内部数据结构————<strong>DOM树</strong> 和 <strong>渲染树</strong>。</p>
-<p>DOM树和渲染树合并为一个DOM渲染树，DOM渲染树上标记每个DOM的外观和位置属性，浏览器依据这棵树计算出每个DOM的位置大小外观等信息，之后依照这些信息将节点绘制在页面中。</p>
-<p>隐藏的DOM不会出现在DOM渲染树中，浏览器不会去渲染它。</p>
-<p>由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。但table及其内部元素除外，它可能需要多次计算才能确定好其在渲染树中节点的属性，通常要花3倍于同等元素的时间。这也是为什么我们要避免使用table做布局的一个原因。</p>
-<p>在CSS中，我们知道每个节点都是一个盒模型，无论通过css或者js改变了这个盒子的属性，都会导致盒子的状态发生变化。浏览器检测到盒子变化后，就会将这种变化即使反应到页面中，一般现代浏览器都比较聪明，会将若干次的变化合并为一次来改变页面。<br>触发这种页面变化的就是重排和重绘。</p>
-<p><strong>重绘</strong> ： 是一个元素外观的改变所触发的浏览器行为，例如改变visibility、outline、背景色等属性。浏览器会根据元素的新属性重新绘制，使元素呈现新的外观。重绘不会带来重新布局，并不一定伴随重排。</p>
-<p><strong>重排</strong> ： 当DOM的变化影响了元素的几何属性（宽或高），浏览器需要重新计算元素的几何属性，同样其他元素的几何属性和位置也会因此受到影响。浏览器会使渲染树中受到影响的部分失效，并重新构造渲染树。这个过程称为重排。重排一定伴随着重绘。</p>
-<p>从上面得知，重排必定会触发重绘，因此减少重排的次数可以有效提高浏览器效率。</p>
-<h1 id="影响重排的操作"><a href="#影响重排的操作" class="headerlink" title="影响重排的操作"></a>影响重排的操作</h1><p>当DOM的几何因素发生变化时，就会触发重排，DOM几何变化有以下几种：</p>
-<ol>
-<li>DOM的<code>width,height,padding,border,margin,line-height</code>属性发生变化时，都会发生重排。如果DOM的其他属性的变化使得它的位置和大小也发生了变化，如调整字体大小因此高度变化，必定也会发生重排。DOM的动画也会影响重排。</li>
-<li>DOM树的结构发生变化，这个肯定是触发重排的，没得商量。</li>
-<li>浏览器大小发生变化。浏览器的resize会影响到页面内容的布局。</li>
-</ol>
-<h1 id="提高浏览器效率"><a href="#提高浏览器效率" class="headerlink" title="提高浏览器效率"></a>提高浏览器效率</h1><p>为了能让浏览器更快的显示页面，一般做到尽量减少重绘次数、减少重排次数、缩小重排的影响范围</p>
-<ol>
-<li><p>合并多次操作</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ele.style.cssText = <span class="string">'margin-top:20px;padding: 0 10px;'</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>如果某个dom频繁触发重排，将它设置为<code>absolute或fixed或float</code>,这样它脱离了文档流，尽可能减少它对其他dom的影响。例如动画类的dom使用绝对定位是最好的。</p>
-</li>
-<li>由于隐藏的元素不在DOM渲染树中，因此针对频繁更新位置和外观的DOM，可以先将它隐藏，之后完成更新后，再显示出来。这样仅触发两次重排。但这个方式有个缺点，会导致页面的忽闪。</li>
-<li>在内存中多次操作节点，完成后再添加到文档中去（可使用fragment元素）。例如要异步获取表格数据，渲染到页面。可以先取得数据后在内存中构建整个表格的html片段，再一次性添加到文档中去，而不是循环添加每一行。</li>
-</ol>
-<p>那么问题来了，如果面试官问你“如何给一个大量数据的表格排序”，你要怎么回答？</p>
-<p>另一个有趣的问题：如何快速让一个元素的子元素逆序展示？<br>给出两个用CSS解决的方法</p>
-<ul>
-<li>使用css3 的 <code>scaleY()</code>方法<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;div id="top-to-bottom"&gt;</div><div class="line">	&lt;div id="a"&gt;A&lt;/div&gt;</div><div class="line">	&lt;div id="b"&gt;B&lt;/div&gt;</div><div class="line">	&lt;div id="c"&gt;C&lt;/div&gt;</div><div class="line">	&lt;div id="d"&gt;D&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line"><span class="selector-tag">div</span><span class="selector-id">#top-to-bottom</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">width</span>:<span class="number">50px</span>;</div><div class="line">	<span class="attribute">text-align</span>: left;</div><div class="line">	<span class="attribute">float</span>: left;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">&#125;</div><div class="line"><span class="selector-tag">div</span><span class="selector-id">#top-to-bottom</span> &gt; <span class="selector-tag">div</span> &#123;</div><div class="line">	<span class="attribute">width</span>: <span class="number">50px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">50px</span>;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">float</span>: right;</div><div class="line">	<span class="attribute">display</span>: block;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">scaleY</span>(-1);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>原理是父元素倒置，子元素也倒置一次，负负得正。</p>
-<ul>
-<li>使用flexbox布局<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#parent</span> &#123;</div><div class="line">  <span class="attribute">display</span>: flex;</div><div class="line">  <span class="attribute">flex-direction</span>: column-reverse;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>缺点目前flexbox在不同浏览器中实现程度不同</p>
-
-    </article>
-    <!-- 前后页  -->
-    <ul class="post-pager">
-        
-            <li class="next">
-                <a href= "/2017/12/26/伸缩盒——Flex/" title= 伸缩盒——Flex >
-                    <span>Next Post</span>
-                    <span>伸缩盒——Flex</span>
-                </a>
-            </li>
-        
-        
-            <li class="previous">
-                <a href= "/2017/12/18/TODO-List/" title= TODO List >
-                    <span>Previous Post</span>
-                    <span>TODO List</span>
-                </a>
-            </li>
-        
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
+            <main class="main index-page">
     
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/01/28/Markdown语法-Hexo/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Markdown语法(Hexo)</span>
+                        </h2>
+                    <div class="abstract-content">
+                        内容目录斜体和粗体1*斜体*  **粗体**
+这是斜体这是粗体
+分级标题在行首加#号表示不同级别的标题 (H1-H6)，格式如下：123456# H1## H2### H3#### H4##### H5###### H6
+分割线在单行中使用***或者---表示分割线
+
+上面是分割线
+
+我也是分割线
+删除线使用~~表示删除线1~~我是一行错误的文本段。~~
+我是一行错误的文本段。
+超链接文字超链接：12[链接文字](链接地址 "链接名称")鼠标hover到链接上会显示链接名称
+百度
+图片超链接：1![图片说明](图片链接 "图片标题")
+
+引入视频则直接插入iframe代码：12&lt;s...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/01/28</span>
+                    </div>
+                </div>
+            </article>
+        
     
-    <!--PC版-->
-
-    <!--PC版-->
-
-
+    <!-- paginator  -->
+    
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/archives/page/3/">#PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
+    </nav>
     
 </main>
+
             <!-- profile -->
             
         </div>
@@ -304,13 +253,6 @@
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper">
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#重排重绘？"><span class="toc-number">1.</span> <span class="toc-text">重排重绘？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#影响重排的操作"><span class="toc-number">2.</span> <span class="toc-text">影响重排的操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#提高浏览器效率"><span class="toc-number">3.</span> <span class="toc-text">提高浏览器效率</span></a></li></ol>
-    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">

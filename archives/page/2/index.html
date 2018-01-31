@@ -170,6 +170,38 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/12/18/JS的单线程与异步/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>JS的单线程与异步</span>
+                        </h2>
+                    <div class="abstract-content">
+                        我们常说JavaScript是单线程的，那么应该怎么来认识这句话呢？它和异步又是什么关系呢？
+单线程与异步在一门语言中，单线程和异步是自相矛盾的。JS本身是单线程的，那么它就不是异步。但是，万事都有个但是，它的宿主环境是多线程的。JS常见的宿主环境是浏览器或Node端，宿主环境让JS通过某种方式（事件驱动）拥有了异步的行为。因为事件驱动让JS的机制非常简单高效。
+浏览器宿主在各个宿主环境中，仅仅分配一个主线程给JS引擎去执行任何或函数，且一次只能执行一个任务。那么在浏览器里充满很多不同任务，且大多任务是非常耗时的，比如网络请求，定时器和事件监听。如果只让一个线程去完成的话，显然很容易阻塞...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/18</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/12/16/ES6——Generator函数学习笔记/" >
                         <h2 class="abstract-title">
                             
@@ -404,44 +436,10 @@ name在package.json中最重要的两个字段是name和version，如果没有�
             </article>
         
     
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Karma单元测试</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Karma?Javascript 单元测试工具
-使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
-安装1.全局安装karma-cli1npm i -g karma-cli
-2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
-自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
-                    </div>
-                </div>
-            </article>
-        
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/">#PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">#NEXT</a>
+        <a class="extend prev" rel="prev" href="/archives/">#PREV</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/3/">#NEXT</a>
     </nav>
     
 </main>
@@ -891,7 +889,38 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
     
     
-    <div class="total-archive"> Total : 30 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 31 </div>
     
     <div class="post-archive">
     
@@ -900,6 +929,11 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/eslint——规范你的代码/" >eslint——规范你的代码</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1069,19 +1103,17 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
@@ -1092,6 +1124,8 @@ name在package.json中最重要的两个字段是name和version，如果没有�
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

@@ -170,6 +170,40 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/11/16/Karma单元测试/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Karma单元测试</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Karma?Javascript 单元测试工具
+使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
+安装1.全局安装karma-cli1npm i -g karma-cli
+2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
+自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/11/10/常用Webpack插件/" >
                         <h2 class="abstract-title">
                             
@@ -249,11 +283,13 @@ Babel is a JavaScript compiler.
                         今天抽了点时间详细去学习一下使用Webpack，以前仅仅是停留在使用层面上。
 Webpack?依据Webpack官网上的介绍，Webpack是一个帮助你打包静态资源的打包软件，处理各种依赖关系等。
 webpack之所以如此受欢迎，因为以下三个特点：1.Spliting code2.Loader3.Plugins
+webpack的本质其实就是
+
+webpack是一个打包模块化js的工具，可以通过loader转换文件，通过plugin扩展功能。
+
 webpack中主要有四个核心概念，只要掌握这四个概念，基本可以学会使用webpack
 
-EntryEntry告知webpack应该从哪个脚本文件开始构建，进而构建依赖图
-OutputOutput会告知webpack应该将打包好的文件放到哪个文件夹中以及如何命名它们
-Loader...
+EntryEntry告知webpack应该从哪个脚本文件...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -472,48 +508,10 @@ More...
             </article>
         
     
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/01/28/Markdown语法-Hexo/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Markdown语法(Hexo)</span>
-                        </h2>
-                    <div class="abstract-content">
-                        内容目录斜体和粗体1*斜体*  **粗体**
-这是斜体这是粗体
-分级标题在行首加#号表示不同级别的标题 (H1-H6)，格式如下：123456# H1## H2### H3#### H4##### H5###### H6
-分割线在单行中使用***或者---表示分割线
-
-上面是分割线
-
-我也是分割线
-删除线使用~~表示删除线1~~我是一行错误的文本段。~~
-我是一行错误的文本段。
-超链接文字超链接：12[链接文字](链接地址 "链接名称")鼠标hover到链接上会显示链接名称
-百度
-图片超链接：1![图片说明](图片链接 "图片标题")
-
-引入视频则直接插入iframe代码：12&lt;s...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/01/28</span>
-                    </div>
-                </div>
-            </article>
-        
-    
     <!-- paginator  -->
     
     <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/2/">#PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
+        <a class="extend prev" rel="prev" href="/archives/page/2/">#PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">#NEXT</a>
     </nav>
     
 </main>
@@ -963,7 +961,38 @@ More...
     
     
     
-    <div class="total-archive"> Total : 30 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 31 </div>
     
     <div class="post-archive">
     
@@ -972,6 +1001,11 @@ More...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/eslint——规范你的代码/" >eslint——规范你的代码</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1141,19 +1175,17 @@ More...
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
-    
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
@@ -1164,6 +1196,8 @@ More...
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
