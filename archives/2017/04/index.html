@@ -170,6 +170,106 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/04/28/同构Javascript应用/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>同构Javascript应用</span>
+                        </h2>
+                    <div class="abstract-content">
+                        偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
+
+能够在客户端和服务器端均可运行的应用——同构应用
+
+既然我是搞前端的，就有必要研究一下同构JavaScript应用。
+历史前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
+能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
+Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/28</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/04/15/静态方法额外参数传递——redux-thunk/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>静态方法额外参数传递——redux-thunk</span>
+                        </h2>
+                    <div class="abstract-content">
+                        今天来看一段仅有14行的代码，它在github上获得了7200+ star。它就是redux-thunkredux-thunk的作用是为redux提供thunk中间件，使得延迟调用dispatch，完成异步请求等功能。
+
+何为thunk?thunk是一种包裹一些稍后执行的表达式的函数
+
+源码先感受一下这14行的代码(v2.0)：1234567891011121314function createThunkMiddleware(extraArgument) &#123;  return (&#123; dispatch, getState &#125;) =&gt; next =&gt; ...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/15</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/04/12/使用Babel/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>使用Babel</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Babel?
+Babel is a JavaScript compiler.
+
+使用Babel可以让你用下一代的语法特性写今天的代码。
+如何使用Babel-CLI1.安装babel以及preset1npm install --save-dev babel-cli babel-preset-env
+2.新建.babelrc文件或者在package.json中配置12345678echo '&#123;presets:["env"]&#125;' &gt; .babelrc// or option in package.json&#123;    ...,    "babel":&#123;...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Babel>Babel</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/12</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
                         <h2 class="abstract-title">
                             
@@ -232,6 +332,40 @@ sessionStorag...
                     <!-- date  -->
                     <div class="abstract-date">
                         <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/04/07/伸缩盒——Flex/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>伸缩盒——Flex</span>
+                        </h2>
+                    <div class="abstract-content">
+                        FlexBoxFlex,全拼Flexible Box 伸缩盒，是CSS3推出的新的布局方式。让盒模型具有更大的灵活性。
+Flex属性一个伸缩盒由两个部分组成：Flex容器和Flex项目。容器即父元素，项目即子元素。它们的关系可以参照下面这张图：
+Flex有比较多的属性，以下思维导图罗列2013最新版本的属性写法和可选值:
+我们针对两个部分对主要属性分析一下
+Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定display:flex;或display:inline-flex的样式，让父元素触发FFC（伸缩格式化上下文），它的作用和BFC元素一致。（BFC特性：浮动不...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = CSS>CSS</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/07</span>
                     </div>
                 </div>
             </article>
@@ -717,7 +851,64 @@ sessionStorag...
     
     
     
-    <div class="total-archive"> Total : 31 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 34 </div>
     
     <div class="post-archive">
     
@@ -729,27 +920,22 @@ sessionStorag...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/eslint——规范你的代码/" >eslint——规范你的代码</a>
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/Node框架——Express-Koa-Egg/" >Node框架——Express,Koa,Egg</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/26</span><a class="archive-post-title" href= "/2018/01/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/PM2——node进程管理器/" >PM2——node进程管理器</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/26</span><a class="archive-post-title" href= "/2018/01/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/Node多线程开发/" >Node多线程开发</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/JS模板引擎/" >JS模板引擎</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/23</span><a class="archive-post-title" href= "/2018/01/23/Javascript真值表/" >Javascript真值表</a>
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/eslint——规范你的代码/" >eslint——规范你的代码</a>
         </li>
     
     
@@ -763,112 +949,97 @@ sessionStorag...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2017/12/29/DOM元素排序/" >DOM元素排序</a>
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2017/12/27/CSS-Modules/" >CSS Modules</a>
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2017/10/14/源码阅读——Redux/" >源码阅读——Redux</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/26</span><a class="archive-post-title" href= "/2017/12/26/伸缩盒——Flex/" >伸缩盒——Flex</a>
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/DOM元素排序/" >DOM元素排序</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2017/12/19/重排与重绘/" >重排与重绘</a>
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/Javascript真值表/" >Javascript真值表</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2017/12/18/TODO-List/" >TODO List</a>
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2017/09/16/Karma单元测试/" >Karma单元测试</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2017/12/18/JS的单线程与异步/" >JS的单线程与异步</a>
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/常用Webpack插件/" >常用Webpack插件</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2017/12/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2017/08/27/CSS-Modules/" >CSS Modules</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2017/12/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/14</span><a class="archive-post-title" href= "/2017/12/14/源码阅读——Redux/" >源码阅读——Redux</a>
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2017/07/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2017/12/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+            <span class="archive-post-date">07/22</span><a class="archive-post-title" href= "/2017/07/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2017/12/12/读懂package-json/" >读懂package.json</a>
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2017/12/06/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/JS模板引擎/" >JS模板引擎</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2017/12/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+            <span class="archive-post-date">06/18</span><a class="archive-post-title" href= "/2017/06/18/JS的单线程与异步/" >JS的单线程与异步</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/30</span><a class="archive-post-title" href= "/2017/11/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2017/06/08/学习使用Webpack/" >学习使用Webpack</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2017/11/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2017/05/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/Karma单元测试/" >Karma单元测试</a>
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2017/11/10/常用Webpack插件/" >常用Webpack插件</a>
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2017/04/28/同构Javascript应用/" >同构Javascript应用</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2017/11/10/webpack原理剖析/" >webpack原理剖析</a>
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2017/04/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2017/11/09/使用Babel/" >使用Babel</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2017/11/08/学习使用Webpack/" >学习使用Webpack</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2017/11/01/同构Javascript应用/" >同构Javascript应用</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/29</span><a class="archive-post-title" href= "/2017/10/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/使用Babel/" >使用Babel</a>
         </li>
     
     
@@ -878,7 +1049,42 @@ sessionStorag...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2017/04/07/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2017/03/21/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/09/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2017/03/01/第一篇博客/" >开篇博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2017/02/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/webpack原理剖析/" >webpack原理剖析</a>
         </li>
     
     
@@ -896,21 +1102,27 @@ sessionStorag...
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+        <span class="sidebar-tag-name"><a href= "#">node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
@@ -919,10 +1131,6 @@ sessionStorag...
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

@@ -170,20 +170,17 @@
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2017/11/01/同构Javascript应用/" >
+                <a class="content-show-full" href = "/2017/04/07/伸缩盒——Flex/" >
                         <h2 class="abstract-title">
                             
-                            <span>同构Javascript应用</span>
+                            <span>伸缩盒——Flex</span>
                         </h2>
                     <div class="abstract-content">
-                        偶然机会在看Redux文档的时候，看到同构应用这个名词，有些概念模糊，因此去Google了一下。得到以下概念：
-
-能够在客户端和服务器端均可运行的应用——同构应用
-
-既然我是搞前端的，就有必要研究一下同构JavaScript应用。
-历史前端的发展历史其实并不算太久，JS的发明一开始也只是给页面加上一点讨人欢喜的小交互。更别提实现同构应用了。
-能够实现同构Javascript应用，首先得益于Node.js的发展。Node.js的发展使得JS能够在服务器端运行JS代码。从而解放了JS的天性——单线程、异步和函数式。
-Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
+                        FlexBoxFlex,全拼Flexible Box 伸缩盒，是CSS3推出的新的布局方式。让盒模型具有更大的灵活性。
+Flex属性一个伸缩盒由两个部分组成：Flex容器和Flex项目。容器即父元素，项目即子元素。它们的关系可以参照下面这张图：
+Flex有比较多的属性，以下思维导图罗列2013最新版本的属性写法和可选值:
+我们针对两个部分对主要属性分析一下
+Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定display:flex;或display:inline-flex的样式，让父元素触发FFC（伸缩格式化上下文），它的作用和BFC元素一致。（BFC特性：浮动不...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -191,13 +188,13 @@ Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
                     
                     <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = CSS>CSS</a>
     
 </div>
                     
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/01</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/07</span>
                     </div>
                 </div>
             </article>
@@ -207,7 +204,7 @@ Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2017/10/29/Javascript计算精度问题/" >
+                <a class="content-show-full" href = "/2017/03/29/Javascript计算精度问题/" >
                         <h2 class="abstract-title">
                             
                             <span>Javascript计算精度问题</span>
@@ -231,62 +228,29 @@ Web 世界有一个至理名言，就是 Java 提出的“Write once, ...
                     
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/29</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/29</span>
                     </div>
                 </div>
             </article>
         
     
         
+    
+        
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2017/04/10/Cookie-localStorage-sessionStorage/" >
+                <a class="content-show-full" href = "/2017/03/12/读懂package-json/" >
                         <h2 class="abstract-title">
                             
-                            <span>Cookie,localStorage,sessionStorage简单分析</span>
+                            <span>读懂package.json</span>
                         </h2>
                     <div class="abstract-content">
-                        基本概念1.Cookie网站为了辨别用户身份而储存在用户本地终端上的数据（通常经过加密）
-2.web storage包括localStorage和sessionStorage。HTML5的产物，两者均用于本地储存数据。前者永久保存（除非手动删除），后者用于会话内（窗口存活期内）保存。
-兼容情况：
+                        作为一个前端工程师，不断地去学习前端新技术是必须的。在这过程中，不断接触开源项目是必不可少的。github上的开源项目，我们发现大多数项目下都有一个package.json文件，package.json存储的是一个严格的json对象。那么今天分析一下package.json中的字段意义。
 
+本文主要是对npm document中package.json的简单翻译
 
-
-特性
-Chrome
-Firefox
-IE
-Opera
-Safari
-
-
-
-
-localStorage
-4
-3.5
-8
-10.50
-4
-
-
-sessionStorage
-5
-2
-8
-10.50
-4
-
-
-
-三者的异同
-
-
-特性
-Cookie
-localStorage
-sessionStorag...
+name在package.json中最重要的两个字段是name和version，如果没有这两个字段，npm无法安装你的包。name和version就像是你的项目身份证，且必须是唯一的。如果你的包做了改动，那么version也应...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -294,18 +258,18 @@ sessionStorag...
                     
                     <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = storage>storage</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = Node>Node</a>
     
 </div>
                     
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/04/10</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/12</span>
                     </div>
                 </div>
             </article>
+        
+    
         
     
         
@@ -333,6 +297,36 @@ sessionStorag...
                     </div>
                 </div>
             </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/02/19/重排与重绘/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>重排与重绘</span>
+                        </h2>
+                    <div class="abstract-content">
+                        重排重绘？当浏览器将静态资源（一般指css、js和字体）加载完成后，会维护两个内部数据结构————DOM树 和 渲染树。
+DOM树和渲染树合并为一个DOM渲染树，DOM渲染树上标记每个DOM的外观和位置属性，浏览器依据这棵树计算出每个DOM的位置大小外观等信息，之后依照这些信息将节点绘制在页面中。
+隐藏的DOM不会出现在DOM渲染树中，浏览器不会去渲染它。
+由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。但table及其内部元素除外，它可能需要多次计算才能确定好其在渲染树中节点的属性，通常要花3倍于同等元素的时间。这也是为什么我们要避免使用table做布局的一个原因。
+在...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/19</span>
+                    </div>
+                </div>
+            </article>
+        
+    
         
     
         
@@ -885,7 +879,64 @@ More...
     
     
     
-    <div class="total-archive"> Total : 31 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 34 </div>
     
     <div class="post-archive">
     
@@ -897,27 +948,22 @@ More...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/eslint——规范你的代码/" >eslint——规范你的代码</a>
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/Node框架——Express-Koa-Egg/" >Node框架——Express,Koa,Egg</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/26</span><a class="archive-post-title" href= "/2018/01/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/PM2——node进程管理器/" >PM2——node进程管理器</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/26</span><a class="archive-post-title" href= "/2018/01/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/Node多线程开发/" >Node多线程开发</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">01/25</span><a class="archive-post-title" href= "/2018/01/25/JS模板引擎/" >JS模板引擎</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">01/23</span><a class="archive-post-title" href= "/2018/01/23/Javascript真值表/" >Javascript真值表</a>
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/eslint——规范你的代码/" >eslint——规范你的代码</a>
         </li>
     
     
@@ -931,112 +977,97 @@ More...
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/29</span><a class="archive-post-title" href= "/2017/12/29/DOM元素排序/" >DOM元素排序</a>
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/27</span><a class="archive-post-title" href= "/2017/12/27/CSS-Modules/" >CSS Modules</a>
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2017/10/14/源码阅读——Redux/" >源码阅读——Redux</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/26</span><a class="archive-post-title" href= "/2017/12/26/伸缩盒——Flex/" >伸缩盒——Flex</a>
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/DOM元素排序/" >DOM元素排序</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/19</span><a class="archive-post-title" href= "/2017/12/19/重排与重绘/" >重排与重绘</a>
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/Javascript真值表/" >Javascript真值表</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2017/12/18/TODO-List/" >TODO List</a>
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2017/09/16/Karma单元测试/" >Karma单元测试</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/18</span><a class="archive-post-title" href= "/2017/12/18/JS的单线程与异步/" >JS的单线程与异步</a>
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/常用Webpack插件/" >常用Webpack插件</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/16</span><a class="archive-post-title" href= "/2017/12/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2017/08/27/CSS-Modules/" >CSS Modules</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/15</span><a class="archive-post-title" href= "/2017/12/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/14</span><a class="archive-post-title" href= "/2017/12/14/源码阅读——Redux/" >源码阅读——Redux</a>
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2017/07/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/13</span><a class="archive-post-title" href= "/2017/12/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+            <span class="archive-post-date">07/22</span><a class="archive-post-title" href= "/2017/07/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/12</span><a class="archive-post-title" href= "/2017/12/12/读懂package-json/" >读懂package.json</a>
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/06</span><a class="archive-post-title" href= "/2017/12/06/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/JS模板引擎/" >JS模板引擎</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">12/04</span><a class="archive-post-title" href= "/2017/12/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+            <span class="archive-post-date">06/18</span><a class="archive-post-title" href= "/2017/06/18/JS的单线程与异步/" >JS的单线程与异步</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/30</span><a class="archive-post-title" href= "/2017/11/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2017/06/08/学习使用Webpack/" >学习使用Webpack</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/22</span><a class="archive-post-title" href= "/2017/11/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2017/05/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/Karma单元测试/" >Karma单元测试</a>
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2017/11/10/常用Webpack插件/" >常用Webpack插件</a>
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2017/04/28/同构Javascript应用/" >同构Javascript应用</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/10</span><a class="archive-post-title" href= "/2017/11/10/webpack原理剖析/" >webpack原理剖析</a>
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2017/04/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">11/09</span><a class="archive-post-title" href= "/2017/11/09/使用Babel/" >使用Babel</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/08</span><a class="archive-post-title" href= "/2017/11/08/学习使用Webpack/" >学习使用Webpack</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">11/01</span><a class="archive-post-title" href= "/2017/11/01/同构Javascript应用/" >同构Javascript应用</a>
-        </li>
-    
-    
-        <li class="archive-post-item">
-            <span class="archive-post-date">10/29</span><a class="archive-post-title" href= "/2017/10/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/使用Babel/" >使用Babel</a>
         </li>
     
     
@@ -1046,7 +1077,42 @@ More...
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2017/04/07/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2017/03/21/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/09/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2017/03/01/第一篇博客/" >开篇博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2017/02/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/webpack原理剖析/" >webpack原理剖析</a>
         </li>
     
     
@@ -1064,21 +1130,27 @@ More...
         <div class="sidebar-tags">
     <div class="sidebar-tags-name">
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
     
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
         <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+        <span class="sidebar-tag-name"><a href= "#">node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
     
@@ -1087,10 +1159,6 @@ More...
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
-    
-        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

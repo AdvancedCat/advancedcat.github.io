@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        Javascript真值表 · XinHong&#39;s Blog
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe779;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Javascript真值表</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Home</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Javascript真值表
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/09/23</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+
+            window.onload = function(){
+                $(function(){
+                    // showAllIcons()
+                })
+
+                function showAllIcons(){
+                    var icon = '600,601,603,607,608,610,612,613,619,630,634,635,637,638,639,642,652,676,695,775,779';
+                    var icons = icon.split(',')
+                    for(var i =0; i<icons.length; i++){
+                        $('body').append(icons[i]+':<span class="iconfont-archer">&#xe'+icons[i]+';</span>&nbsp;&nbsp;&nbsp;')
+                    }
+                }
+            }
+            
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="JS真值表"><a href="#JS真值表" class="headerlink" title="JS真值表"></a>JS真值表</h1><svg id="rAndEOp" width="970" height="920"><g transform="translate(120,120)"><text class="xLabel" transform="translate(4, -4) rotate(90)" style="text-anchor: end;">null</text><text class="xLabel" transform="translate(26, -4) rotate(90)" style="text-anchor: end;">undefined</text><text class="xLabel" transform="translate(48, -4) rotate(90)" style="text-anchor: end;">false</text><text class="xLabel" transform="translate(70, -4) rotate(90)" style="text-anchor: end;">“false”</text><text class="xLabel" transform="translate(92, -4) rotate(90)" style="text-anchor: end;">Boolean(false)</text><text class="xLabel" transform="translate(114, -4) rotate(90)" style="text-anchor: end;">[]</text><text class="xLabel" transform="translate(136, -4) rotate(90)" style="text-anchor: end;">[[]]</text><text class="xLabel" transform="translate(158, -4) rotate(90)" style="text-anchor: end;">“”</text><text class="xLabel" transform="translate(180, -4) rotate(90)" style="text-anchor: end;">String(“”)</text><text class="xLabel" transform="translate(202, -4) rotate(90)" style="text-anchor: end;">0</text><text class="xLabel" transform="translate(224, -4) rotate(90)" style="text-anchor: end;">Number(0)</text><text class="xLabel" transform="translate(246, -4) rotate(90)" style="text-anchor: end;">“0”</text><text class="xLabel" transform="translate(268, -4) rotate(90)" style="text-anchor: end;">String(“0”)</text><text class="xLabel" transform="translate(290, -4) rotate(90)" style="text-anchor: end;">[0]</text><text class="xLabel" transform="translate(312, -4) rotate(90)" style="text-anchor: end;">true</text><text class="xLabel" transform="translate(334, -4) rotate(90)" style="text-anchor: end;">“true”</text><text class="xLabel" transform="translate(356, -4) rotate(90)" style="text-anchor: end;">Boolean(true)</text><text class="xLabel" transform="translate(378, -4) rotate(90)" style="text-anchor: end;">1</text><text class="xLabel" transform="translate(400, -4) rotate(90)" style="text-anchor: end;">Number(1)</text><text class="xLabel" transform="translate(422, -4) rotate(90)" style="text-anchor: end;">“1”</text><text class="xLabel" transform="translate(444, -4) rotate(90)" style="text-anchor: end;">String(“1”)</text><text class="xLabel" transform="translate(466, -4) rotate(90)" style="text-anchor: end;">[1]</text><text class="xLabel" transform="translate(488, -4) rotate(90)" style="text-anchor: end;">-1</text><text class="xLabel" transform="translate(510, -4) rotate(90)" style="text-anchor: end;">Number(-1)</text><text class="xLabel" transform="translate(532, -4) rotate(90)" style="text-anchor: end;">“-1”</text><text class="xLabel" transform="translate(554, -4) rotate(90)" style="text-anchor: end;">String(“-1”)</text><text class="xLabel" transform="translate(576, -4) rotate(90)" style="text-anchor: end;">[-1]</text><text class="xLabel" transform="translate(598, -4) rotate(90)" style="text-anchor: end;">Infinity</text><text class="xLabel" transform="translate(620, -4) rotate(90)" style="text-anchor: end;">-Infinity</text><text class="xLabel" transform="translate(642, -4) rotate(90)" style="text-anchor: end;">Object()</text><text class="xLabel" transform="translate(664, -4) rotate(90)" style="text-anchor: end;">NaN</text><text class="yLabel" transform="translate(-4, 16)" style="text-anchor: end;">null</text><text class="yLabel" transform="translate(-4, 38)" style="text-anchor: end;">undefined</text><text class="yLabel" transform="translate(-4, 60)" style="text-anchor: end;">false</text><text class="yLabel" transform="translate(-4, 82)" style="text-anchor: end;">“false”</text><text class="yLabel" transform="translate(-4, 104)" style="text-anchor: end;">Boolean(false)</text><text class="yLabel" transform="translate(-4, 126)" style="text-anchor: end;">[]</text><text class="yLabel" transform="translate(-4, 148)" style="text-anchor: end;">[[]]</text><text class="yLabel" transform="translate(-4, 170)" style="text-anchor: end;">“”</text><text class="yLabel" transform="translate(-4, 192)" style="text-anchor: end;">String(“”)</text><text class="yLabel" transform="translate(-4, 214)" style="text-anchor: end;">0</text><text class="yLabel" transform="translate(-4, 236)" style="text-anchor: end;">Number(0)</text><text class="yLabel" transform="translate(-4, 258)" style="text-anchor: end;">“0”</text><text class="yLabel" transform="translate(-4, 280)" style="text-anchor: end;">String(“0”)</text><text class="yLabel" transform="translate(-4, 302)" style="text-anchor: end;">[0]</text><text class="yLabel" transform="translate(-4, 324)" style="text-anchor: end;">true</text><text class="yLabel" transform="translate(-4, 346)" style="text-anchor: end;">“true”</text><text class="yLabel" transform="translate(-4, 368)" style="text-anchor: end;">Boolean(true)</text><text class="yLabel" transform="translate(-4, 390)" style="text-anchor: end;">1</text><text class="yLabel" transform="translate(-4, 412)" style="text-anchor: end;">Number(1)</text><text class="yLabel" transform="translate(-4, 434)" style="text-anchor: end;">“1”</text><text class="yLabel" transform="translate(-4, 456)" style="text-anchor: end;">String(“1”)</text><text class="yLabel" transform="translate(-4, 478)" style="text-anchor: end;">[1]</text><text class="yLabel" transform="translate(-4, 500)" style="text-anchor: end;">-1</text><text class="yLabel" transform="translate(-4, 522)" style="text-anchor: end;">Number(-1)</text><text class="yLabel" transform="translate(-4, 544)" style="text-anchor: end;">“-1”</text><text class="yLabel" transform="translate(-4, 566)" style="text-anchor: end;">String(“-1”)</text><text class="yLabel" transform="translate(-4, 588)" style="text-anchor: end;">[-1]</text><text class="yLabel" transform="translate(-4, 610)" style="text-anchor: end;">Infinity</text><text class="yLabel" transform="translate(-4, 632)" style="text-anchor: end;">-Infinity</text><text class="yLabel" transform="translate(-4, 654)" style="text-anchor: end;">Object()</text><text class="yLabel" transform="translate(-4, 676)" style="text-anchor: end;">NaN</text><rect y="0" x="0" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="0" x="22" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="0" x="44" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="0" x="88" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="110" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="132" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="154" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="176" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="198" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="220" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="242" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="264" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="286" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="0" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="0" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="0" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="0" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="0" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="0" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="0" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="0" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="0" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="0" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="0" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="22" x="22" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="22" x="44" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="88" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="110" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="132" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="154" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="176" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="198" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="220" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="242" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="264" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="286" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="308" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="352" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="374" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="396" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="418" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="440" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="462" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="484" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="506" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="528" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="550" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="572" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="594" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="616" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="22" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="44" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="44" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="44" x="44" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="44" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="44" x="88" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="44" x="110" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="132" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="154" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="176" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="242" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="264" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="286" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="44" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="44" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="44" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="44" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="44" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="44" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="44" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="44" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="44" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="44" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="0" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="44" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="66" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="66" x="88" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="198" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="220" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="308" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="66" x="352" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="374" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="396" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="418" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="440" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="462" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="484" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="506" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="594" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="616" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="66" x="638" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="66" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="88" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="88" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="88" x="44" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="88" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="88" x="88" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="88" x="110" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="132" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="154" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="176" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="242" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="264" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="286" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="88" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="88" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="88" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="88" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="88" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="88" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="88" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="88" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="88" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="88" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="110" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="110" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="110" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="110" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="110" x="110" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="110" x="132" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="110" x="154" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="110" x="176" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="110" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="110" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="110" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="110" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="110" x="528" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="550" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="572" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="110" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="110" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="132" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="132" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="132" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="132" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="132" x="110" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="132" x="132" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="132" x="154" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="132" x="176" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="132" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="132" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="132" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="132" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="132" x="528" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="550" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="572" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="132" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="132" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="154" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="154" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="154" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="154" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="154" x="110" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="154" x="132" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="154" x="154" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="154" x="176" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="154" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="154" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="154" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="154" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="154" x="528" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="550" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="572" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="154" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="154" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="176" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="176" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="176" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="176" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="176" x="110" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="176" x="132" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="176" x="154" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="176" x="176" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="176" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="176" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="176" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="176" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="176" x="528" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="550" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="572" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="176" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="176" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="198" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="198" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="198" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="198" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="110" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="132" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="154" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="176" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="198" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="198" x="220" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="198" x="242" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="264" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="286" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="198" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="198" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="198" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="198" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="198" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="198" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="198" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="198" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="198" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="198" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="220" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="220" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="220" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="220" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="110" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="132" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="154" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="176" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="198" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="220" x="220" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="220" x="242" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="264" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="286" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="220" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="220" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="220" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="220" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="220" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="220" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="220" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="220" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="220" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="220" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="242" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="242" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="242" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="242" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="242" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="242" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="242" x="242" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="242" x="264" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="242" x="286" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="242" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="242" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="242" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="264" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="264" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="264" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="264" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="264" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="264" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="264" x="242" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="264" x="264" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="264" x="286" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="264" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="264" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="264" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="286" x="0" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="286" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="286" x="44" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="286" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="88" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="286" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="198" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="286" x="220" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="286" x="242" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="286" x="264" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="286" x="286" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="286" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="286" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="286" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="308" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="308" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="308" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="308" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="308" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="308" x="352" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="308" x="374" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="308" x="396" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="308" x="418" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="308" x="440" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="308" x="462" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="308" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="308" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="308" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="308" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="0" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="44" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="66" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="88" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="198" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="220" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="308" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="330" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="330" x="352" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="374" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="396" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="418" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="440" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="462" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="484" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="506" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="594" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="616" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="330" x="638" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="330" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="352" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="352" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="352" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="308" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="352" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="352" x="352" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="352" x="374" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="352" x="396" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="352" x="418" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="352" x="440" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="352" x="462" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="352" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="352" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="352" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="352" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="374" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="374" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="374" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="308" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="374" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="374" x="352" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="374" x="374" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="374" x="396" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="374" x="418" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="374" x="440" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="374" x="462" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="374" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="374" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="374" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="374" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="396" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="396" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="396" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="308" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="396" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="396" x="352" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="396" x="374" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="396" x="396" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="396" x="418" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="396" x="440" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="396" x="462" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="396" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="396" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="396" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="396" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="418" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="418" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="418" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="308" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="418" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="418" x="352" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="418" x="374" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="418" x="396" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="418" x="418" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="418" x="440" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="418" x="462" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="418" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="418" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="418" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="418" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="440" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="440" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="440" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="308" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="440" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="440" x="352" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="440" x="374" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="440" x="396" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="440" x="418" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="440" x="440" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="440" x="462" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="440" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="440" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="440" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="440" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="462" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="462" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="462" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="308" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="462" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="462" x="352" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="462" x="374" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="462" x="396" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="462" x="418" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="462" x="440" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="462" x="462" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="462" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="462" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="462" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="462" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="484" x="0" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="484" x="44" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="484" x="88" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="110" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="132" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="154" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="176" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="198" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="220" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="484" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="484" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="484" x="506" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="484" x="528" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="484" x="550" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="484" x="572" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="484" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="484" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="484" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="484" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="506" x="0" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="506" x="44" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="506" x="88" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="110" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="132" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="154" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="176" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="198" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="220" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="506" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="484" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="506" x="506" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="506" x="528" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="506" x="550" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="506" x="572" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="506" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="506" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="506" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="506" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="528" x="0" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="528" x="44" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="88" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="528" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="528" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="528" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="528" x="198" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="220" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="484" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="528" x="506" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="528" x="528" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="528" x="550" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="528" x="572" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="528" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="528" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="528" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="550" x="0" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="550" x="44" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="88" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="550" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="550" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="550" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="550" x="198" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="220" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="484" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="550" x="506" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="550" x="528" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="550" x="550" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="550" x="572" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="550" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="550" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="550" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="572" x="0" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="572" x="44" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="88" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="572" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="572" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="572" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="572" x="198" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="220" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="484" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="572" x="506" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="572" x="528" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="572" x="550" width="20" height="20" style="fill: rgb(235, 108, 95);"/><rect y="572" x="572" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="572" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="572" x="638" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="572" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="594" x="0" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="594" x="44" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="594" x="88" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="198" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="220" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="308" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="594" x="352" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="374" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="396" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="418" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="440" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="462" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="484" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="506" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="594" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="594" x="616" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="594" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="594" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="616" x="0" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="616" x="44" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="616" x="88" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="110" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="132" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="154" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="176" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="198" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="220" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="242" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="264" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="286" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="308" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="616" x="352" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="374" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="396" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="418" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="440" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="462" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="484" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="506" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="528" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="550" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="572" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="594" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="616" x="616" width="20" height="20" style="fill: rgb(144, 43, 32);"/><rect y="616" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="616" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="0" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="44" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="66" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="638" x="88" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="110" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="132" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="154" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="176" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="198" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="220" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="242" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="264" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="286" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="308" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="330" width="20" height="20" style="fill: rgb(52, 152, 219);"/><rect y="638" x="352" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="374" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="396" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="418" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="440" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="462" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="484" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="506" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="528" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="550" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="572" width="20" height="20" style="fill: rgb(46, 204, 113);"/><rect y="638" x="594" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="616" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="638" x="638" width="20" height="20" style="fill: rgb(241, 196, 15);"/><rect y="638" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="0" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="22" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="44" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="66" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="88" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="110" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="132" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="154" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="176" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="198" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="220" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="242" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="264" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="286" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="308" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="330" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="352" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="374" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="396" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="418" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="440" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="462" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="484" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="506" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="528" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="550" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="572" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="594" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="616" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="638" width="20" height="20" style="fill: rgb(189, 195, 199);"/><rect y="660" x="660" width="20" height="20" style="fill: rgb(189, 195, 199);"/><g class="legend" transform="translate(722, 0)"><rect width="30" height="30" style="fill: rgb(144, 43, 32);"/><text x="40" y="18" style="text-anchor: start;">===</text></g><g class="legend" transform="translate(722, 60)"><rect width="30" height="30" style="fill: rgb(235, 108, 95);"/><text x="40" y="18" style="text-anchor: start;">==</text></g><g class="legend" transform="translate(722, 120)"><rect width="30" height="30" style="fill: rgb(241, 196, 15);"/><text x="40" y="18" style="text-anchor: start;">&gt;= &amp;&amp; &lt;=</text></g><g class="legend" transform="translate(722, 180)"><rect width="30" height="30" style="fill: rgb(46, 204, 113);"/><text x="40" y="18" style="text-anchor: start;">&gt;=</text></g><g class="legend" transform="translate(722, 240)"><rect width="30" height="30" style="fill: rgb(52, 152, 219);"/><text x="40" y="18" style="text-anchor: start;">&lt;=</text></g><g class="legend" transform="translate(722, 300)"><rect width="30" height="30" style="fill: rgb(189, 195, 199);"/><text x="40" y="18" style="text-anchor: start;">else</text></g></g></svg>
+
+
+<h1 id="严格相等"><a href="#严格相等" class="headerlink" title="严格相等 ==="></a>严格相等 <code>===</code></h1><p>两个被比较的值在比较前都不进行隐式转换。</p>
+<p>对于除了数值之外的值，全等操作符使用明确的语义进行比较：一个值只与自身全等。</p>
+<p>对于数值，全等操作符使用略加修改的语义来处理两个特殊情况：</p>
+<ul>
+<li>第一个情况是，浮点数 0 是不分正负的。区分 +0 和 -0 在解决一些特定的数学问题时是必要的，但是大部分情况下我们并不用关心。全等操作符认为这两个值是全等的。</li>
+<li>第二个情况是，浮点数包含了 NaN 值，用来表示某些定义不明确的数学问题的解，例如：正无穷加负无穷。全等操作符认为 NaN 与其他任何值都不全等，包括它自己。（等式 (x !== x) 成立的唯一情况是 x 的值为 NaN）</li>
+</ul>
+<p>各个值的严格相等结果如上图棕色块所示。与自身严格相等或与构造函数返回的值严格相等<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="string">"123"</span> === <span class="string">"123"</span></div><div class="line"><span class="string">"123"</span> === <span class="built_in">String</span>(<span class="string">"123"</span>)</div></pre></td></tr></table></figure></p>
+<h1 id="非严格相等"><a href="#非严格相等" class="headerlink" title="非严格相等 =="></a>非严格相等 <code>==</code></h1><p>相等操作符比较两个值是否相等，在比较前将两个被比较的值转换为相同类型。在转换后（等式的一边或两边都可能被转换），最终的比较方式等同于全等操作符 === 的比较方式。</p>
+<p>注意图上false与其他值得非严格相等结果，<code>XXX == false</code>有以下值：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[] [[]] <span class="string">""</span> <span class="built_in">String</span>(<span class="string">""</span>) <span class="number">0</span> <span class="built_in">Number</span>(<span class="number">0</span>) <span class="built_in">String</span>(<span class="string">"0"</span>) [<span class="number">0</span>]</div></pre></td></tr></table></figure></p>
+<h1 id="逻辑“非”运算符"><a href="#逻辑“非”运算符" class="headerlink" title="逻辑“非”运算符 !"></a>逻辑“非”运算符 !</h1><p>先看看在规范中逻辑非运算符做了什么事情，<a href="http://www.ecma-international.org/ecma-262/8.0/index.html#sec-logical-not-operator" target="_blank" rel="external">在这里</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">UnaryExpression:!UnaryExpression</div><div class="line">	Let expr be the result <span class="keyword">of</span> evaluating UnaryExpression.</div><div class="line">	Let oldValue be ToBoolean(? GetValue(expr)).</div><div class="line">	If oldValue is <span class="literal">true</span>, <span class="keyword">return</span> <span class="literal">false</span>.</div><div class="line">	Return <span class="literal">true</span>.</div></pre></td></tr></table></figure></p>
+<p>清晰明了，关键运算在ToBealean函数，我们看看它<a href="http://www.ecma-international.org/ecma-262/8.0/index.html#sec-toboolean" target="_blank" rel="external">做了什么</a>：<br>它提供了一个结果表格：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数类型</th>
+<th style="text-align:left">结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Undefined</td>
+<td style="text-align:left">Return false.</td>
+</tr>
+<tr>
+<td style="text-align:left">Null</td>
+<td style="text-align:left">Return false.</td>
+</tr>
+<tr>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">Return argument.</td>
+</tr>
+<tr>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">If argument is +0, -0, or NaN, return false; otherwise return true.</td>
+</tr>
+<tr>
+<td style="text-align:left">String</td>
+<td style="text-align:left">If argument is the empty String (its length is zero), return false; otherwise return true.</td>
+</tr>
+<tr>
+<td style="text-align:left">Symbol</td>
+<td style="text-align:left">Return true.</td>
+</tr>
+<tr>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Return true.</td>
+</tr>
+</tbody>
+</table>
+<p>总结一下，凡是<code>undefined</code>,<code>null</code>返回false<br>凡是<code>Symbol</code>,<code>Object</code>返回true</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/09/29/DOM元素排序/" title= DOM元素排序 >
+                    <span>Next Post</span>
+                    <span>DOM元素排序</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/09/16/Karma单元测试/" title= Karma单元测试 >
+                    <span>Previous Post</span>
+                    <span>Karma单元测试</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wshx1938@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/AdvancedCat" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JS真值表"><span class="toc-number">1.</span> <span class="toc-text">JS真值表</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#严格相等"><span class="toc-number">2.</span> <span class="toc-text">严格相等 ===</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#非严格相等"><span class="toc-number">3.</span> <span class="toc-text">非严格相等 ==</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#逻辑“非”运算符"><span class="toc-number">4.</span> <span class="toc-text">逻辑“非”运算符 !</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 34 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/Node框架——Express-Koa-Egg/" >Node框架——Express,Koa,Egg</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/PM2——node进程管理器/" >PM2——node进程管理器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/Node多线程开发/" >Node多线程开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/eslint——规范你的代码/" >eslint——规范你的代码</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2017/10/14/源码阅读——Redux/" >源码阅读——Redux</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/DOM元素排序/" >DOM元素排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/Javascript真值表/" >Javascript真值表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2017/09/16/Karma单元测试/" >Karma单元测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/常用Webpack插件/" >常用Webpack插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2017/08/27/CSS-Modules/" >CSS Modules</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2017/07/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/22</span><a class="archive-post-title" href= "/2017/07/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/JS模板引擎/" >JS模板引擎</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/18</span><a class="archive-post-title" href= "/2017/06/18/JS的单线程与异步/" >JS的单线程与异步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2017/06/08/学习使用Webpack/" >学习使用Webpack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2017/05/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2017/04/28/同构Javascript应用/" >同构Javascript应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2017/04/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/使用Babel/" >使用Babel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2017/04/10/Cookie-localStorage-sessionStorage/" >Cookie,localStorage,sessionStorage简单分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2017/04/07/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2017/03/21/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/09/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2017/03/01/第一篇博客/" >开篇博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2017/02/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/webpack原理剖析/" >webpack原理剖析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/hello-world/" >How to maintain HexoBlog</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2017/01/28/Markdown语法-Hexo/" >Markdown语法(Hexo)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">工作</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

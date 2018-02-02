@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        源码阅读——Redux · XinHong&#39;s Blog
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe779;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">源码阅读——Redux</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Home</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            源码阅读——Redux
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/10/14</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+
+            window.onload = function(){
+                $(function(){
+                    // showAllIcons()
+                })
+
+                function showAllIcons(){
+                    var icon = '600,601,603,607,608,610,612,613,619,630,634,635,637,638,639,642,652,676,695,775,779';
+                    var icons = icon.split(',')
+                    for(var i =0; i<icons.length; i++){
+                        $('body').append(icons[i]+':<span class="iconfont-archer">&#xe'+icons[i]+';</span>&nbsp;&nbsp;&nbsp;')
+                    }
+                }
+            }
+            
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="何为Redux"><a href="#何为Redux" class="headerlink" title="何为Redux"></a>何为Redux</h1><p>Redux是一个为JavaScript应用设计的可预测状态容器。GitHub官网是<a href="https://github.com/reactjs/redux" target="_blank" rel="external">https://github.com/reactjs/redux</a><br>严格的单向数据流动是Redux架构的核心</p>
+<h1 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h1><p>Redux遵循三大原则：</p>
+<ol>
+<li>单一数据源<br>整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个store中。<br>也就是说整个应用只有一个store，读取数据都是从这个store中进行</li>
+<li>State是只读的<br>唯一改变 state 的方法就是触发 action，action 是一个用于描述已发生事件的普通对象。<br>action的作用仅仅表达一种修改的意向，整个应用的修改操作都被集中起来。我们可以对action进行记录追踪，方便调试观察。</li>
+<li>使用纯函数进行修改<br>为了描述 action 如何改变 state tree ，你需要编写 reducers。<br>Reducer 只是一些纯函数，它接收先前的 state 和 action，并返回<strong>新的 state</strong>。</li>
+</ol>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p>分析Redux的源码是很有趣的事情，Redux的源码很少，打包压缩后仅有2KB左右。它封装了几个关键的函数，就是这些函数应用了函数式编程的技巧，封装了私有变量，造就了Redux的三大原则。<br>PS:本博客中不分析参数检查部分的代码，有兴趣的可以去gitbub上看看</p>
+<h2 id="createStore"><a href="#createStore" class="headerlink" title="createStore"></a>createStore</h2><p>顾名思义，createStore函数返回一个store对象，store对象上会定义一些应用使用的钩子函数，帮助操作内部封装隐藏的state</p>
+<p>源码如下（有删减）:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 创建一个Store，来维护一颗状态树</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; reducer        纯函数，接受state和action，触发相应事件</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; preloadedState 初始state</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; enhancer       给第三方中间件使用，在Redux中指的是applyMiddleware</span></div><div class="line"><span class="comment"> * @return &#123;[type]&#125;                返回store，暴露公开API用于读取state，分发action，注册事件</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">createStore</span>(<span class="params">reducer, preloadedState, enhancer</span>) </span>&#123;</div><div class="line">  <span class="comment">// 类型检查...</span></div><div class="line"></div><div class="line">  <span class="comment">//  私有变量，外界尽可以通过暴露出的API函数去修改这些私有变量</span></div><div class="line">  <span class="keyword">let</span> currentReducer = reducer</div><div class="line">  <span class="keyword">let</span> currentState = preloadedState</div><div class="line">  <span class="keyword">let</span> currentListeners = []</div><div class="line">  <span class="keyword">let</span> nextListeners = currentListeners</div><div class="line">  <span class="keyword">let</span> isDispatching = <span class="literal">false</span></div><div class="line"></div><div class="line">  <span class="comment">// 确保对nextListeners的操作不会影响到currentListeners</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">ensureCanMutateNextListeners</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (nextListeners === currentListeners) &#123;</div><div class="line">      nextListeners = currentListeners.slice()</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 获取当前的状态</span></div><div class="line">  <span class="comment">// 事实上，我们仍可以通过引用的形式去修改内部的state。如果你这样做了，那你就从一开始就没想清楚去使用redux</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getState</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> currentState</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 注册事件，所有事件会push到listeners数组中，在触发dispatch时依次执行</span></div><div class="line">  <span class="comment">// subscribe返回解除listener的函数，这里用到了闭包</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">listener</span>) </span>&#123;</div><div class="line">    <span class="comment">// 类型检查...</span></div><div class="line">    <span class="keyword">let</span> isSubscribed = <span class="literal">true</span></div><div class="line"></div><div class="line">    ensureCanMutateNextListeners()</div><div class="line">    nextListeners.push(listener)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">unsubscribe</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (!isSubscribed) &#123;</div><div class="line">        <span class="keyword">return</span></div><div class="line">      &#125;</div><div class="line"></div><div class="line">      isSubscribed = <span class="literal">false</span></div><div class="line"></div><div class="line">      ensureCanMutateNextListeners()</div><div class="line">      <span class="keyword">const</span> index = nextListeners.indexOf(listener)</div><div class="line">      nextListeners.splice(index, <span class="number">1</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 核心函数，分发action，这是唯一可以改变state的途径</span></div><div class="line">  <span class="comment">// 它会将state和action传给reducer纯函数，reducer执行完毕后返回新的state</span></div><div class="line">  <span class="comment">// 请记住，dispatch是你应用时刻关注的钩子函数。因为只有它才能真正触发修改state的行为</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span>(<span class="params">action</span>) </span>&#123;</div><div class="line">    <span class="comment">// 类型检查...</span></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      isDispatching = <span class="literal">true</span></div><div class="line">      currentState = currentReducer(currentState, action)</div><div class="line">    &#125; <span class="keyword">finally</span> &#123;</div><div class="line">      isDispatching = <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> listeners = currentListeners = nextListeners</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; listeners.length; i++) &#123;</div><div class="line">      <span class="keyword">const</span> listener = listeners[i]</div><div class="line">      listener()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> action</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 替换reducer</span></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">replaceReducer</span>(<span class="params">nextReducer</span>) </span>&#123;</div><div class="line">    <span class="comment">// 类型检查...</span></div><div class="line">    currentReducer = nextReducer</div><div class="line">    dispatch(&#123; <span class="attr">type</span>: ActionTypes.INIT &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 暴露API</span></div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    dispatch,</div><div class="line">    subscribe,</div><div class="line">    getState,</div><div class="line">    replaceReducer</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="combineReducers"><a href="#combineReducers" class="headerlink" title="combineReducers"></a>combineReducers</h2><p>如果应用比较简单，我们可以只写一个reducer，将所有的action都集中到一处去，之后参数传给createStore.<br>但是随着应用越来越大，你可能有很多action，如果都放入一个reducer中，显然变得不可维护。于是期望可以拆分reducer，每个reducer仅关心store tree中某个分支（即state中部分key），且仅返回这部分分支内容。其他分支内容你并不关心。<br>为了解决这个问题，Reudex提供了combineReducers函数。<br>combineReducers接受一个reducers对象，每一个key对应了一个reducer，这个key之后也将反应到state中。<br>比如你有一个postListReducer，这个reducer专门用来处理博客列表相关的操作（增删改查），将<code>{postList: postListReducer}</code>传给combineReducers，你会得到<code>{postList: []}</code>的store。而postListReducer也仅能处理postList部分的数据，不用关心其他字段。</p>
+<p>源码如下（有删减）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将包含多个reducer函数的对象转换为一个reducer函数</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; reducers [description]</span></div><div class="line"><span class="comment"> * @return &#123;[type]&#125;          [description]</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">combineReducers</span>(<span class="params">reducers</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> reducerKeys = <span class="built_in">Object</span>.keys(reducers)</div><div class="line">  <span class="keyword">const</span> finalReducers = &#123;&#125;</div><div class="line">  <span class="comment">// 将有效的reducer汇集到一个最终对象中</span></div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; reducerKeys.length; i++) &#123;</div><div class="line">    <span class="keyword">const</span> key = reducerKeys[i]</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> reducers[key] === <span class="string">'function'</span>) &#123;</div><div class="line">      finalReducers[key] = reducers[key]</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">const</span> finalReducerKeys = <span class="built_in">Object</span>.keys(finalReducers)</div><div class="line"></div><div class="line">  <span class="comment">// 最终返回一个reducer函数，接受state和action参数</span></div><div class="line">  <span class="comment">// 它会遍历每一个之前传入的reducer，每个reducer仅会改变对应key的state</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">combination</span>(<span class="params">state = &#123;&#125;, action</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> hasChanged = <span class="literal">false</span></div><div class="line">    <span class="keyword">const</span> nextState = &#123;&#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; finalReducerKeys.length; i++) &#123;</div><div class="line">      <span class="keyword">const</span> key = finalReducerKeys[i]</div><div class="line">      <span class="keyword">const</span> reducer = finalReducers[key]</div><div class="line">      <span class="keyword">const</span> previousStateForKey = state[key]</div><div class="line">      <span class="keyword">const</span> nextStateForKey = reducer(previousStateForKey, action)</div><div class="line">      <span class="comment">// 每个reducer只管自己的一亩三分地</span></div><div class="line">      nextState[key] = nextStateForKey  <span class="comment">// 计算出的state会放入对应key中去</span></div><div class="line">      hasChanged = hasChanged || nextStateForKey !== previousStateForKey  <span class="comment">// 这里应对可能reducer返回原来的state</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> hasChanged ? nextState : state</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="bindActionCreators"><a href="#bindActionCreators" class="headerlink" title="bindActionCreators"></a>bindActionCreators</h2><p>在你使用Redux后，我们可以通过<code>store.dispatch(ActionCreator(...))</code>的形式去分发由ActionCreator生成的action。<br>我们知道，React很适合组件式开发，那么如果我们需要在子组件中去分发action的时候该如何做呢？可以这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;Child &#123;...data&#125; dispatch=&#123;store.dispatch&#125;&gt;<span class="xml"><span class="tag">&lt;/<span class="name">Child</span>&gt;</span></span></div><div class="line"></div><div class="line"><span class="comment">//在组件内部我们可以这样调用了</span></div><div class="line"><span class="keyword">this</span>.props.dispatch(action)</div></pre></td></tr></table></figure></p>
+<p>这样做有一个问题，如果子组件嵌套较深，那么每个组件我都要传一个dispatch下去，我们希望使用redux时透明的，能否将dispatch保存在actioncreator中，当分发action时自动带出dispatch。答案是可以的，这里我们需要借助bindActionCreators函数来绑定dispatch<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">render()&#123;</div><div class="line">    <span class="keyword">let</span> &#123;todos, dispatch&#125; = <span class="keyword">this</span>.props</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">     * &#123;</span></div><div class="line"><span class="comment">     *    add<span class="doctag">Todo:</span> Function,</span></div><div class="line"><span class="comment">     *    remove<span class="doctag">Todo:</span> Function</span></div><div class="line"><span class="comment">     * &#125;</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">let</span> boundActionCreators = bindActionCreators(TodoActionCreators, dispatch)</div><div class="line"></div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;TodoList todos=&#123;todos&#125; &#123;...boundActionCreators&#125; /&gt;</div><div class="line">    )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上例摘自<a href="http://cn.redux.js.org/docs/api/bindActionCreators.html" target="_blank" rel="external">Redux文档</a>中<br>在实际应用，我么也可以用的更灵活一些，比如借助<code>react-redux</code>中connect方法</p>
+<p>源码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bindActionCreator</span>(<span class="params">actionCreator, dispatch</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> dispatch(actionCreator.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)) &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将dispatch绑定到actionCreator函数中</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; actionCreators actionCreator函数或者actionCreator函数对象</span></div><div class="line"><span class="comment"> * @param  &#123;[type]&#125; dispatch       [description]</span></div><div class="line"><span class="comment"> * @return &#123;[type]&#125;                [description]</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">bindActionCreators</span>(<span class="params">actionCreators, dispatch</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> actionCreators === <span class="string">'function'</span>) &#123;</div><div class="line">    <span class="keyword">return</span> bindActionCreator(actionCreators, dispatch)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> keys = <span class="built_in">Object</span>.keys(actionCreators)</div><div class="line">  <span class="keyword">const</span> boundActionCreators = &#123;&#125;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; keys.length; i++) &#123;</div><div class="line">    <span class="keyword">const</span> key = keys[i]</div><div class="line">    <span class="keyword">const</span> actionCreator = actionCreators[key]</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> actionCreator === <span class="string">'function'</span>) &#123;</div><div class="line">      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> boundActionCreators</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这段源码是比较简单的，大致意图是进一步封装actionCreator函数，通过闭包的形式将dispatch绑定到actionCreator中。从而使子组件不需要关心dispatch参数，直接分发action</p>
+<h2 id="applyMiddleware"><a href="#applyMiddleware" class="headerlink" title="applyMiddleware"></a>applyMiddleware</h2><p>Middleware 可以让你包装 store 的 dispatch 方法来达到你想要的目的。同时， middleware 还拥有“可组合”这一关键特性。多个 middleware 可以被组合到一起使用，形成 middleware 链。其中，每个 middleware 都不需要关心链中它前后的 middleware 的任何信息。<br>源码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">applyMiddleware</span>(<span class="params">...middlewares</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">createStore</span>) =&gt;</span> (...args) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> store = createStore(...args)</div><div class="line">    <span class="keyword">let</span> dispatch = store.dispatch</div><div class="line">    <span class="keyword">let</span> chain = []</div><div class="line"></div><div class="line">    <span class="keyword">const</span> middlewareAPI = &#123;</div><div class="line">      getState: store.getState,</div><div class="line">      dispatch: <span class="function">(<span class="params">...args</span>) =&gt;</span> dispatch(...args)</div><div class="line">    &#125;</div><div class="line">    chain = middlewares.map(<span class="function"><span class="params">middleware</span> =&gt;</span> middleware(middlewareAPI))</div><div class="line">    dispatch = compose(...chain)(store.dispatch)</div><div class="line"></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      ...store,</div><div class="line">      dispatch</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/11/16/ES6——Generator函数学习笔记/" title= ES6——Generator函数学习笔记 >
+                    <span>Next Post</span>
+                    <span>ES6——Generator函数学习笔记</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/09/29/DOM元素排序/" title= DOM元素排序 >
+                    <span>Previous Post</span>
+                    <span>DOM元素排序</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wshx1938@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/AdvancedCat" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#何为Redux"><span class="toc-number">1.</span> <span class="toc-text">何为Redux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三大原则"><span class="toc-number">2.</span> <span class="toc-text">三大原则</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码"><span class="toc-number">3.</span> <span class="toc-text">源码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#createStore"><span class="toc-number">3.1.</span> <span class="toc-text">createStore</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#combineReducers"><span class="toc-number">3.2.</span> <span class="toc-text">combineReducers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bindActionCreators"><span class="toc-number">3.3.</span> <span class="toc-text">bindActionCreators</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#applyMiddleware"><span class="toc-number">3.4.</span> <span class="toc-text">applyMiddleware</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 34 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/Node框架——Express-Koa-Egg/" >Node框架——Express,Koa,Egg</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/PM2——node进程管理器/" >PM2——node进程管理器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/Node多线程开发/" >Node多线程开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/eslint——规范你的代码/" >eslint——规范你的代码</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2017/10/14/源码阅读——Redux/" >源码阅读——Redux</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/DOM元素排序/" >DOM元素排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/Javascript真值表/" >Javascript真值表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2017/09/16/Karma单元测试/" >Karma单元测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/常用Webpack插件/" >常用Webpack插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2017/08/27/CSS-Modules/" >CSS Modules</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2017/07/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/22</span><a class="archive-post-title" href= "/2017/07/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/JS模板引擎/" >JS模板引擎</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/18</span><a class="archive-post-title" href= "/2017/06/18/JS的单线程与异步/" >JS的单线程与异步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2017/06/08/学习使用Webpack/" >学习使用Webpack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2017/05/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2017/04/28/同构Javascript应用/" >同构Javascript应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2017/04/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/使用Babel/" >使用Babel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2017/04/10/Cookie-localStorage-sessionStorage/" >Cookie,localStorage,sessionStorage简单分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2017/04/07/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2017/03/21/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/09/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2017/03/01/第一篇博客/" >开篇博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2017/02/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/webpack原理剖析/" >webpack原理剖析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/hello-world/" >How to maintain HexoBlog</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2017/01/28/Markdown语法-Hexo/" >Markdown语法(Hexo)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">工作</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

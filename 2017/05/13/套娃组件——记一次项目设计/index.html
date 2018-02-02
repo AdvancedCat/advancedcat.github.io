@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        套娃组件——记一次项目设计 · XinHong&#39;s Blog
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe779;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">套娃组件——记一次项目设计</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Home</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            套娃组件——记一次项目设计
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 项目设计>项目设计</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/05/13</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+
+            window.onload = function(){
+                $(function(){
+                    // showAllIcons()
+                })
+
+                function showAllIcons(){
+                    var icon = '600,601,603,607,608,610,612,613,619,630,634,635,637,638,639,642,652,676,695,775,779';
+                    var icons = icon.split(',')
+                    for(var i =0; i<icons.length; i++){
+                        $('body').append(icons[i]+':<span class="iconfont-archer">&#xe'+icons[i]+';</span>&nbsp;&nbsp;&nbsp;')
+                    }
+                }
+            }
+            
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>近期，接到一个项目，商业产品引入新的券种————时长券。大致的交互和以往的现金券差不不多，仅仅是优惠券的数据结构不同，展示的弹框样式也有所不同。<br>下图是时长券弹框的样式：<br><img src="/img/时长券弹框样式.png" alt=""></p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><ul>
+<li>偷懒方案<br>大可将现金券的交互逻辑拷贝一份，装饰一个新的模板，留意券的数据结构，调整个别个性化交互即可。<br>预估两三天即可，很轻松。</li>
+</ul>
+<p>缺点：代码通过剪刀胶水一番操作后，重复大片，如果下次需要调整优惠券的一些逻辑时，相当于我要改两次。另外，弹框的交互和优惠券的业务掺杂在一起了。耦合度较高。</p>
+<ul>
+<li>自找麻烦方案<br>静下心，认真分析现金券和时长券之间共同点，思考是否可以将它们共同部分单独抽离出来。<br>比如弹框的左右翻页，就可以抽离出来作为弹框本身的事件处理，与何种券没有关系。</li>
+</ul>
+<h1 id="套娃组件"><a href="#套娃组件" class="headerlink" title="套娃组件"></a>套娃组件</h1><p>本着不给自己挖坑的原则，有必要好好设计一下。想到俄罗斯的玩具————套娃，既然两种券弹框样式和交互大多一致，就可以将共同部分抽离出为一个弹框组件。弹框组件维护自己的样式和交互，它并不关心优惠券的类别。<br>现金券弹框和时长券弹框都可继承自这个基础弹框，它们仅负责自己业务行为，将需要展示的优惠券列表通过参数形式传入到基础弹框组件中。<br>这就像一个套娃套住了另一个套娃。<br>在实际开发中，也尽量将基础弹框组件做成热拔插的组件，这样也可以应对以后业务扩展的需要，比如以后再引入其他券种，就可以继承自基础组件，而仅关心业务需求即可。</p>
+<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p>依据上面的思路，画出以下设计框架，以继承封装的形式层层套组件<br><img src="/img/优惠券套娃组件设计.png" alt=""></p>
+<p>由于基础弹框组件已经封装了弹框的交互行为，当弹框点击行为触发时，比如翻页，它需要读取到下一页的数据并展示，那么通知券组件获取展示数据。此时需要为组件之间的通信架起桥梁。<br>我的解决方案是观察者模式，又称订阅发布模式。当基础弹框组件触发相关事件时，可以立即抛出消息，券组件就可以监听到这个消息，从而准备好相关数据，再次调用基础弹框组件暴露的方法更新视图。大致流程图如下：<br><img src="/img/时长券组件消息通知.png" alt=""></p>
+<p>1.基础弹框组件继承观察者类(Observer)，在基础弹框组件的关键行为中，如翻页事件，会触发消息：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.trigger(<span class="string">'go_page'</span>, [page])</div></pre></td></tr></table></figure></p>
+<p>2.券组件初始化时，会监听来自基础弹框组件的消息，并依据消息完成业务逻辑，如翻页消息:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> self = <span class="keyword">this</span></div><div class="line">self.on(<span class="string">'go_page'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">page</span>)</span>&#123;</div><div class="line">    <span class="comment">// get coupon list according to page paramater</span></div><div class="line">    self._common.goPage(page)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>3.券组件在实例化基础弹框组件时，可以传入一些钩子函数，这些钩子函数的作用是在弹框组件一些事件中执行券组件个性化需求。<br>比如基础弹框组件不关心券列表，其中显示的表格样式也可以由券组件配置，那么基础弹框组件在渲染券列表时，并不知道它的数据结构，因此可以调起传入的优惠券渲染钩子函数，这样渲染个性化的模板任务交给了券组件。<br>如果钩子函数参数是空的，那么基础弹框组件就会执行默认行为。<br>以下代码片段是计算使用优惠券后计算优惠信息，其中<code>calDiscountHook</code>就是一个钩子。当计算完毕后，还会抛出<code>calculate</code>消息告知券组件已计算完毕，可以执行一些额外的工作。（添加<code>eventPrefix</code>为的防止消息重名）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * [calculate 计算优惠信息]</span></div><div class="line"><span class="comment"> * @return &#123;number&#125;    [折后价]</span></div><div class="line"><span class="comment"> */</span></div><div class="line">Common.prototype.calculate = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>,</div><div class="line">        discount = <span class="number">0</span></div><div class="line">    _.each(self._choosen, <span class="function"><span class="keyword">function</span> (<span class="params">coupon</span>) </span>&#123;</div><div class="line">        <span class="comment">// 可以指定计算优惠信息的钩子函数，方便自定义。默认读取discountValue字段</span></div><div class="line">        discount += ( self._op.calDiscountHook ? +self._op.calDiscountHook(coupon) : (+coupon.discountValue || <span class="number">0</span>) )</div><div class="line">    &#125;)</div><div class="line">    discount = toFixed(discount, <span class="number">2</span>)</div><div class="line">    self._updateDiscount(discount)</div><div class="line">    <span class="comment">// 如果你需要自定义更新显示优惠信息，你可以去监听这个事件</span></div><div class="line">    self.trigger(self._op.eventPrefix + <span class="string">'calculate'</span>, [self._choosen, discount])</div><div class="line">    <span class="keyword">return</span> discount</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/05/26/Manifest在webpack打包中的作用/" title= Manifest在webpack打包中的作用 >
+                    <span>Next Post</span>
+                    <span>Manifest在webpack打包中的作用</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/04/28/同构Javascript应用/" title= 同构Javascript应用 >
+                    <span>Previous Post</span>
+                    <span>同构Javascript应用</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wshx1938@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/AdvancedCat" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分析"><span class="toc-number">2.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#套娃组件"><span class="toc-number">3.</span> <span class="toc-text">套娃组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#设计"><span class="toc-number">4.</span> <span class="toc-text">设计</span></a></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 34 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/Node框架——Express-Koa-Egg/" >Node框架——Express,Koa,Egg</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/PM2——node进程管理器/" >PM2——node进程管理器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/Node多线程开发/" >Node多线程开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/eslint——规范你的代码/" >eslint——规范你的代码</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2017/10/14/源码阅读——Redux/" >源码阅读——Redux</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/DOM元素排序/" >DOM元素排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/Javascript真值表/" >Javascript真值表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2017/09/16/Karma单元测试/" >Karma单元测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/常用Webpack插件/" >常用Webpack插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2017/08/27/CSS-Modules/" >CSS Modules</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2017/07/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/22</span><a class="archive-post-title" href= "/2017/07/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/JS模板引擎/" >JS模板引擎</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/18</span><a class="archive-post-title" href= "/2017/06/18/JS的单线程与异步/" >JS的单线程与异步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2017/06/08/学习使用Webpack/" >学习使用Webpack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2017/05/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2017/04/28/同构Javascript应用/" >同构Javascript应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2017/04/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/使用Babel/" >使用Babel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2017/04/10/Cookie-localStorage-sessionStorage/" >Cookie,localStorage,sessionStorage简单分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2017/04/07/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2017/03/21/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/09/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2017/03/01/第一篇博客/" >开篇博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2017/02/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/webpack原理剖析/" >webpack原理剖析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/hello-world/" >How to maintain HexoBlog</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2017/01/28/Markdown语法-Hexo/" >Markdown语法(Hexo)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">工作</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+

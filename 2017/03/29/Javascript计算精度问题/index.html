@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <title>
+        
+        Javascript计算精度问题 · XinHong&#39;s Blog
+        
+    </title>
+    <link rel="icon" href= /assests/favicon.ico>
+    <!-- TODO: 在font-face加载完毕后改变字体  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js"></script>
+    <!-- 提前加载place holder  -->
+    <style type="text/css">
+        @font-face {
+            font-family: 'Oswald-Regular';
+            src: url('/font/Oswald-Regular.ttf');
+        }
+    </style>
+    <style type="text/css">
+        .site-intro-placeholder {
+            position: absolute;
+            z-index: -2;
+            top: 0;
+            left: 0px;
+            width: calc(100% + 300px);
+            height: 100%;
+            background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+            background-position: center center;
+            transform: translate3d(-226px, 0, 0);
+            animation: gradient-move 2.5s ease-out 0s 1;
+        }
+        @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+    <link rel="stylesheet" href = /css/style.css?v=20171020 />
+    <script src="//cdn.staticfile.org/jquery/3.2.1/jquery.min.js" defer></script>
+    
+    <script src="/scripts/main.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+    
+        <body class="post-body">
+    
+    <script>
+    var jsInfo = {
+        root: '/'
+    }
+</script>
+    
+<header class="header">
+
+    <div class="header-sidebar-menu">&#xe779;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Javascript计算精度问题</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Home</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            Javascript计算精度问题
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/03/29</span>
+            </div>
+        
+    </div>
+</div>
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <script>
+            var browser = {
+                    versions: function () {
+                        var u = window.navigator.userAgent;
+                        return {
+                            userAgent: u,
+                            trident: u.indexOf('Trident') > -1, //IE内核
+                            presto: u.indexOf('Presto') > -1, //opera内核
+                            webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                            gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                            mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                            ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                            android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                            iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+                            iPad: u.indexOf('iPad') > -1, //是否为iPad
+                            webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+                            weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+                            uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+                        };
+                    }()
+                }
+
+            function fontLoaded(){
+                console.log('font loaded');
+                if (document.getElementsByClassName('site-intro-meta')) {
+                    document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+                    document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+                    var postIntroTags = document.getElementsByClassName('post-intro-tags')[0],
+                        postIntroMeat = document.getElementsByClassName('post-intro-meta')[0];
+                        if (postIntroTags) {
+                            postIntroTags.classList.add('post-fade-in');
+                        }
+                        if (postIntroMeat) {
+                            postIntroMeat.classList.add('post-fade-in');
+                        }
+                    }
+                }
+                
+            console.log("userAgent:" + browser.versions.userAgent);
+            // UC不支持跨域，所以直接显示
+            if (browser.versions.uc) {
+                console.log("UCBrowser");
+                fontLoaded();
+            } else {
+                WebFont.load({
+                    custom: {
+                        families: ['Oswald-Regular']
+                    },
+                    loading: function () {  //所有字体开始加载
+                        // console.log('loading');
+                    },
+                    active: function () {  //所有字体已渲染
+                        fontLoaded();
+                    },
+                    inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+                        console.log('inactive: timeout');
+                        fontLoaded();
+                    },
+                    timeout: 7000 // Set the timeout to two seconds
+                });
+            }
+
+            window.onload = function(){
+                $(function(){
+                    // showAllIcons()
+                })
+
+                function showAllIcons(){
+                    var icon = '600,601,603,607,608,610,612,613,619,630,634,635,637,638,639,642,652,676,695,775,779';
+                    var icons = icon.split(',')
+                    for(var i =0; i<icons.length; i++){
+                        $('body').append(icons[i]+':<span class="iconfont-archer">&#xe'+icons[i]+';</span>&nbsp;&nbsp;&nbsp;')
+                    }
+                }
+            }
+            
+        </script>
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/280956-0e24421bc8f4c197.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。</p>
+<h2 id="双数四则运算"><a href="#双数四则运算" class="headerlink" title="双数四则运算"></a>双数四则运算</h2><p>以下代码可以参考：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//加法函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">accAdd</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> r1,r2,m;</div><div class="line">    <span class="keyword">try</span>&#123;r1=arg1.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;r1=<span class="number">0</span>&#125;</div><div class="line">    <span class="keyword">try</span>&#123;r2=arg2.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;r2=<span class="number">0</span>&#125;</div><div class="line">    m=<span class="built_in">Math</span>.pow(<span class="number">10</span>,<span class="built_in">Math</span>.max(r1,r2));</div><div class="line">    <span class="keyword">return</span> (arg1*m+arg2*m)/m;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//减法函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">accSub</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">     <span class="keyword">var</span> r1,r2,m,n;</div><div class="line">     <span class="keyword">try</span>&#123;r1=arg1.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;r1=<span class="number">0</span>&#125;</div><div class="line">     <span class="keyword">try</span>&#123;r2=arg2.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;r2=<span class="number">0</span>&#125;</div><div class="line">     m=<span class="built_in">Math</span>.pow(<span class="number">10</span>,<span class="built_in">Math</span>.max(r1,r2));</div><div class="line">     <span class="comment">//last modify by deeka</span></div><div class="line">     <span class="comment">//动态控制精度长度</span></div><div class="line">     n=(r1&gt;=r2)?r1:r2;</div><div class="line">     <span class="keyword">return</span> ((arg1*m-arg2*m)/m).toFixed(n);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//乘法函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">accMul</span>(<span class="params">arg1,arg2</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">var</span> m=<span class="number">0</span>,s1=arg1.toString(),s2=arg2.toString();</div><div class="line">    <span class="keyword">try</span>&#123;m+=s1.split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;&#125;</div><div class="line">    <span class="keyword">try</span>&#123;m+=s2.split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;&#125;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Number</span>(s1.replace(<span class="string">"."</span>,<span class="string">""</span>))*<span class="built_in">Number</span>(s2.replace(<span class="string">"."</span>,<span class="string">""</span>))/<span class="built_in">Math</span>.pow(<span class="number">10</span>,m);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//除法函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">accDiv</span>(<span class="params">arg1,arg2</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> t1=<span class="number">0</span>,t2=<span class="number">0</span>,r1,r2;</div><div class="line">    <span class="keyword">try</span>&#123;t1=arg1.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;&#125;</div><div class="line">    <span class="keyword">try</span>&#123;t2=arg2.toString().split(<span class="string">"."</span>)[<span class="number">1</span>].length&#125;<span class="keyword">catch</span>(e)&#123;&#125;</div><div class="line">    <span class="keyword">with</span>(<span class="built_in">Math</span>)&#123;</div><div class="line">		r1=<span class="built_in">Number</span>(arg1.toString().replace(<span class="string">"."</span>,<span class="string">""</span>));</div><div class="line">		r2=<span class="built_in">Number</span>(arg2.toString().replace(<span class="string">"."</span>,<span class="string">""</span>));</div><div class="line">		<span class="keyword">return</span> accMul((r1/r2),pow(<span class="number">10</span>,t2-t1));</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 可以绑定至Number原型链上方便调用</span></div><div class="line"><span class="built_in">Number</span>.prototype.add = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> accAdd(<span class="keyword">this</span>,arg)</div><div class="line">&#125;</div><div class="line"><span class="built_in">Number</span>.prototype.sub = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> accSub(<span class="keyword">this</span>,arg)</div><div class="line">&#125;</div><div class="line"><span class="built_in">Number</span>.prototype.mul = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> accMul(<span class="keyword">this</span>,arg)</div><div class="line">&#125;</div><div class="line"><span class="built_in">Number</span>.prototype.div = <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> accDiv(<span class="keyword">this</span>,arg)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">'0.1+0.2='</span>,(<span class="number">0.1</span>).add(<span class="number">0.2</span>))</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'10.3-9.2='</span>,(<span class="number">10.3</span>).sub(<span class="number">9.2</span>))</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'8.1*0.7='</span>,(<span class="number">8.1</span>).mul(<span class="number">0.7</span>))</div><div class="line"><span class="built_in">console</span>.log(<span class="string">'0.21/0.7='</span>,(<span class="number">0.21</span>).div(<span class="number">0.7</span>))</div></pre></td></tr></table></figure>
+<h2 id="多数据三则运算"><a href="#多数据三则运算" class="headerlink" title="多数据三则运算"></a>多数据三则运算</h2><p>以下代码仅列出了三则运算：加减乘。并未列出除法运算，因为除法本身具有特殊性，无法保证所得结果一定是除的尽的。 </p>
+<p>会用到的工具函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获得数据的小数部分 2.25 -&gt; 25</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDecimals</span>(<span class="params">num</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(num == <span class="keyword">void</span> <span class="number">0</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="string">''</span></div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">var</span> arr = (<span class="string">''</span>+num).split(<span class="string">'.'</span>)</div><div class="line">	<span class="keyword">return</span> (arr.length &gt; <span class="number">1</span> ? arr[<span class="number">1</span>] : <span class="string">''</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 获得一列数中小数点后位数的最大值  [0.25, 6.2598] -&gt; 4  </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMaxDecimalBits</span>(<span class="params">args</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> i, m = <span class="number">0</span>, len, t</div><div class="line"></div><div class="line">	<span class="keyword">if</span>( !args || !args.length) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	len = args.length</div><div class="line"></div><div class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; len; i++)&#123;</div><div class="line">		t = getDecimals(args[i]).length</div><div class="line">		m = t &gt; m ? t : m</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> m</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>算法思想都是一致的，取得一列数中小数点位数最大数，各乘以最大公因子。再对最后的结果进行处理。</p>
+<h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addNum</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>),</div><div class="line">		len = args.length,</div><div class="line">		result = <span class="number">0</span>,</div><div class="line">		m = <span class="number">0</span>, i, factor</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!len) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	m = getMaxDecimalBits(args)</div><div class="line">	factor = <span class="built_in">Math</span>.pow(<span class="number">10</span>, m)</div><div class="line"></div><div class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>; i &lt; len; i++)&#123;</div><div class="line">		result+=(args[i] * factor)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result / factor</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">subNum</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>),</div><div class="line">		len = args.length,</div><div class="line">		result, m, i, factor</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!len) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	m = getMaxDecimalBits(args)</div><div class="line">	factor = <span class="built_in">Math</span>.pow(<span class="number">10</span>, m)</div><div class="line"></div><div class="line">	result = args[<span class="number">0</span>] * factor</div><div class="line">	<span class="keyword">for</span>( i=<span class="number">1</span>; i&lt;len; i++)&#123;</div><div class="line">		result -= (args[i] * factor)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result / factor</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiNum</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> args = [].slice.call(<span class="built_in">arguments</span>),</div><div class="line">		len = args.length,</div><div class="line">		m, factor, i, result = <span class="number">1</span></div><div class="line"></div><div class="line">	<span class="keyword">if</span>(!len) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line">	m = getMaxDecimalBits(args)</div><div class="line">	factor = <span class="built_in">Math</span>.pow(<span class="number">10</span>, m)</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)&#123;</div><div class="line">		result *= (args[i] * factor)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result / <span class="built_in">Math</span>.pow(factor, len)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>针对解决JS计算精度的问题，我特地写了一个专门解决这些问题的函数库。可以访问我的<a href="https://github.com/AdvancedCat/Fixed-Number" target="_blank" rel="external">Github</a>项目仓库进一步查看。</p>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+            <li class="next">
+                <a href= "/2017/04/07/伸缩盒——Flex/" title= 伸缩盒——Flex >
+                    <span>Next Post</span>
+                    <span>伸缩盒——Flex</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2017/03/21/target与currentTarget，傻傻分不清/" title= target与currentTarget，傻傻分不清 >
+                    <span>Previous Post</span>
+                    <span>target与currentTarget，傻傻分不清</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
+
+    <!--PC版-->
+
+
+    
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:wshx1938@gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/AdvancedCat" class="iconfont-archer github" target="_blank" title="github"></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="/atom.xml" class="iconfont-archer rss" target="_blank" title="rss"></a>
+            
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">Theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#双数四则运算"><span class="toc-number">1.</span> <span class="toc-text">双数四则运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多数据三则运算"><span class="toc-number">2.</span> <span class="toc-text">多数据三则运算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#加法"><span class="toc-number">2.1.</span> <span class="toc-text">加法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#减法"><span class="toc-number">2.2.</span> <span class="toc-text">减法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#乘法"><span class="toc-number">2.3.</span> <span class="toc-text">乘法</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top">&#xe639;</div>
+    <div class="sidebar">
+    <div class="sidebar-header sidebar-header-show-archive">
+        <div class="sidebar-category">
+            <span class="sidebar-archive-link"><span class="iconfont-archer">&#xe67d;</span>Archive</span>
+            <span class="sidebar-tags-link"><span class="iconfont-archer">&#xe610;</span>Tag</span>
+        </div>
+    </div>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-archive">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 34 </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2018/02/01/Node框架——Express-Koa-Egg/" >Node框架——Express,Koa,Egg</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/31</span><a class="archive-post-title" href= "/2018/01/31/PM2——node进程管理器/" >PM2——node进程管理器</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/24</span><a class="archive-post-title" href= "/2018/01/24/Node多线程开发/" >Node多线程开发</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/02</span><a class="archive-post-title" href= "/2018/01/02/eslint——规范你的代码/" >eslint——规范你的代码</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2017 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/16</span><a class="archive-post-title" href= "/2017/11/16/ES6——Generator函数学习笔记/" >ES6——Generator函数学习笔记</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/14</span><a class="archive-post-title" href= "/2017/10/14/源码阅读——Redux/" >源码阅读——Redux</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/29</span><a class="archive-post-title" href= "/2017/09/29/DOM元素排序/" >DOM元素排序</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/23</span><a class="archive-post-title" href= "/2017/09/23/Javascript真值表/" >Javascript真值表</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/16</span><a class="archive-post-title" href= "/2017/09/16/Karma单元测试/" >Karma单元测试</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/10</span><a class="archive-post-title" href= "/2017/09/10/常用Webpack插件/" >常用Webpack插件</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/27</span><a class="archive-post-title" href= "/2017/08/27/CSS-Modules/" >CSS Modules</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/26</span><a class="archive-post-title" href= "/2017/08/26/常用的Linux-Mac命令/" >常用的Linux/Mac命令</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/30</span><a class="archive-post-title" href= "/2017/07/30/工作过程中相关问题的总结/" >工作过程中相关问题的总结</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/22</span><a class="archive-post-title" href= "/2017/07/22/结合百度地图的业务场景/" >结合百度地图的业务场景</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span><a class="archive-post-title" href= "/2017/07/04/jQuery中的focus与focusin/" >jQuery中的focus与focusin</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2017/06/25/JS模板引擎/" >JS模板引擎</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/18</span><a class="archive-post-title" href= "/2017/06/18/JS的单线程与异步/" >JS的单线程与异步</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/08</span><a class="archive-post-title" href= "/2017/06/08/学习使用Webpack/" >学习使用Webpack</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/26</span><a class="archive-post-title" href= "/2017/05/26/Manifest在webpack打包中的作用/" >Manifest在webpack打包中的作用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/13</span><a class="archive-post-title" href= "/2017/05/13/套娃组件——记一次项目设计/" >套娃组件——记一次项目设计</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/28</span><a class="archive-post-title" href= "/2017/04/28/同构Javascript应用/" >同构Javascript应用</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/15</span><a class="archive-post-title" href= "/2017/04/15/静态方法额外参数传递——redux-thunk/" >静态方法额外参数传递——redux-thunk</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/12</span><a class="archive-post-title" href= "/2017/04/12/使用Babel/" >使用Babel</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/10</span><a class="archive-post-title" href= "/2017/04/10/Cookie-localStorage-sessionStorage/" >Cookie,localStorage,sessionStorage简单分析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/07</span><a class="archive-post-title" href= "/2017/04/07/伸缩盒——Flex/" >伸缩盒——Flex</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/29</span><a class="archive-post-title" href= "/2017/03/29/Javascript计算精度问题/" >Javascript计算精度问题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2017/03/21/target与currentTarget，傻傻分不清/" >target与currentTarget，傻傻分不清</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/12</span><a class="archive-post-title" href= "/2017/03/12/读懂package-json/" >读懂package.json</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/09</span><a class="archive-post-title" href= "/2017/03/09/TODO-List/" >TODO List</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/01</span><a class="archive-post-title" href= "/2017/03/01/第一篇博客/" >开篇博客</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/19</span><a class="archive-post-title" href= "/2017/02/19/重排与重绘/" >重排与重绘</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/webpack原理剖析/" >webpack原理剖析</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/01</span><a class="archive-post-title" href= "/2017/02/01/hello-world/" >How to maintain HexoBlog</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/28</span><a class="archive-post-title" href= "/2017/01/28/Markdown语法-Hexo/" >Markdown语法(Hexo)</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Javascript</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">storage</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">webpack</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Node</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Babel</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">项目设计</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">工作</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+    </div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #888; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: false
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tag-list"></div>
+</div>
+    </div>
+</div> 
+    
+    <!-- 不蒜子  -->
+    
+    <!-- CNZZ统计  -->
+    
+    </div>
+    </body>
+</html>
+
+
