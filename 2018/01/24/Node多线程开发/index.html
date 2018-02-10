@@ -274,6 +274,8 @@
 <li><a href="http://pm2.keymetrics.io/" target="_blank" rel="external">pm2</a></li>
 <li><a href="http://supervisord.org/" target="_blank" rel="external">supervisor</a></li>
 </ol>
+<p>通过benchmark实验，当使用<code>pm2 reload/restart</code>重启进程时，可以在100ms以内完成重启（会因应用复杂情况有所不同）。如果该应用设计到内存数据缓存，则缓存会在重启时丢失。在客户端请求中，重启期间会断开连接，由于重启时间很短，对用户是无感的（登录状态会丢失）。因此，可以考虑将内存数据在重启前存入数据库或本地文件中，在重启后重新读入。</p>
+<p>结论：pm2可以在用户无感情况下完成对应用的重启。</p>
 <h3 id="日志收集"><a href="#日志收集" class="headerlink" title="日志收集"></a>日志收集</h3><p>方案：</p>
 <ol>
 <li>异常捕获后，可以将错误信息存储于本地数据表中或存于文件系统中，或者通过发码实时监测</li>
