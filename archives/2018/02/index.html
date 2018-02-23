@@ -170,6 +170,67 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2018/02/23/零散知识点/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>零散知识点</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Restful APIREST本身是一个很复杂的概念，是Roy Fielding的博士毕业论文，全文在此点击
+引申而来的Restful API设计方案则是我们需要关心的，基本规范总结为
+
+URL定位资源，用HTTP动词（GET,POST,DELETE,DETC）描述操作。
+
+有兴趣的可以读读阮一峰老师的博文RESTful API 设计指南,基本符合RESTful接口设计方案
+
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 前端>前端</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/23</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2018/02/22/Javascript模块化开发/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Javascript模块化开发</span>
+                        </h2>
+                    <div class="abstract-content">
+                        按以下模式去封装一些方法和变化是较好的实践：
+123456789101112var UTIL = (function (parent, $) &#123;	var my = parent.ajax = parent.ajax || &#123;&#125;;	my.get = function (url, params, callback) &#123;		// ok, so I'm cheating a bit :)		return $.getJSON(url, params, callback);	&#125;;	// etc...	return parent;&#125;(UTIL...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/22</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2018/02/01/Node框架——Express-Koa-Egg/" >
                         <h2 class="abstract-title">
                             
@@ -743,7 +804,47 @@ KOA 框架的核心是 ES6 的 generator。KOA ...
     
     
     
-    <div class="total-archive"> Total : 34 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 36 </div>
     
     <div class="post-archive">
     
@@ -752,6 +853,16 @@ KOA 框架的核心是 ES6 的 generator。KOA ...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/23</span><a class="archive-post-title" href= "/2018/02/23/零散知识点/" >零散知识点</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2018/02/22/Javascript模块化开发/" >Javascript模块化开发</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -966,6 +1077,8 @@ KOA 框架的核心是 ES6 的 generator。KOA ...
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

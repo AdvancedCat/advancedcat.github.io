@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        读懂package.json · XinHong&#39;s Blog
+        Javascript模块化开发 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -68,7 +68,7 @@
                 <a href="/" >XinHong&#39;s Blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">读懂package.json</a>
+                <a href="#" class="post-name">Javascript模块化开发</a>
             </div>
     </div>
     
@@ -89,7 +89,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            读懂package.json
+            Javascript模块化开发
             <!-- 404 -->
             
         </h1>
@@ -105,15 +105,9 @@
         
             <!-- 文章页标签  -->
             
-                <div class= post-intro-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Node>Node</a>
-    
-</div>
-            
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/03/12</span>
+                <span class="post-intro-time">2018/02/22</span>
             </div>
         
     </div>
@@ -199,66 +193,30 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>作为一个前端工程师，不断地去学习前端新技术是必须的。在这过程中，不断接触开源项目是必不可少的。github上的开源项目，我们发现大多数项目下都有一个package.json文件，package.json存储的是一个严格的json对象。那么今天分析一下package.json中的字段意义。</p>
-<blockquote>
-<p>本文主要是对<a href="https://docs.npmjs.com/files/package.json" target="_blank" rel="external">npm document</a>中<code>package.json</code>的简单翻译</p>
-</blockquote>
-<h3 id="name"><a href="#name" class="headerlink" title="name"></a>name</h3><p>在package.json中最重要的两个字段是name和version，如果没有这两个字段，npm无法安装你的包。name和version就像是你的项目身份证，且必须是唯一的。如果你的包做了改动，那么version也应该改动。<br>一些规则：</p>
-<ul>
-<li>name少于214字符</li>
-<li>name不可以以<code>.</code>和<code>_</code>开头</li>
-<li>name应是URL安全的字符，因为name会出现在URL中（<code>git clone XXX</code>）</li>
+        <p>按以下模式去封装一些方法和变化是较好的实践：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> UTIL = (<span class="function"><span class="keyword">function</span> (<span class="params">parent, $</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> my = parent.ajax = parent.ajax || &#123;&#125;;</div><div class="line"></div><div class="line">	my.get = <span class="function"><span class="keyword">function</span> (<span class="params">url, params, callback</span>) </span>&#123;</div><div class="line">		<span class="comment">// ok, so I'm cheating a bit :)</span></div><div class="line">		<span class="keyword">return</span> $.getJSON(url, params, callback);</div><div class="line">	&#125;;</div><div class="line"></div><div class="line">	<span class="comment">// etc...</span></div><div class="line"></div><div class="line">	<span class="keyword">return</span> parent;</div><div class="line">&#125;(UTIL || &#123;&#125;, jQuery));</div></pre></td></tr></table></figure>
+<h1 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h1><ul>
+<li><a href="http://www.ruanyifeng.com/blog/2012/10/javascript_module.html" target="_blank" rel="external">Javascript模块化编程（一）：模块的写法</a></li>
+<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="external">JavaScript Module Pattern: In-Depth</a></li>
+<li><a href="https://seajs.github.io/seajs/docs/#intro" target="_blank" rel="external">SeaJS</a></li>
 </ul>
-<h3 id="version"><a href="#version" class="headerlink" title="version"></a>version</h3><p>version应满足<code>[major, minor, patch]</code>的格式，version必须能够被<code>node-semver</code>解析的. <a href="https://docs.npmjs.com/misc/semver" target="_blank" rel="external">semver</a>给出了version的规则限定。</p>
-<h3 id="description"><a href="#description" class="headerlink" title="description"></a>description</h3><p>项目的描述信息</p>
-<h3 id="keywords"><a href="#keywords" class="headerlink" title="keywords"></a>keywords</h3><p>项目的一些关键字。有助于用户通过关键字搜索到你的项目</p>
-<h3 id="homepage"><a href="#homepage" class="headerlink" title="homepage"></a>homepage</h3><p>一个指向你项目主页的url</p>
-<h3 id="bugs"><a href="#bugs" class="headerlink" title="bugs"></a>bugs</h3><p>当用户发现了你的bugs时，可以在这里找到你并反馈给你：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">   <span class="string">"url"</span> : <span class="string">"https://github.com/owner/project/issues"</span>,</div><div class="line">   <span class="string">"email"</span> : <span class="string">"project@hostname.com"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="license"><a href="#license" class="headerlink" title="license"></a>license</h3><p>指明你的项目许可证，让用户知道以何种权限使用你的项目</p>
-<h3 id="people-fields-author-contributors"><a href="#people-fields-author-contributors" class="headerlink" title="people fields: author, contributors"></a>people fields: author, contributors</h3><p>宣誓你主权的地方啦<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"author"</span>:&#123;</div><div class="line">    <span class="string">"name"</span>: <span class="string">"xinhong"</span>,</div><div class="line">    <span class="string">"email"</span>: <span class="string">"xinhong@anjuke.com"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="files"><a href="#files" class="headerlink" title="files"></a>files</h3><p>表明项目下的哪些文件是重要的。效果类似于<code>.gitignore</code>文件，区别是前者包含性，后者排除性。</p>
-<h3 id="main"><a href="#main" class="headerlink" title="main"></a>main</h3><p>指向你项目入口文件。比如项目名为foo，那么用户需要使用你的项目时，需要书写代码<code>require(&#39;foo&#39;)</code>,并且你的入口文件需要抛出这个对象</p>
-<h3 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h3><p>指明你的项目仓库地点。这有助于其他人能够帮助你一起维护项目，最常见的就是GitHub仓库啦：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"repository"</span> :</div><div class="line"> &#123;</div><div class="line">    <span class="string">"type"</span> : <span class="string">"git"</span>,</div><div class="line">    <span class="string">"url"</span> : <span class="string">"https://github.com/npm/npm.git"</span></div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-<h3 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h3><p>scripts包含了在项目开发过程会使用的脚本命令，我们可以运行<code>npm run command-name</code>来执行它们：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">   <span class="string">"start"</span>: <span class="string">"node server.js"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="dependencies"><a href="#dependencies" class="headerlink" title="dependencies"></a>dependencies</h3><p><strong>For production</strong>: 指明你项目生产环境时的依赖，即别人使用你的项目代码时必须依赖某些插件方可使用。在这里需要特别说明一下关于依赖项目version的范围规则：</p>
-<blockquote>
-<p>版本号满足范式： major.minor.patch 即 主版本.次版本.补丁</p>
-</blockquote>
-<ul>
-<li>version :必须满足规定的版本</li>
-<li>>version  :大于某个版本</li>
-<li>>=version :大于等于某个版本</li>
-<li>&lt;version  :小于某个版本</li>
-<li>&lt;=version  :小于等于某个版本</li>
-<li>~version :大约等于某个版本。若指明minor，不允许超越minor;若未指明minor，则minor可变</li>
-<li>^version  :兼容性版本。从左非零版本数值限定，之后版本数值可变</li>
-<li>1.2.x  :指定某个版本数值可变</li>
-<li>http://…  :指定链接</li>
-<li>*  :任意版本</li>
-<li>…</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ~</span></div><div class="line">~<span class="number">1.2</span><span class="number">.3</span> := &gt;=<span class="number">1.2</span><span class="number">.3</span> &lt;<span class="number">1.</span>(<span class="number">2</span>+<span class="number">1</span>)<span class="number">.0</span> := &gt;=<span class="number">1.2</span><span class="number">.3</span> &lt;<span class="number">1.3</span><span class="number">.0</span></div><div class="line">~<span class="number">1.2</span> := &gt;=<span class="number">1.2</span><span class="number">.0</span> &lt;<span class="number">1.</span>(<span class="number">2</span>+<span class="number">1</span>)<span class="number">.0</span> := &gt;=<span class="number">1.2</span><span class="number">.0</span> &lt;<span class="number">1.3</span><span class="number">.0</span> (Same <span class="keyword">as</span> <span class="number">1.2</span>.x)</div><div class="line">~<span class="number">1</span> := &gt;=<span class="number">1.0</span><span class="number">.0</span> &lt;(<span class="number">1</span>+<span class="number">1</span>)<span class="number">.0</span><span class="number">.0</span> := &gt;=<span class="number">1.0</span><span class="number">.0</span> &lt;<span class="number">2.0</span><span class="number">.0</span> (Same <span class="keyword">as</span> <span class="number">1.</span>x)</div><div class="line">~<span class="number">0.2</span><span class="number">.3</span> := &gt;=<span class="number">0.2</span><span class="number">.3</span> &lt;<span class="number">0.</span>(<span class="number">2</span>+<span class="number">1</span>)<span class="number">.0</span> := &gt;=<span class="number">0.2</span><span class="number">.3</span> &lt;<span class="number">0.3</span><span class="number">.0</span></div><div class="line">~<span class="number">0.2</span> := &gt;=<span class="number">0.2</span><span class="number">.0</span> &lt;<span class="number">0.</span>(<span class="number">2</span>+<span class="number">1</span>)<span class="number">.0</span> := &gt;=<span class="number">0.2</span><span class="number">.0</span> &lt;<span class="number">0.3</span><span class="number">.0</span> (Same <span class="keyword">as</span> <span class="number">0.2</span>.x)</div><div class="line">~<span class="number">0</span> := &gt;=<span class="number">0.0</span><span class="number">.0</span> &lt;(<span class="number">0</span>+<span class="number">1</span>)<span class="number">.0</span><span class="number">.0</span> := &gt;=<span class="number">0.0</span><span class="number">.0</span> &lt;<span class="number">1.0</span><span class="number">.0</span> (Same <span class="keyword">as</span> <span class="number">0.</span>x)</div><div class="line"></div><div class="line"><span class="comment">// ^</span></div><div class="line">^<span class="number">1.2</span><span class="number">.3</span> := &gt;=<span class="number">1.2</span><span class="number">.3</span> &lt;<span class="number">2.0</span><span class="number">.0</span></div><div class="line">^<span class="number">0.2</span><span class="number">.3</span> := &gt;=<span class="number">0.2</span><span class="number">.3</span> &lt;<span class="number">0.3</span><span class="number">.0</span></div><div class="line">^<span class="number">0.0</span><span class="number">.3</span> := &gt;=<span class="number">0.0</span><span class="number">.3</span> &lt;<span class="number">0.0</span><span class="number">.4</span></div></pre></td></tr></table></figure>
-<h3 id="devDependencies"><a href="#devDependencies" class="headerlink" title="devDependencies"></a>devDependencies</h3><p><strong>For development</strong>: 当其他开发者需要继续开发你的项目时，需要安装的依赖。</p>
-<h3 id="engines"><a href="#engines" class="headerlink" title="engines"></a>engines</h3><p>用于指明你的项目运行依赖的node版本或npm版本<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"engines"</span>:&#123;</div><div class="line">       <span class="string">"node"</span>: <span class="string">"&gt;=0.10.3"</span>,</div><div class="line">       <span class="string">"npm"</span>: <span class="string">"~1.0.20"</span></div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>更多的参数可以查看<a href="https://docs.npmjs.com/files/package.json" target="_blank" rel="external">这个文档</a></p>
-<p>@update<br>今天在看<a href="https://yarnpkg.com/zh-Hans/" target="_blank" rel="external">Yarn</a>文档的时候，发现有一篇文章对package.json的解析夜挺到位的，<a href="https://yarnpkg.com/zh-Hans/docs/package-json" target="_blank" rel="external">贴出来</a>供大家参考</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
             <li class="next">
-                <a href= "/2017/03/21/target与currentTarget，傻傻分不清/" title= target与currentTarget，傻傻分不清 >
+                <a href= "/2018/02/23/零散知识点/" title= 零散知识点 >
                     <span>Next Post</span>
-                    <span>target与currentTarget，傻傻分不清</span>
+                    <span>零散知识点</span>
                 </a>
             </li>
         
         
             <li class="previous">
-                <a href= "/2017/03/09/TODO-List/" title= TODO List >
+                <a href= "/2018/02/01/Node框架——Express-Koa-Egg/" title= Node框架——Express,Koa,Egg >
                     <span>Previous Post</span>
-                    <span>TODO List</span>
+                    <span>Node框架——Express,Koa,Egg</span>
                 </a>
             </li>
         
@@ -322,7 +280,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#name"><span class="toc-number">1.</span> <span class="toc-text">name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#version"><span class="toc-number">2.</span> <span class="toc-text">version</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#description"><span class="toc-number">3.</span> <span class="toc-text">description</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keywords"><span class="toc-number">4.</span> <span class="toc-text">keywords</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#homepage"><span class="toc-number">5.</span> <span class="toc-text">homepage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bugs"><span class="toc-number">6.</span> <span class="toc-text">bugs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#license"><span class="toc-number">7.</span> <span class="toc-text">license</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#people-fields-author-contributors"><span class="toc-number">8.</span> <span class="toc-text">people fields: author, contributors</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#files"><span class="toc-number">9.</span> <span class="toc-text">files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#main"><span class="toc-number">10.</span> <span class="toc-text">main</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repository"><span class="toc-number">11.</span> <span class="toc-text">repository</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#scripts"><span class="toc-number">12.</span> <span class="toc-text">scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dependencies"><span class="toc-number">13.</span> <span class="toc-text">dependencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#devDependencies"><span class="toc-number">14.</span> <span class="toc-text">devDependencies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#engines"><span class="toc-number">15.</span> <span class="toc-text">engines</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#扩展阅读"><span class="toc-number">1.</span> <span class="toc-text">扩展阅读</span></a></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>

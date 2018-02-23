@@ -201,8 +201,8 @@
 <p>使用正则表达式选项：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">grep -E "[1-9]+"</div><div class="line">或</div><div class="line">egrep "[1-9]+"</div></pre></td></tr></table></figure></p>
 <p>统计文件或者文本中包含匹配字符串的行数 -c 选项：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -c "text" file_name</div></pre></td></tr></table></figure></p>
 <p>搜索多个文件并查找匹配文本在哪些文件中：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">grep -l "text" file1 file2 file3...</div></pre></td></tr></table></figure></p>
-<p>在多级目录中对文本进行递归搜索：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">grep "text" . -r -n</div><div class="line"><span class="meta">#</span> .表示当前目录。</div></pre></td></tr></table></figure></p>
-<p>在grep搜索结果中包括或者排除指定文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>只在目录中所有的.php和.html文件中递归搜索字符"main()"</div><div class="line">grep "main()" . -r --include=*.&#123;php,html&#125;</div><div class="line"></div><div class="line"><span class="meta">#</span>在搜索结果中排除所有README文件</div><div class="line">grep "main()" . -r --exclude="README"</div></pre></td></tr></table></figure></p>
+<p>在多级目录中对文本进行递归搜索：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">grep "text" . -r -n</div><div class="line"><span class="meta">#</span><span class="bash"> .表示当前目录。</span></div></pre></td></tr></table></figure></p>
+<p>在grep搜索结果中包括或者排除指定文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">只在目录中所有的.php和.html文件中递归搜索字符<span class="string">"main()"</span></span></div><div class="line">grep "main()" . -r --include=*.&#123;php,html&#125;</div><div class="line"></div><div class="line"><span class="meta">#</span><span class="bash">在搜索结果中排除所有README文件</span></div><div class="line">grep "main()" . -r --exclude="README"</div></pre></td></tr></table></figure></p>
 <h1 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h1><p>ifconfig命令被用于配置和显示Linux内核中网络接口的网络参数。<br>类似于Windows下的<code>ipconfig</code>命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">ifconfig</div><div class="line"></div><div class="line">// You will get it</div><div class="line">lo0: flags=8049&lt;UP,LOOPBACK,RUNNING,MULTICAST&gt; mtu 16384</div><div class="line">	options=1203&lt;RXCSUM,TXCSUM,TXSTATUS,SW_TIMESTAMP&gt;</div><div class="line">	inet 127.0.0.1 netmask 0xff000000</div><div class="line">	inet6 ::1 prefixlen 128</div><div class="line">	inet6 fe80::1%lo0 prefixlen 64 scopeid 0x1</div><div class="line">	nd6 options=201&lt;PERFORMNUD,DAD&gt;</div><div class="line">en0: flags=8863&lt;UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST&gt; mtu 1500</div><div class="line">	ether 8c:85:90:16:4a:94</div><div class="line">	inet6 fe80::1465:130e:7d30:991a%en0 prefixlen 64 secured scopeid 0x6</div><div class="line">	inet 10.249.23.139 netmask 0xffffff00 broadcast 10.249.23.255</div><div class="line">	nd6 options=201&lt;PERFORMNUD,DAD&gt;</div><div class="line">	media: autoselect</div><div class="line">	status: active</div></pre></td></tr></table></figure>
 <p>inet后面即为IP地址</p>
@@ -785,7 +785,47 @@
     
     
     
-    <div class="total-archive"> Total : 34 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 36 </div>
     
     <div class="post-archive">
     
@@ -794,6 +834,16 @@
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/23</span><a class="archive-post-title" href= "/2018/02/23/零散知识点/" >零散知识点</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2018/02/22/Javascript模块化开发/" >Javascript模块化开发</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1008,6 +1058,8 @@
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

@@ -183,6 +183,73 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/09/16/Karma单元测试/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Karma单元测试</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Karma?Javascript 单元测试工具
+使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
+安装1.全局安装karma-cli1npm i -g karma-cli
+2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
+自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/16</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/09/10/常用Webpack插件/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>常用Webpack插件</span>
+                        </h2>
+                    <div class="abstract-content">
+                        webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
+webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
+由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
+12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/10</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/08/27/CSS-Modules/" >
                         <h2 class="abstract-title">
                             
@@ -411,80 +478,6 @@ EntryEntry告知webpack应该从哪个脚本文件...
                     <!-- date  -->
                     <div class="abstract-date">
                         <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/06/08</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/05/26/Manifest在webpack打包中的作用/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Manifest在webpack打包中的作用</span>
-                        </h2>
-                    <div class="abstract-content">
-                        何为ManifestManifest，英文释义“货物单；旅客名单”。映射到网络中，可以认为是静态资源清单。在我们使用webpack打包资源的时候，manifest在其中起到了什么作用呢
-在使用 webpack 构建的典型应用程序或站点中，有三种主要的代码类型：
-
-你或你的团队编写的源码。
-你的源码会依赖的任何第三方的 library 或 “vendor” 代码。
-webpack 的 runtime 和 manifest，管理所有模块的交互。
-
-本文将重点介绍这三个部分中的最后部分，runtime 和 manifest。
-Runtimeruntime，以及伴随的 manifest 数据，主...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/05/26</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/05/13/套娃组件——记一次项目设计/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>套娃组件——记一次项目设计</span>
-                        </h2>
-                    <div class="abstract-content">
-                        背景近期，接到一个项目，商业产品引入新的券种————时长券。大致的交互和以往的现金券差不不多，仅仅是优惠券的数据结构不同，展示的弹框样式也有所不同。下图是时长券弹框的样式：
-分析
-偷懒方案大可将现金券的交互逻辑拷贝一份，装饰一个新的模板，留意券的数据结构，调整个别个性化交互即可。预估两三天即可，很轻松。
-
-缺点：代码通过剪刀胶水一番操作后，重复大片，如果下次需要调整优惠券的一些逻辑时，相当于我要改两次。另外，弹框的交互和优惠券的业务掺杂在一起了。耦合度较高。
-
-自找麻烦方案静下心，认真分析现金券和时长券之间共同点，思考是否可以将它们共同部分单独抽离出来。比如弹框的左右翻页，就可以抽离出来...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = 项目设计>项目设计</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/05/13</span>
                     </div>
                 </div>
             </article>
@@ -1076,7 +1069,47 @@ Runtimeruntime，以及伴随的 manifest 数据，主...
     
     
     
-    <div class="total-archive"> Total : 34 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 36 </div>
     
     <div class="post-archive">
     
@@ -1085,6 +1118,16 @@ Runtimeruntime，以及伴随的 manifest 数据，主...
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/23</span><a class="archive-post-title" href= "/2018/02/23/零散知识点/" >零散知识点</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2018/02/22/Javascript模块化开发/" >Javascript模块化开发</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1299,6 +1342,8 @@ Runtimeruntime，以及伴随的 manifest 数据，主...
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

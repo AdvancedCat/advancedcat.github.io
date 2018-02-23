@@ -183,6 +183,67 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2018/02/23/零散知识点/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>零散知识点</span>
+                        </h2>
+                    <div class="abstract-content">
+                        Restful APIREST本身是一个很复杂的概念，是Roy Fielding的博士毕业论文，全文在此点击
+引申而来的Restful API设计方案则是我们需要关心的，基本规范总结为
+
+URL定位资源，用HTTP动词（GET,POST,DELETE,DETC）描述操作。
+
+有兴趣的可以读读阮一峰老师的博文RESTful API 设计指南,基本符合RESTful接口设计方案
+
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 前端>前端</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/23</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2018/02/22/Javascript模块化开发/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>Javascript模块化开发</span>
+                        </h2>
+                    <div class="abstract-content">
+                        按以下模式去封装一些方法和变化是较好的实践：
+123456789101112var UTIL = (function (parent, $) &#123;	var my = parent.ajax = parent.ajax || &#123;&#125;;	my.get = function (url, params, callback) &#123;		// ok, so I'm cheating a bit :)		return $.getJSON(url, params, callback);	&#125;;	// etc...	return parent;&#125;(UTIL...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/22</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2018/02/01/Node框架——Express-Koa-Egg/" >
                         <h2 class="abstract-title">
                             
@@ -280,9 +341,10 @@ PM2可配置化JS/JSON配置文件
 
 高性能首先，单线程避免了传统PHP那样频繁创建、切换线程的开销，使执行速度更加迅速。第二，资源占用小，如果有对Node.js的web服务器做过压力测试的朋友可能发现，Node.js在大负荷下对内存占用仍然很低，同样的负载PHP因为一个请求一个线程的模型，将会占用大量的物理内存，很可能会导致服务器因物理内存耗尽而频繁交换，失去响应。
 
+
 线程安全避免多线程竞争资源，造成死锁的问题。降低开发者对资源加锁解锁的风险。
 
-异步与非阻塞其实Node.js在底层访问I/O还是多线程的，有兴趣的朋友可以翻看Node.js的fs模块的源码，里面会用到lib...
+异步与非阻塞其实Node.js在底层访问I/O还是多线程的，有兴趣的朋友可以翻看Node.js的fs模块的源码，里面会用到li...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -471,73 +533,6 @@ State是只读的唯一改变 state 的方法就是触发 action，action 是一
                     <!-- date  -->
                     <div class="abstract-date">
                         <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/23</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/09/16/Karma单元测试/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Karma单元测试</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Karma?Javascript 单元测试工具
-使用背景公司内部维护使用了一套前端底层的JS框架（简称UI），需要有完整的测试。UI是运行在浏览器环境中，内部提供了一些常用的函数库，以及根据义务需要封装的UI皮肤。
-安装1.全局安装karma-cli1npm i -g karma-cli
-2.项目安装相关依赖1npm i -D karma jasmine-core karma-jasmine
-自动化单元测试Karma最常用的功能就是它的自动化单元测试首先在终端运行：karma init依据提示，输入一些配置参数，之后我们可以得到以下的配置文件（根目录下的karma.conf.js）:12...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Karma>Karma</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/16</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/09/10/常用Webpack插件/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>常用Webpack插件</span>
-                        </h2>
-                    <div class="abstract-content">
-                        webpack plugin?插件是 wepback 的支柱功能。webpack 自身也是构建于，你在 webpack 配置中用到的相同的插件系统之上！
-webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性会被 webpack compiler 调用，并且 compiler 对象可在整个编译生命周期访问。
-由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入 new 实例。
-12345678const CleanWebpackPlugin = require('clean-webpack-plugin')m...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = webpack>webpack</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/10</span>
                     </div>
                 </div>
             </article>
@@ -1129,7 +1124,47 @@ webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性�
     
     
     
-    <div class="total-archive"> Total : 34 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 36 </div>
     
     <div class="post-archive">
     
@@ -1138,6 +1173,16 @@ webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性�
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/23</span><a class="archive-post-title" href= "/2018/02/23/零散知识点/" >零散知识点</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/22</span><a class="archive-post-title" href= "/2018/02/22/Javascript模块化开发/" >Javascript模块化开发</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1352,6 +1397,8 @@ webpack 插件是一个具有 apply 属性的 JavaScript 对象。apply 属性�
         <span class="sidebar-tag-name"><a href= "#">工作</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Design</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
