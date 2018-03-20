@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        XinHong&#39;s Blog
+        使用Charles手机抓包 · XinHong&#39;s Blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -50,6 +50,8 @@
     
 </head>
     
+        <body class="post-body">
+    
     <script>
     var jsInfo = {
         root: '/'
@@ -61,27 +63,52 @@
     <div class="header-sidebar-menu">&#xe779;</div>
     <!-- post页的toggle banner  -->
     
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >XinHong&#39;s Blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">使用Charles手机抓包</a>
+            </div>
+    </div>
+    
     <a class="home-link" href=/>Home</a>
 </header>
     <div class="wrapper">
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            使用Charles手机抓包
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/03/20</span>
+            </div>
         
     </div>
 </div>
@@ -164,175 +191,44 @@
             
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/03/12/读懂package-json/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>读懂package.json</span>
-                        </h2>
-                    <div class="abstract-content">
-                        作为一个前端工程师，不断地去学习前端新技术是必须的。在这过程中，不断接触开源项目是必不可少的。github上的开源项目，我们发现大多数项目下都有一个package.json文件，package.json存储的是一个严格的json对象。那么今天分析一下package.json中的字段意义。
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>在进行web touch端开发时，需要捕获请求接口分析，对数据的正确性分析。此时有必要通过抓包工具抓取数据包，本文分析使用Charles达到抓包目的。</p>
+<h1 id="Charles"><a href="#Charles" class="headerlink" title="Charles"></a>Charles</h1><p><a href="https://www.charlesproxy.com/" target="_blank" rel="external">Charles官网</a></p>
+<p>Charles天生适合抓取移动端数据包，它会在PC侧设置为系统的网络代理服务器，使得所有的网络访问都通过它来完成。它可以抓取HTTP和HTTPS请求。</p>
+<p><a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="external">这里有详细安装设置教程</a></p>
+<h1 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h1><p>教程中对安装设置已经很详细，但是我在设置HTTPS抓包始终有问题，包都是unkonwn的，说明安装在手机端的证书没有生效。</p>
+<p>如果你的手机现在是 10.3 以上系统，但是之前手机是 10.3 以下的系统，并且你以前用 Charles 调试过，那么你就不会出现“SSLHandshake: Received fatal alert: unknown_ca”的问题。如果你是第一次用 10.3 以上系统手机去调试，你就出问题了。当你按照正常步骤把一切证书安装好后，发现调试 HTTPS 的时候全是x，抓不到包。</p>
+<p>我明明安装了 Charles 的证书，为什么抓 HTTPS 包会失败呢？因为 10.3 以上系统需要你在“证书信任设置”中信任 Charles 的证书。</p>
+<p>通用 -&gt; 关于本机 -&gt; 证书信任设置 -&gt; 选择 Charles 的证书打开<br><img src="/img/charles5.png" alt=""></p>
+<p>问题点<a href="https://www.ianisme.com/ios/2502.html" target="_blank" rel="external">这里</a></p>
 
-本文主要是对npm document中package.json的简单翻译
-
-name在package.json中最重要的两个字段是name和version，如果没有这两个字段，npm无法安装你的包。name和version就像是你的项目身份证，且必须是唯一的。如果你的包做了改动，那么version也应...
-                    </div>
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2018/02/23/零散知识点/" title= 零散知识点 >
+                    <span>Previous Post</span>
+                    <span>零散知识点</span>
                 </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Node>Node</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/12</span>
-                    </div>
-                </div>
-            </article>
+            </li>
         
-    
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/03/01/第一篇博客/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>开篇博客</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Start now从研究生毕业到现在已有一年有余，在职场中，从一个前端小白逐渐成长为可以挑起业务项目的前端大白。虽然项目经验慢慢积累起来，但是深知前端水很深，有太多未知的东西需要慢慢去探索。偶然机会遨游Github之中，发现Hexo博客之美，竟爱上记录一些事情。虽然这里只有我知道，但文字总是强大的，文字承载的不仅是知识，更是那一刻的心情。
-工作或是学习中，总会遇到一些问题，希望在这里，能够对自己答疑解惑，也希望自己能越来越优秀。
-定一个小目标一周一篇博文，技术或是吐槽，只要愿意记录，都可以
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/01</span>
-                    </div>
-                </div>
-            </article>
-        
+<!-- City版安装代码已完成 -->
     
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/02/19/重排与重绘/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>重排与重绘</span>
-                        </h2>
-                    <div class="abstract-content">
-                        重排重绘？当浏览器将静态资源（一般指css、js和字体）加载完成后，会维护两个内部数据结构————DOM树 和 渲染树。
-DOM树和渲染树合并为一个DOM渲染树，DOM渲染树上标记每个DOM的外观和位置属性，浏览器依据这棵树计算出每个DOM的位置大小外观等信息，之后依照这些信息将节点绘制在页面中。
-隐藏的DOM不会出现在DOM渲染树中，浏览器不会去渲染它。
-由于浏览器的流布局，对渲染树的计算通常只需要遍历一次就可以完成。但table及其内部元素除外，它可能需要多次计算才能确定好其在渲染树中节点的属性，通常要花3倍于同等元素的时间。这也是为什么我们要避免使用table做布局的一个原因。
-在...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/19</span>
-                    </div>
-                </div>
-            </article>
-        
     
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/02/01/hello-world/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>How to maintain HexoBlog</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/02/01</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/01/28/Markdown语法-Hexo/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Markdown语法(Hexo)</span>
-                        </h2>
-                    <div class="abstract-content">
-                        内容目录斜体和粗体1*斜体*  **粗体**
-这是斜体这是粗体
-分级标题在行首加#号表示不同级别的标题 (H1-H6)，格式如下：123456# H1## H2### H3#### H4##### H5###### H6
-分割线在单行中使用***或者---表示分割线
+    <!--PC版-->
 
-上面是分割线
+    <!--PC版-->
 
-我也是分割线
-删除线使用~~表示删除线1~~我是一行错误的文本段。~~
-我是一行错误的文本段。
-超链接文字超链接：12[链接文字](链接地址 "链接名称")鼠标hover到链接上会显示链接名称
-百度
-图片超链接：1![图片说明](图片链接 "图片标题")
 
-引入视频则直接插入iframe代码：12&lt;s...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/01/28</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-    <!-- paginator  -->
-    
-    <nav class="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/page/3/">#PREV</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><span class="page-number current">4</span>
-    </nav>
     
 </main>
-
             <!-- profile -->
             
         </div>
@@ -374,6 +270,13 @@ More...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Charles"><span class="toc-number">1.</span> <span class="toc-text">Charles</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tips"><span class="toc-number">2.</span> <span class="toc-text">Tips</span></a></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
