@@ -170,23 +170,30 @@
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2018/02/01/Node框架——Express-Koa-Egg/" >
+                <a class="content-show-full" href = "/2018/01/31/PM2——node进程管理器/" >
                         <h2 class="abstract-title">
                             
-                            <span>Node框架——Express,Koa,Egg</span>
+                            <span>PM2——node进程管理器</span>
                         </h2>
                     <div class="abstract-content">
-                        Express
-简单，门槛低，快速
+                        PM2Advanced, production process manager for node.js官网
+Features
+热重载不需要停机，0秒重载进程 (是否可以记住应用当前的状态呢？如内存中的变量等)
 
-项目地址 36000+ stars官网  中文网站
-提供了对Nodejs API的简单封装，帮助开发者快速构建web应用，准入门槛低。使用Express application generator脚手架工具可以快速生成Express应用
-通过使用 Node Express，你可以实现中间件来响应 http 请求，可以定义路由表来定义对不同请求的响应函数，还可以使用模板引擎来输出 html 页面。
-Koa
-洋葱圈中间件机制，高度可扩展性
+日志集成可查看应用在存活期间的日志，特别是error log信息
 
-项目地址 19000+ stars官网  中文网站
-KOA 框架的核心是 ES6 的 generator。KOA ...
+API —— 脚本化管理进程可以做到脚本化管理应用
+
+Teminal Monitoring终端监控
+
+原生集群化支持，多进程管理
+
+PM2可配置化JS/JSON配置文件
+
+
+安装1npm install -g pm2
+当完成安装后，pm2会在$HOME下新建pm2文件夹：
+12345678$HOME/.pm2  ...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -194,13 +201,13 @@ KOA 框架的核心是 ES6 的 generator。KOA ...
                     
                     <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Node>Node</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = node>node</a>
     
 </div>
                     
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/01</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/31</span>
                     </div>
                 </div>
             </article>
@@ -210,17 +217,20 @@ KOA 框架的核心是 ES6 的 generator。KOA ...
         
         
             <article class="index-post">
-                <a class="content-show-full" href = "/2017/03/12/读懂package-json/" >
+                <a class="content-show-full" href = "/2018/01/24/Node多线程开发/" >
                         <h2 class="abstract-title">
                             
-                            <span>读懂package.json</span>
+                            <span>Node多线程开发</span>
                         </h2>
                     <div class="abstract-content">
-                        作为一个前端工程师，不断地去学习前端新技术是必须的。在这过程中，不断接触开源项目是必不可少的。github上的开源项目，我们发现大多数项目下都有一个package.json文件，package.json存储的是一个严格的json对象。那么今天分析一下package.json中的字段意义。
+                        单线程Node.js选择V8作为它的执行引擎，
 
-本文主要是对npm document中package.json的简单翻译
+高性能首先，单线程避免了传统PHP那样频繁创建、切换线程的开销，使执行速度更加迅速。第二，资源占用小，如果有对Node.js的web服务器做过压力测试的朋友可能发现，Node.js在大负荷下对内存占用仍然很低，同样的负载PHP因为一个请求一个线程的模型，将会占用大量的物理内存，很可能会导致服务器因物理内存耗尽而频繁交换，失去响应。
 
-name在package.json中最重要的两个字段是name和version，如果没有这两个字段，npm无法安装你的包。name和version就像是你的项目身份证，且必须是唯一的。如果你的包做了改动，那么version也应...
+
+线程安全避免多线程竞争资源，造成死锁的问题。降低开发者对资源加锁解锁的风险。
+
+异步与非阻塞其实Node.js在底层访问I/O还是多线程的，有兴趣的朋友可以翻看Node.js的fs模块的源码，里面会用到li...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -228,13 +238,13 @@ name在package.json中最重要的两个字段是name和version，如果没有�
                     
                     <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Node>Node</a>
+        <a class="post-tag" href="javascript:void(0);" data-href = node>node</a>
     
 </div>
                     
                     <!-- date  -->
                     <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/12</span>
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/01/24</span>
                     </div>
                 </div>
             </article>
@@ -814,7 +824,45 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
     
     
-    <div class="total-archive"> Total : 37 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 39 </div>
     
     <div class="post-archive">
     
@@ -823,6 +871,16 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/原生JS获取DOM元素/" >原生JS获取DOM元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2018/03/23/XSS-跨站脚本攻击/" >XSS:跨站脚本攻击</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1029,7 +1087,7 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
         <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
@@ -1040,6 +1098,8 @@ name在package.json中最重要的两个字段是name和version，如果没有�
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">网络安全</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
@@ -1053,7 +1113,7 @@ name在package.json中最重要的两个字段是name和version，如果没有�
     
         <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
@@ -1088,15 +1148,6 @@ jsonContent:
 </div> 
     
     <!-- 不蒜子  -->
-    
-    <!-- CNZZ统计  -->
-    
-    </div>
-    </body>
-</html>
-
-
->
     
     <!-- CNZZ统计  -->
     

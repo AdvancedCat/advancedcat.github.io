@@ -183,6 +183,74 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2018/04/04/原生JS获取DOM元素/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>原生JS获取DOM元素</span>
+                        </h2>
+                    <div class="abstract-content">
+                        原生JS获取页面DOM元素的一些方法
+getElementById返回一个匹配特定ID的元素，如果元素未找到，返回null1element = document.getElementById(id);
+element是Element对象
+getElementsByTagName返回一个包括所有给定标签名称的元素的HTML集合HTMLCollection。 搜寻范围是整个文档。返回的 HTML集合是动态的, 意味着它可以自动更新自己来保持和 DOM 树的同步而不用再次调用 document.getElementsByTagName() 。无结果，返回空数组。
+123elements = d...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/04/04</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2018/03/23/XSS-跨站脚本攻击/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>XSS:跨站脚本攻击</span>
+                        </h2>
+                    <div class="abstract-content">
+                        在网络安全领域，有许多的安全问题值得我们去关注，网络安全本身就是一门很大的计算机学科。今天我们仅仅关注其中与web相关的一个安全问题：XSS。
+XSS?XSS（Cross-Site Scripting），全称跨站脚本攻击。它是一种通过向HTML注入恶意代码执行，从而达到非法目的的攻击。一般这种XSS注入都比较隐蔽，需要通过检索代码才能发现（甚至有的代码是被混淆过的，就更隐蔽了）。
+XSS牵扯到三个角色：攻击者、目标服务器、受害浏览器
+XSS类型XSS主要有两种类型：反射型XSS和存储型XSS
+1. 反射型XSS反射型XSS又称非持久性XSS，主要依靠目标服务器返回结果给受害浏览器，从而受...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 网络安全>网络安全</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/03/23</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2018/03/20/使用Charles手机抓包/" >
                         <h2 class="abstract-title">
                             
@@ -224,7 +292,11 @@ Tips教程中对安装设置已经很详细，但是我在设置HTTPS抓包始�
 URL定位资源，用HTTP动词（GET,POST,DELETE,DETC）描述操作。
 
 有兴趣的可以读读阮一峰老师的博文RESTful API 设计指南,基本符合RESTful接口设计方案
+Set-Cookie响应首部 Set-Cookie 被用来由服务器端向客户端发送 cookie
+一些参数
+Expire=cookie最长有效时间，形式为符合HTTP-date规范的时间戳。
 
+Max-Age=与Exp...
                     </div>
                 </a>
                 <div class="abstract-post-meta">
@@ -455,83 +527,6 @@ Generator 函数是一个状态机，封装了多个内部状态。
                     <!-- date  -->
                     <div class="abstract-date">
                         <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/16</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/10/14/源码阅读——Redux/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>源码阅读——Redux</span>
-                        </h2>
-                    <div class="abstract-content">
-                        何为ReduxRedux是一个为JavaScript应用设计的可预测状态容器。GitHub官网是https://github.com/reactjs/redux严格的单向数据流动是Redux架构的核心
-三大原则Redux遵循三大原则：
-
-单一数据源整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个store中。也就是说整个应用只有一个store，读取数据都是从这个store中进行
-State是只读的唯一改变 state 的方法就是触发 action，action 是一个用于描述已发生事件的普通对象。action的作用仅仅表达一种修改的...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/14</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/09/29/DOM元素排序/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>DOM元素排序</span>
-                        </h2>
-                    <div class="abstract-content">
-                        问题如何给页面中已存在的DOM元素排序？
-
-表格中有一些数据，希望按照某些规则进行排序
-父元素下的子元素排序等等…
-
-分析这个问题的关键是如何以最小的代价去操作这些dom，我们都知道直接操作页面DOM是很耗时的行为，因为操作一次页面DOM就会引发重排或重绘.那么如何设计解决这个问题。
-
-必须要缓存读取的DOM集合，在JS中完成排序，之后再写会页面中
-最好能直接用已存在的DOM填充到父元素中，不要使用新建DOM的方式
-以最少的标记来标识已存在DOM如何做移动
-
-关键函数sortElements根据以上设想，写出以下代码：12345678910111213141516171819202122...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = DOM>DOM</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/29</span>
                     </div>
                 </div>
             </article>
@@ -1160,7 +1155,45 @@ State是只读的唯一改变 state 的方法就是触发 action，action 是一
     
     
     
-    <div class="total-archive"> Total : 37 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 39 </div>
     
     <div class="post-archive">
     
@@ -1169,6 +1202,16 @@ State是只读的唯一改变 state 的方法就是触发 action，action 是一
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/原生JS获取DOM元素/" >原生JS获取DOM元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2018/03/23/XSS-跨站脚本攻击/" >XSS:跨站脚本攻击</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1375,7 +1418,7 @@ State是只读的唯一改变 state 的方法就是触发 action，action 是一
     
         <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
@@ -1386,6 +1429,8 @@ State是只读的唯一改变 state 的方法就是触发 action，action 是一
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">网络安全</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
@@ -1399,7 +1444,7 @@ State是只读的唯一改变 state 的方法就是触发 action，action 是一
     
         <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

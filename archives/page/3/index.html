@@ -170,6 +170,71 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/06/25/JS模板引擎/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>JS模板引擎</span>
+                        </h2>
+                    <div class="abstract-content">
+                        常见的几种JS模板引擎ArtTemplateHigh performance JavaScript templating engine https://aui.github.io/art-template/
+性能
+标准语法123&#123;&#123;if user&#125;&#125;  &lt;h2&gt;&#123;&#123;user.name&#125;&#125;&lt;/h2&gt;&#123;&#123;/if&#125;&#125;
+原始语法123&lt;% if (user) &#123; %&gt;  &lt;h2&gt;&lt;%= user.name %&gt...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/06/25</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/06/18/JS的单线程与异步/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>JS的单线程与异步</span>
+                        </h2>
+                    <div class="abstract-content">
+                        我们常说JavaScript是单线程的，那么应该怎么来认识这句话呢？它和异步又是什么关系呢？
+单线程与异步在一门语言中，单线程和异步是自相矛盾的。JS本身是单线程的，那么它就不是异步。但是，万事都有个但是，它的宿主环境是多线程的。JS常见的宿主环境是浏览器或Node端，宿主环境让JS通过某种方式（事件驱动）拥有了异步的行为。因为事件驱动让JS的机制非常简单高效。
+浏览器宿主在各个宿主环境中，仅仅分配一个主线程给JS引擎去执行任何或函数，且一次只能执行一个任务。那么在浏览器里充满很多不同任务，且大多任务是非常耗时的，比如网络请求，定时器和事件监听。如果只让一个线程去完成的话，显然很容易阻塞...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/06/18</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/06/08/学习使用Webpack/" >
                         <h2 class="abstract-title">
                             
@@ -484,42 +549,6 @@ Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定dis
                     </div>
                 </div>
             </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/03/29/Javascript计算精度问题/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>Javascript计算精度问题</span>
-                        </h2>
-                    <div class="abstract-content">
-                        Javascript是弱类型语言，在进行浮点数计算时会有误差出现（这在很多语言中都是存在的，只是其他语言内部会去规避误差风险）。如果系统中有较多的浮点数计算步骤且对计算结果有准确度要求，则需要手动书写代码去规避。如下：
-
-解决的主要思路是将浮点数转换为整数进行计算，然后再转换为正确结果。
-双数四则运算以下代码可以参考：
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162//加法函数function accAdd...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/03/29</span>
-                    </div>
-                </div>
-            </article>
-        
-    
         
     
     <!-- paginator  -->
@@ -1100,7 +1129,45 @@ Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定dis
     
     
     
-    <div class="total-archive"> Total : 37 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 39 </div>
     
     <div class="post-archive">
     
@@ -1109,6 +1176,16 @@ Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定dis
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/原生JS获取DOM元素/" >原生JS获取DOM元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2018/03/23/XSS-跨站脚本攻击/" >XSS:跨站脚本攻击</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1315,7 +1392,7 @@ Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定dis
     
         <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
@@ -1326,6 +1403,8 @@ Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定dis
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">网络安全</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
@@ -1339,7 +1418,7 @@ Flex容器display: flex当我们使用伸缩盒时，先要给父元素指定dis
     
         <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">

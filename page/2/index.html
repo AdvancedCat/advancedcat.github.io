@@ -183,6 +183,83 @@
         
         
             <article class="index-post">
+                <a class="content-show-full" href = "/2017/10/14/源码阅读——Redux/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>源码阅读——Redux</span>
+                        </h2>
+                    <div class="abstract-content">
+                        何为ReduxRedux是一个为JavaScript应用设计的可预测状态容器。GitHub官网是https://github.com/reactjs/redux严格的单向数据流动是Redux架构的核心
+三大原则Redux遵循三大原则：
+
+单一数据源整个应用的state被储存在一棵object tree中，并且这个object tree只存在于唯一一个store中。也就是说整个应用只有一个store，读取数据都是从这个store中进行
+State是只读的唯一改变 state 的方法就是触发 action，action 是一个用于描述已发生事件的普通对象。action的作用仅仅表达一种修改的...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/10/14</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
+                <a class="content-show-full" href = "/2017/09/29/DOM元素排序/" >
+                        <h2 class="abstract-title">
+                            
+                            <span>DOM元素排序</span>
+                        </h2>
+                    <div class="abstract-content">
+                        问题如何给页面中已存在的DOM元素排序？
+
+表格中有一些数据，希望按照某些规则进行排序
+父元素下的子元素排序等等…
+
+分析这个问题的关键是如何以最小的代价去操作这些dom，我们都知道直接操作页面DOM是很耗时的行为，因为操作一次页面DOM就会引发重排或重绘.那么如何设计解决这个问题。
+
+必须要缓存读取的DOM集合，在JS中完成排序，之后再写会页面中
+最好能直接用已存在的DOM填充到父元素中，不要使用新建DOM的方式
+以最少的标记来标识已存在DOM如何做移动
+
+关键函数sortElements根据以上设想，写出以下代码：12345678910111213141516171819202122...
+                    </div>
+                </a>
+                <div class="abstract-post-meta">
+                    <!-- tags  -->
+                    
+                    <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = DOM>DOM</a>
+    
+</div>
+                    
+                    <!-- date  -->
+                    <div class="abstract-date">
+                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/09/29</span>
+                    </div>
+                </div>
+            </article>
+        
+    
+        
+        
+        
+            <article class="index-post">
                 <a class="content-show-full" href = "/2017/09/23/Javascript真值表/" >
                         <h2 class="abstract-title">
                             
@@ -405,71 +482,6 @@ grepgrep是一个强大的文本搜索命令，并将匹配的行打印出来
             </article>
         
     
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/06/25/JS模板引擎/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>JS模板引擎</span>
-                        </h2>
-                    <div class="abstract-content">
-                        常见的几种JS模板引擎ArtTemplateHigh performance JavaScript templating engine https://aui.github.io/art-template/
-性能
-标准语法123&#123;&#123;if user&#125;&#125;  &lt;h2&gt;&#123;&#123;user.name&#125;&#125;&lt;/h2&gt;&#123;&#123;/if&#125;&#125;
-原始语法123&lt;% if (user) &#123; %&gt;  &lt;h2&gt;&lt;%= user.name %&gt...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/06/25</span>
-                    </div>
-                </div>
-            </article>
-        
-    
-        
-        
-        
-            <article class="index-post">
-                <a class="content-show-full" href = "/2017/06/18/JS的单线程与异步/" >
-                        <h2 class="abstract-title">
-                            
-                            <span>JS的单线程与异步</span>
-                        </h2>
-                    <div class="abstract-content">
-                        我们常说JavaScript是单线程的，那么应该怎么来认识这句话呢？它和异步又是什么关系呢？
-单线程与异步在一门语言中，单线程和异步是自相矛盾的。JS本身是单线程的，那么它就不是异步。但是，万事都有个但是，它的宿主环境是多线程的。JS常见的宿主环境是浏览器或Node端，宿主环境让JS通过某种方式（事件驱动）拥有了异步的行为。因为事件驱动让JS的机制非常简单高效。
-浏览器宿主在各个宿主环境中，仅仅分配一个主线程给JS引擎去执行任何或函数，且一次只能执行一个任务。那么在浏览器里充满很多不同任务，且大多任务是非常耗时的，比如网络请求，定时器和事件监听。如果只让一个线程去完成的话，显然很容易阻塞...
-                    </div>
-                </a>
-                <div class="abstract-post-meta">
-                    <!-- tags  -->
-                    
-                    <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-href = Javascript>Javascript</a>
-    
-</div>
-                    
-                    <!-- date  -->
-                    <div class="abstract-date">
-                        <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/06/18</span>
-                    </div>
-                </div>
-            </article>
         
     
     <!-- paginator  -->
@@ -1095,7 +1107,45 @@ grepgrep是一个强大的文本搜索命令，并将匹配的行打印出来
     
     
     
-    <div class="total-archive"> Total : 37 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 39 </div>
     
     <div class="post-archive">
     
@@ -1104,6 +1154,16 @@ grepgrep是一个强大的文本搜索命令，并将匹配的行打印出来
     
     <div class="archive-year"> 2018 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/04</span><a class="archive-post-title" href= "/2018/04/04/原生JS获取DOM元素/" >原生JS获取DOM元素</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/23</span><a class="archive-post-title" href= "/2018/03/23/XSS-跨站脚本攻击/" >XSS:跨站脚本攻击</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -1310,7 +1370,7 @@ grepgrep是一个强大的文本搜索命令，并将匹配的行打印出来
     
         <span class="sidebar-tag-name"><a href= "#">CSS</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
+        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">Karma</a></span>
     
@@ -1321,6 +1381,8 @@ grepgrep是一个强大的文本搜索命令，并将匹配的行打印出来
         <span class="sidebar-tag-name"><a href= "#">Node</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">TODO</a></span>
+    
+        <span class="sidebar-tag-name"><a href= "#">网络安全</a></span>
     
         <span class="sidebar-tag-name"><a href= "#">jQuery</a></span>
     
@@ -1334,7 +1396,7 @@ grepgrep是一个强大的文本搜索命令，并将匹配的行打印出来
     
         <span class="sidebar-tag-name"><a href= "#">前端</a></span>
     
-        <span class="sidebar-tag-name"><a href= "#">DOM</a></span>
+        <span class="sidebar-tag-name"><a href= "#">ES6</a></span>
     
     </div>
     <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
