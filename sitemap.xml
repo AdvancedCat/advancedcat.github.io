@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/04/18/CSS%E5%AE%9E%E7%8E%B0%E6%AD%A3%E6%96%B9%E5%BD%A2/</loc>
+    
+    <lastmod>2018-04-18T11:54:47.445Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/04/04/%E5%8E%9F%E7%94%9FJS%E8%8E%B7%E5%8F%96DOM%E5%85%83%E7%B4%A0/</loc>
     
     <lastmod>2018-04-04T07:38:47.889Z</lastmod>
@@ -254,14 +261,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/03/01/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>http://yoursite.com/2017/04/10/Cookie-localStorage-sessionStorage/</loc>
     
     <lastmod>2017-11-01T02:08:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/04/10/Cookie-localStorage-sessionStorage/</loc>
+    <loc>http://yoursite.com/2017/03/01/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
     
     <lastmod>2017-11-01T02:08:08.000Z</lastmod>
     

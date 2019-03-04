@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-04-04T07:38:47.889Z</updated>
+  <updated>2018-04-18T11:54:47.445Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSS实现正方形</title>
+    <link href="http://yoursite.com/2018/04/18/CSS%E5%AE%9E%E7%8E%B0%E6%AD%A3%E6%96%B9%E5%BD%A2/"/>
+    <id>http://yoursite.com/2018/04/18/CSS实现正方形/</id>
+    <published>2018-04-18T11:53:56.000Z</published>
+    <updated>2018-04-18T11:54:47.445Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>今天需要完成一个样式需求：图片区域是正方形，同时需要满足自适应。效果如下：</p><p><img src="/img/CSS图片正方形展示.jpg" alt=""></p><p>图中红色框中的图片需要宽高一致，正方形显示。</p><h2 id="CSS方案"><a href="#CSS方案" class="headerlink" title="CSS方案"></a>CSS方案</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"square"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>""&gt;</span>content<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wrap</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>方案一： <strong>vw</strong> <a href="https://www.w3.org/TR/css3-values/#viewport-relative-lengths" target="_blank" rel="external">REC</a><br><em>viewport width</em>，基于视口的宽度。<br>屏幕的宽度被分为100个vw，这样元素可以依据视口的宽度来设置宽度值。vw是长度单位，因此可以用于任何尺寸标注，如高度、padding、margin等。<br>与vw一致概念是vh，基于视口的高度。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.square</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">50vw</span>;</div><div class="line">    <span class="attribute">height</span>:<span class="number">50vw</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>这是目前最优的解决方案，缺点是兼容性较差。详见<a href="https://caniuse.com/#search=vw" target="_blank" rel="external">Can I Use</a></p><p>方案二：设置垂直方向的padding，撑开容器<br>在css容器中，padding和margin可以赋值为百分数。这个百分数是基于<strong>父元素的宽度</strong>设置的。只要将容器垂直方向的padding设置为宽度一样的百分数，就可以自适应为正方形了。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.square</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">padding-top</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>这里有个问题，正方形div中如果放入内容后，内部产生高度。则需要如下处理：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.square</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</div><div class="line">    <span class="attribute">padding-top</span>:<span class="number">100%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>方案三：对方案二的进阶<br>如果需要限定高度，如<code>max-height:180px;</code>。由于<code>max-height</code>属性是依赖于content height的，所以方案二不起作用。做如下调整：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wrap</span>&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">250px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">250px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.square</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">    <span class="attribute">background</span>: red;</div><div class="line">    <span class="attribute">max-height</span>: <span class="number">180px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.square</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">    <span class="attribute">content</span>: <span class="string">' '</span>;</div><div class="line">    <span class="attribute">display</span>: block;</div><div class="line">    <span class="attribute">padding-top</span>: <span class="number">100%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><h2 id="JS方案"><a href="#JS方案" class="headerlink" title="JS方案"></a>JS方案</h2><p>使用js肯定可以做到正方形，但效率肯定没css好。不做介绍。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;今天需要完成一个样式需求：图片区域是正方形，同时需要满足自适应。效果如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/CSS图片正方形展示
+      
+    
+    </summary>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title>原生JS获取DOM元素</title>
@@ -462,30 +486,6 @@
     
     
       <category term="Design" scheme="http://yoursite.com/tags/Design/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jQuery中的focus与focusin</title>
-    <link href="http://yoursite.com/2017/07/04/jQuery%E4%B8%AD%E7%9A%84focus%E4%B8%8Efocusin/"/>
-    <id>http://yoursite.com/2017/07/04/jQuery中的focus与focusin/</id>
-    <published>2017-07-04T07:36:02.000Z</published>
-    <updated>2018-02-02T07:47:42.205Z</updated>
-    
-    <content type="html"><![CDATA[<p>关于focus与focusin的区别<br>敬请期待</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;关于focus与focusin的区别&lt;br&gt;敬请期待&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
     
   </entry>
   
